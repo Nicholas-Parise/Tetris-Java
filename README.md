@@ -14,6 +14,7 @@ Draw:
 - input images 
 - display score
 
+---------------------
 
 Done: 
 - shape rotation
