@@ -17,8 +17,6 @@ public class Main extends JPanel {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBackground(Color.red);
 
-		frame.setBackground(Color.red);
-
 		frame.setLocationRelativeTo(null);
 		frame.setSize(500, 600);
 		frame.setVisible(true);
@@ -37,13 +35,9 @@ public class Main extends JPanel {
 
 		// [Y][X]
 
-		// Blocks.SpriteShape = Blocks.LShape;
-		// Blocks.CurrentShape = 0;
 
 		Blocks.MakeBlockQueue();
 		Blocks.NextBlock();
-
-		// Blocks.CurrentSymbol = 8;
 
 		System.out.println();
 		Blocks.BlockHandler(0);
@@ -52,9 +46,9 @@ public class Main extends JPanel {
 
 		// Blocks.PrintMatrix();
 
+
 		Boolean Test = false;
 
-		int ran = 0;
 
 		Blocks.MakeBlockQueue();
 
@@ -66,11 +60,18 @@ public class Main extends JPanel {
 		}
 
 		do {
-			ran++;
 
 			Blocks.Gravity();
 
 			// Blocks.PrintMatrix();
+
+
+		if(Blocks.WhereFloor()){
+
+			Blocks.NextBlock();
+		}
+
+
 
 			try {
 

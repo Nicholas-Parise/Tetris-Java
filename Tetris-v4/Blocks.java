@@ -4,11 +4,6 @@ import java.util.Arrays;
 
 public class Blocks {
 
-	public int BlockPosition[][] = new int[4][4];
-
-	public static int offsetX = 2;
-	public static int offsetY = 0;
-
 	public static int[][] LShape = { { 1, 0, 0, 0 }, { 1, 0, 0, 0 }, { 1, 1, 0, 0 }, { 0, 0, 0, 0 } };
 
 	public static int[][] L2Shape = { { 0, 2, 0, 0 }, { 0, 2, 0, 0 }, { 2, 2, 0, 0 }, { 0, 0, 0, 0 } };
@@ -23,11 +18,9 @@ public class Blocks {
 
 	public static int[][] TShape = { { 7, 0, 0, 0 }, { 7, 7, 0, 0 }, { 7, 0, 0, 0 }, { 0, 0, 0, 0 } };
 
-	public static int CurrentShape = 0;
-
 	public static int[][] SpriteShape = new int[4][4];
 
-	public static int CurrentSymbol = 0;
+	public static int BlockPosition[][] = new int[4][4];
 
 	public static int[][] GameMatrix = new int[20][10];
 
@@ -36,6 +29,14 @@ public class Blocks {
 	private static int[] BlockQueue = new int[7];
 
 	private static int[] BlockQueueNeg = { -1, -1, -1, -1, -1, -1, -1 };
+
+	public static int CurrentShape = 0;
+
+	public static int offsetX = 2;
+
+	public static int offsetY = 0;
+
+	public static int CurrentSymbol = 0;
 
 	private static int BlockQueuePlace = 0;
 
@@ -346,21 +347,16 @@ public class Blocks {
 
 					if (SpriteShape[i][j] != 0) {
 
-						if (i + offsetY != LowestPointsY.get(k) + 1 && j + offsetX != LowestPointsX.get(k)) {
+						if (GameMatrix[LowestPointsY.get(k) + 1][LowestPointsX.get(k)] > 0
+								&& TempGameMatrix[LowestPointsY.get(k) + 1][LowestPointsX.get(k)] == 0) {
 
-							if (GameMatrix[LowestPointsY.get(k) + 1][LowestPointsX.get(k)] > 0
-									&& TempGameMatrix[LowestPointsY.get(k) + 1][LowestPointsX.get(k)] == 0) {
-
-								return true;
-							}
+							return true;
 						}
 
 					}
 				}
 			}
-
 		}
-
 		return false;
 	}
 
@@ -560,9 +556,14 @@ public class Blocks {
 
 				for (int j = 0; j < 7; j++) {
 
-					if (TryWhere == BlockQueue[j] && BlockQueue[j] == -1) {
+					if (TryWhere == BlockQueue[j]) {
+
 						Temp = true;
 					}
+				}
+
+				if (BlockQueue[6] != -1) {
+					break;
 				}
 
 				for (int k = 0; k < 7; k++) {
@@ -588,9 +589,21 @@ public class Blocks {
 	// changes the Sprite to a new shape
 	public static void NextBlock() {
 
+		if (BlockQueuePlace == 7) {
+			BlockQueuePlace = 0;
+		}
+
 		CurrentShape = BlockQueue[BlockQueuePlace];
 
 		SpriteShape = GetCurrent();
+
+		BlockQueuePlace++;
+
+		for (int i = 0; i < 20; i++) {
+			for (int j = 0; j < 10; j++) {
+				TempGameMatrix[i][j] = 0;
+			}
+		}
 
 		offsetX = 2;
 		offsetY = 0;
