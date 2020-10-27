@@ -18,14 +18,14 @@ Doing:
 -
 - your mother
 - row completion
-
+- shape queue
+- show next block
 
 <br>
 
 Done: 
 -
 - display score
-- shape queue
 - shape rotation
 - Move sprite with arrow keys:
 - shapes
