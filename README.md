@@ -9,6 +9,7 @@ To-Do:
 - title screen
 - input images 
 - save score 
+- buttons
 
 <br>
 
@@ -16,13 +17,14 @@ Doing:
 -
 - your mother
 - row completion
-- shape queue
+
 
 <br>
 
 Done: 
 -
 - display score
+- shape queue
 - shape rotation
 - Move sprite with arrow keys:
 - shapes
