@@ -8,7 +8,7 @@ To-Do:
 - title screen
 - input images 
 
-
+<br>
 Doing:
 - your mother
 - row completion
@@ -16,7 +16,7 @@ Doing:
 - display score
 - score, save, display
 
----------------------
+<br>
 
 Done: 
 - shape rotation
