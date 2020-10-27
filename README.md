@@ -1,7 +1,5 @@
 # Tetris-Java
 
-So this is the first version
-
 To-Do:
 -
 - fix resize so aspect ratio stays same
