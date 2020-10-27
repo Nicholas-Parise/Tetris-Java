@@ -3,13 +3,16 @@
 So this is the first version
 
 To-Do:
+-
 - fix resize so aspect ratio stays same
 - pause
 - title screen
 - input images 
 
 <br>
+
 Doing:
+-
 - your mother
 - row completion
 - shape queue
@@ -19,6 +22,7 @@ Doing:
 <br>
 
 Done: 
+-
 - shape rotation
 - Move sprite with arrow keys:
 - shapes
