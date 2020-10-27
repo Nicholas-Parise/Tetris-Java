@@ -10,6 +10,7 @@ To-Do:
 - input images 
 - save score 
 - buttons
+- comment
 
 <br>
 
