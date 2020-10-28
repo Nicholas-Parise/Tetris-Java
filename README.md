@@ -16,13 +16,14 @@ Doing:
 -
 - your mother
 - commenting
-- pause
+
 
 
 <br>
 
 Done: 
 -
+- pause
 - display score
 - shape queue
 - show next block
