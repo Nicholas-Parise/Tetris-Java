@@ -7,6 +7,7 @@ To-Do:
 - input images 
 - save score 
 - buttons
+- show future position of shape on bottom
 
 
 <br>
