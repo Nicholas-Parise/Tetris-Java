@@ -3,27 +3,29 @@
 To-Do:
 -
 - fix resize so aspect ratio stays same
-- pause
 - title screen
 - input images 
 - save score 
 - buttons
-- comment
+
 
 <br>
 
 Doing:
 -
 - your mother
-- row completion
-- shape queue
-- show next block
+- commenting
+- pause
+
 
 <br>
 
 Done: 
 -
 - display score
+- shape queue
+- show next block
+- row completion
 - shape rotation
 - Move sprite with arrow keys:
 - shapes
