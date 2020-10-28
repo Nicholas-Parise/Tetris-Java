@@ -8,7 +8,7 @@ To-Do:
 - save score 
 - buttons
 - show future position of shape on bottom
-
+- speed up falling every level
 
 <br>
 
