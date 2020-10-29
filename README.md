@@ -10,6 +10,7 @@ To-Do:
 - speed up falling every level
 - highscore, highscore list
 - spash screen
+- Game Over screen
 
 <br>
 
