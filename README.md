@@ -6,7 +6,7 @@ To-Do:
 - title screen
 - input images
 - buttons
-- show future position of shape on bottom
+
 - speed up falling every level
 - highscore, highscore list
 - spash screen
@@ -18,7 +18,7 @@ Doing:
 -
 - your mother
 - commenting
-- fixing rotations
+- show future position of shape on bottom
 
 
 
@@ -26,6 +26,7 @@ Doing:
 
 Done: 
 -
+- fixing rotations
 - pause
 - display score
 - shape queue
