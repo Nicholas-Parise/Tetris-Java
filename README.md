@@ -10,6 +10,7 @@ To-Do:
 - show future position of shape on bottom
 - speed up falling every level
 - highscore, highscore list
+- spash screen
 
 <br>
 
