@@ -4,8 +4,7 @@ To-Do:
 -
 - fix resize so aspect ratio stays same
 - title screen
-- input images 
-- save score 
+- input images
 - buttons
 - show future position of shape on bottom
 - speed up falling every level
@@ -18,6 +17,7 @@ Doing:
 -
 - your mother
 - commenting
+- fixing rotations
 
 
 
