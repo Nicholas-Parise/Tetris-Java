@@ -11,21 +11,17 @@ To-Do:
 - highscore, highscore list
 - spash screen
 - Game Over screen
-
 <br>
 
 Doing:
 -
 - your mother
 - commenting
-- show future position of shape on bottom
-
-
-
 <br>
 
 Done: 
 -
+- show future position of shape on bottom
 - fixing rotations
 - pause
 - display score
