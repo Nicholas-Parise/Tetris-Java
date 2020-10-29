@@ -6,7 +6,7 @@ To-Do:
 - title screen
 - input images
 - buttons
-
+- Help section
 - speed up falling every level
 - highscore, highscore list
 - spash screen
