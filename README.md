@@ -16,12 +16,12 @@ To-Do:
 Doing:
 -
 - your mother
-- title screen
 - commenting
 <br>
 
 Done: 
 -
+- title screen
 - show future position of shape on bottom
 - fixing rotations
 - pause
