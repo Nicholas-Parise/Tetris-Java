@@ -3,7 +3,7 @@
 To-Do:
 -
 - fix resize so aspect ratio stays same
-- title screen
+
 - input images
 - buttons
 - Help section
@@ -16,6 +16,7 @@ To-Do:
 Doing:
 -
 - your mother
+- title screen
 - commenting
 <br>
 
