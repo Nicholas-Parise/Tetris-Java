@@ -10,7 +10,7 @@ To-Do:
 - speed up falling every level
 - highscore, highscore list
 - spash screen
-- Game Over screen
+
 <br>
 
 Doing:
@@ -21,6 +21,7 @@ Doing:
 
 Done: 
 -
+- Game Over screen
 - title screen
 - show future position of shape on bottom
 - fixing rotations
