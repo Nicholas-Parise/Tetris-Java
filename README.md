@@ -9,7 +9,8 @@ To-Do:
 - Help section
 - speed up falling every level
 - highscore, highscore list
-- spash screen
+
+- improve rotations
 
 <br>
 
@@ -17,6 +18,7 @@ Doing:
 -
 - your mother
 - commenting
+- spash screen
 <br>
 
 Done: 
