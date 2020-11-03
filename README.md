@@ -17,11 +17,11 @@ Doing:
 - your mother
 - commenting
 - spash screen
-- improve rotations
 <br>
 
 Done: 
 -
+- improve rotations
 - Render class
 - Game Over screen
 - title screen
