@@ -10,8 +10,6 @@ To-Do:
 - speed up falling every level
 - highscore, highscore list
 
-- improve rotations
-
 <br>
 
 Doing:
@@ -19,6 +17,7 @@ Doing:
 - your mother
 - commenting
 - spash screen
+- improve rotations
 <br>
 
 Done: 
