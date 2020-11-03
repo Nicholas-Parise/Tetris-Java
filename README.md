@@ -22,6 +22,7 @@ Doing:
 
 Done: 
 -
+- Render class
 - Game Over screen
 - title screen
 - show future position of shape on bottom
