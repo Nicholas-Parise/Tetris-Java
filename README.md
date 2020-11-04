@@ -2,10 +2,9 @@
 
 To-Do:
 -
-- fix resize so aspect ratio stays same
-- input images
 - speed up falling every level
 - highscore, highscore list
+- fix resize so aspect ratio stays same
 
 <br>
 
