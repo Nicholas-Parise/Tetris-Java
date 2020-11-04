@@ -3,10 +3,7 @@
 To-Do:
 -
 - fix resize so aspect ratio stays same
-
 - input images
-- buttons
-- Help section
 - speed up falling every level
 - highscore, highscore list
 
@@ -21,6 +18,8 @@ Doing:
 
 Done: 
 -
+- buttons
+- Help section
 - improve rotations
 - Render class
 - Game Over screen
