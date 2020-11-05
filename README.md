@@ -3,8 +3,9 @@
 To-Do:
 -
 - speed up falling every level
-- highscore, highscore list
+- highscore list
 - fix resize so aspect ratio stays same
+- spash screen
 
 <br>
 
@@ -12,11 +13,12 @@ Doing:
 -
 - your mother
 - commenting
-- spash screen
+
 <br>
 
 Done: 
 -
+- highscore,
 - buttons
 - Help section
 - improve rotations
