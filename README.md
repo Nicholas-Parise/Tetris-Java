@@ -2,10 +2,8 @@
 
 To-Do:
 -
-- speed up falling every level
 - highscore list
 - fix resize so aspect ratio stays same
-- spash screen
 
 <br>
 
@@ -18,6 +16,8 @@ Doing:
 
 Done: 
 -
+- speed up falling every level
+- spash screen
 - highscore,
 - buttons
 - Help section
