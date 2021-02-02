@@ -2,15 +2,13 @@
 
 To-Do:
 -
-- highscore list
 - fix resize so aspect ratio stays same
 
 <br>
 
 Doing:
 -
-- your mother
-- commenting
+
 
 <br>
 
