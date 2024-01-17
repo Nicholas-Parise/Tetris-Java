@@ -1,6 +1,6 @@
 public class GameStateManager {
 
-	public static String CurrentState = "Menu";
+	public static String CurrentState = "Splash";
 
 	private static Boolean PauseCount = false;
 	private static int PauseTime = 0;
@@ -8,6 +8,8 @@ public class GameStateManager {
 	private static int EndTime = 0;
 	private static Boolean MenuCount = false;
 	private static int MenuTime = 0;
+	private static Boolean SplashCount = false;
+	private static int SplashTime = 0;
 
 	public static void Delta(int DeltaTime) {
 		// adds delta time to individual times
@@ -21,6 +23,20 @@ public class GameStateManager {
 
 		if (MenuCount) {
 			MenuTime += DeltaTime;
+		}
+
+		if (SplashCount) {
+			SplashTime += DeltaTime;
+		}
+	}
+
+	public static void SwitchSplash() {
+
+		if (SplashCount) {
+			if (SplashTime > 2000) {
+				CurrentState = "Menu";
+				SplashCount = false;
+			}
 		}
 	}
 
@@ -86,6 +102,10 @@ public class GameStateManager {
 
 	public static void StartMenu() {
 		MenuCount = true;
+	}
+
+	public static void EndSplash() {
+		SplashCount = true;
 	}
 
 	// ---------

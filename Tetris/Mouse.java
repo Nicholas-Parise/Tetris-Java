@@ -15,7 +15,7 @@ public class Mouse extends JPanel implements MouseListener, MouseMotionListener 
 		y = e.getY();
 
 		if (Button.isButtonHover(x, y)) {
-			System.out.println("On Button");
+		//	System.out.println("On Button");
 
 		}
 	}
@@ -26,10 +26,8 @@ public class Mouse extends JPanel implements MouseListener, MouseMotionListener 
 		y = evt.getY();
 
 		if (Button.isButtonHover(x, y)) {
-			System.out.println("Button Clicked");
-
+		//	System.out.println("Button Clicked");
 			GameStateManager.StartPause();
-
 		}
 
 	}

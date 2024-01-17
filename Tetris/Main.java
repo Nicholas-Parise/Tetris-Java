@@ -17,6 +17,10 @@ public class Main {
 		long time = 0;
 		int delta_time = 0;
 
+		ScoreManager.GetHighScore();
+
+		// GameStateManager.EndSplash();
+
 		do {
 
 			time = System.nanoTime();
@@ -27,6 +31,7 @@ public class Main {
 			GameStateManager.SwitchPause();
 			GameStateManager.SwitchEnd();
 			GameStateManager.SwitchMenu();
+			GameStateManager.SwitchSplash();
 
 			if (GameStateManager.CurrentState == "Game") {
 

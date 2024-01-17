@@ -11,6 +11,23 @@ public class Render extends JPanel {
 
 	public static int DeltaTitle = 0;
 
+	private int[] ColorWave = new int[6];
+	// colors
+	private Color colors[] = { new Color(80, 80, 80), new Color(255, 255, 255), new Color(255, 50, 50),
+			new Color(50, 255, 50), new Color(50, 50, 255), new Color(225, 225, 50), new Color(225, 50, 225),
+			new Color(50, 225, 225), new Color(250, 170, 0), new Color(255, 50, 50, 50), new Color(50, 255, 50, 50),
+			new Color(50, 50, 255, 50), new Color(225, 225, 50, 50), new Color(225, 50, 225, 50),
+			new Color(50, 225, 225, 50), new Color(250, 170, 0, 50) };
+	// Normal: black0,white1,red2,green3,blue4,yellow5,purple6,cyan7,orange8,
+	// Lighter: red9,green10,blue11,yellow12,purple13,cyan14,orange15,
+
+	private int[] ColorWave1 = { 2, 3, 4, 5, 6, 7 };
+	private int[] ColorWave2 = { 7, 2, 3, 4, 5, 6 };
+	private int[] ColorWave3 = { 6, 7, 2, 3, 4, 5 };
+	private int[] ColorWave4 = { 5, 6, 7, 2, 3, 4 };
+	private int[] ColorWave5 = { 4, 5, 6, 7, 2, 3 };
+	private int[] ColorWave6 = { 3, 4, 5, 6, 7, 2 };
+
 	public static void construc() {
 
 		frame.getContentPane().add(new Render());
@@ -34,17 +51,28 @@ public class Render extends JPanel {
 		frame.getKeyListeners();
 	}
 
+	private void ArrayBuilder(Graphics g, int xOff, int yOff, int blockSize, int color, int[][] arr) {
+
+		int numberOfColumns = arr[0].length;
+		int numberOfRows = arr.length;
+
+		for (int j = 0; j < numberOfColumns; j++) {
+			for (int i = 0; i < numberOfRows; i++) {
+
+				int x = blockSize * j + xOff;
+				int y = blockSize * i + yOff;
+
+				if (arr[i][j] != 0) {
+
+					g.setColor(colors[color]);
+					g.fillRect(x, y, blockSize, blockSize);
+				}
+			}
+		}
+
+	}
+
 	public void paint(Graphics g) {
-		// colors
-
-		Color colors[] = { new Color(80, 80, 80), new Color(255, 255, 255), new Color(255, 50, 50),
-				new Color(50, 255, 50), new Color(50, 50, 255), new Color(225, 225, 50), new Color(225, 50, 225),
-				new Color(50, 225, 225), new Color(250, 170, 0), new Color(255, 50, 50, 50), new Color(50, 255, 50, 50),
-				new Color(50, 50, 255, 50), new Color(225, 225, 50, 50), new Color(225, 50, 225, 50),
-				new Color(50, 225, 225, 50), new Color(250, 170, 0, 50) };
-
-		// Normal: black0,white1,red2,green3,blue4,yellow5,purple6,cyan7,orange8,
-		// Lighter: red9,green10,blue11,yellow12,purple13,cyan14,orange15,
 
 		g.setColor(colors[0]);
 		g.fillRect(0, 0, 1000, 1000);
@@ -118,56 +146,13 @@ public class Render extends JPanel {
 
 				int[][] HighScoreArr = AssetManager.AssetCreater(HighscoreString);
 
-				for (int j = 0; j < 5; j++) {
-					for (int i = 0; i < ScoreString.length() + (ScoreString.length() * 3); i++) {
+				ArrayBuilder(g, 300, 250, 5, 1, ScoreArr);
 
-						int x = 5 * i + 300;
-						int y = 5 * j + 250;
-						int width = 5;
-						int height = 5;
+				ArrayBuilder(g, 300, 400, 5, 1, HighScoreArr);
 
-						if (ScoreArr[i][j] != 0) {
+				ArrayBuilder(g, 300, 20, 5, 1, AssetManager.NextPieceText);
 
-							g.setColor(colors[1]);
-							g.fillRect(x, y, width, height);
-
-						}
-
-					}
-				}
-
-				for (int j = 0; j < 5; j++) {
-					for (int i = 0; i < HighscoreString.length() + (HighscoreString.length() * 3); i++) {
-
-						int x = 5 * i + 300;
-						int y = 5 * j + 400;
-						int width = 5;
-						int height = 5;
-
-						if (HighScoreArr[i][j] != 0) {
-
-							g.setColor(colors[1]);
-							g.fillRect(x, y, width, height);
-						}
-					}
-				}
-
-				for (int j = 0; j < 40; j++) {
-					for (int i = 0; i < 5; i++) {
-
-						int x = 5 * j + 300;
-						int y = 5 * i + 20;
-						int width = 5;
-						int height = 5;
-
-						if (AssetManager.NextPieceText[i][j] != 0) {
-
-							g.setColor(colors[1]);
-							g.fillRect(x, y, width, height);
-						}
-					}
-				}
-
+				// Box
 				int xx = 300;
 				int yy = 50;
 
@@ -208,43 +193,13 @@ public class Render extends JPanel {
 
 							g.setColor(color);
 							g.fillRect(x, y, width, height);
-
-						}
-
-					}
-				}
-
-				for (int j = 0; j < 20; j++) {
-					for (int i = 0; i < 5; i++) {
-
-						int x = 5 * j + 300;
-						int y = 5 * i + 200;
-						int width = 5;
-						int height = 5;
-
-						if (AssetManager.ScoreText[i][j] != 0) {
-
-							g.setColor(colors[2]);
-							g.fillRect(x, y, width, height);
 						}
 					}
 				}
 
-				for (int j = 0; j < 38; j++) {
-					for (int i = 0; i < 5; i++) {
+				ArrayBuilder(g, 300, 200, 5, 2, AssetManager.ScoreText);
 
-						int x = 5 * j + 300;
-						int y = 5 * i + 350;
-						int width = 5;
-						int height = 5;
-
-						if (AssetManager.HighScoreText[i][j] != 0) {
-
-							g.setColor(colors[2]);
-							g.fillRect(x, y, width, height);
-						}
-					}
-				}
+				ArrayBuilder(g, 300, 350, 5, 2, AssetManager.HighScoreText);
 
 				if (GameStateManager.CurrentState == "Pause") {
 
@@ -263,19 +218,11 @@ public class Render extends JPanel {
 							}
 						}
 					}
+
 				}
 
 			} else if (GameStateManager.CurrentState == "Menu") {
 				// Titele screen
-
-				int[] ColorWave1 = { 2, 3, 4, 5, 6, 7 };
-				int[] ColorWave2 = { 7, 2, 3, 4, 5, 6 };
-				int[] ColorWave3 = { 6, 7, 2, 3, 4, 5 };
-				int[] ColorWave4 = { 5, 6, 7, 2, 3, 4 };
-				int[] ColorWave5 = { 4, 5, 6, 7, 2, 3 };
-				int[] ColorWave6 = { 3, 4, 5, 6, 7, 2 };
-
-				int[] ColorWave = new int[6];
 
 				if (DeltaTitle > 2000) {
 					ColorWave = ColorWave6;
@@ -295,7 +242,7 @@ public class Render extends JPanel {
 					for (int i = 0; i < 5; i++) {
 
 						int x = 20 * j + 10;
-						int y = 20 * i + 200;
+						int y = 20 * i + 100;
 						int width = 20;
 						int height = 20;
 
@@ -323,21 +270,9 @@ public class Render extends JPanel {
 					}
 				}
 
-				for (int j = 0; j < 41; j++) {
-					for (int i = 0; i < 5; i++) {
+				ArrayBuilder(g, 35, 300, 10, ColorWave[0], AssetManager.PressStart);
 
-						int x = 10 * j + 35;
-						int y = 10 * i + 350;
-						int width = 10;
-						int height = 10;
-
-						if (AssetManager.PressStart[i][j] != 0) {
-
-							g.setColor(colors[ColorWave[0]]);
-							g.fillRect(x, y, width, height);
-						}
-					}
-				}
+				////
 
 				for (int j = 0; j < 19; j++) {
 					for (int i = 0; i < 9; i++) {
@@ -354,7 +289,7 @@ public class Render extends JPanel {
 
 							} else {
 
-								g.setColor(colors[6]);
+								g.setColor(colors[0]);
 							}
 							g.fillRect(x, y, width, height);
 						}
@@ -373,7 +308,7 @@ public class Render extends JPanel {
 					}
 				}
 
-			} else {
+			} else if (GameStateManager.CurrentState == "Help") {
 				// Help
 
 				for (int j = 0; j < 19; j++) {
@@ -391,7 +326,7 @@ public class Render extends JPanel {
 
 							} else {
 
-								g.setColor(colors[6]);
+								g.setColor(colors[0]);
 							}
 							g.fillRect(x, y, width, height);
 						}
@@ -409,56 +344,15 @@ public class Render extends JPanel {
 
 					}
 				}
-////------------
-				for (int j = 0; j < 43; j++) {
-					for (int i = 0; i < 5; i++) {
-						// Key Bindings
-						int x = 10 * j + 30;
-						int y = 10 * i + 40;
-						int width = 10;
-						int height = 10;
+				//// ------------
 
-						if (AssetManager.KeyBindings[i][j] != 0) {
-
-							g.setColor(colors[6]);
-							g.fillRect(x, y, width, height);
-						}
-					}
-				}
+				ArrayBuilder(g, 30, 20, 10, ColorWave[0], AssetManager.KeyBindings);
 
 				/// -------------
 
-				for (int j = 0; j < 9; j++) {
-					for (int i = 0; i < 9; i++) {
-						// Up Arrow
-						int x = 5 * j + 30;
-						int y = 5 * i + 100;
-						int width = 5;
-						int height = 5;
+				ArrayBuilder(g, 30, 100, 5, 1, AssetManager.Arrow);
 
-						if (AssetManager.Arrow[i][j] != 0) {
-
-							g.setColor(colors[6]);
-							g.fillRect(x, y, width, height);
-						}
-					}
-				}
-
-				for (int j = 0; j < 80; j++) {
-					for (int i = 0; i < 5; i++) {
-						// counter clock wis rot
-						int x = 5 * j + 100;
-						int y = 5 * i + 100;
-						int width = 5;
-						int height = 5;
-
-						if (AssetManager.TextRotation[i][j] != 0) {
-
-							g.setColor(colors[6]);
-							g.fillRect(x, y, width, height);
-						}
-					}
-				}
+				ArrayBuilder(g, 100, 110, 5, ColorWave[0], AssetManager.TextCRotation);
 
 				/// -------------
 				for (int j = 0; j < 9; j++) {
@@ -494,27 +388,13 @@ public class Render extends JPanel {
 
 						if (AssetManager.Arrow[temp][j] != 0) {
 
-							g.setColor(colors[6]);
+							g.setColor(colors[1]);
 							g.fillRect(x, y, width, height);
 						}
 					}
 				}
 
-				for (int j = 30; j < 78; j++) {
-					for (int i = 0; i < 5; i++) {
-						// Clock wise rot
-						int x = 5 * j - 50;
-						int y = 5 * i + 150;
-						int width = 5;
-						int height = 5;
-
-						if (AssetManager.TextRotation[i][j] != 0) {
-
-							g.setColor(colors[6]);
-							g.fillRect(x, y, width, height);
-						}
-					}
-				}
+				ArrayBuilder(g, 100, 160, 5, ColorWave[0], AssetManager.TextRotation);
 
 				/// --------------
 
@@ -528,27 +408,13 @@ public class Render extends JPanel {
 
 						if (AssetManager.Arrow[j][i] != 0) {
 
-							g.setColor(colors[6]);
+							g.setColor(colors[1]);
 							g.fillRect(x, y, width, height);
 						}
 					}
 				}
 
-				for (int j = 0; j < 16; j++) {
-					for (int i = 0; i < 5; i++) {
-						// left Text
-						int x = 5 * j + 100;
-						int y = 5 * i + 200;
-						int width = 5;
-						int height = 5;
-
-						if (AssetManager.LeftText[i][j] != 0) {
-
-							g.setColor(colors[6]);
-							g.fillRect(x, y, width, height);
-						}
-					}
-				}
+				ArrayBuilder(g, 100, 210, 5, ColorWave[0], AssetManager.LeftText);
 
 				/// -------------
 
@@ -585,135 +451,74 @@ public class Render extends JPanel {
 
 						if (AssetManager.Arrow[temp][i] != 0) {
 
-							g.setColor(colors[6]);
+							g.setColor(colors[1]);
 							g.fillRect(x, y, width, height);
 						}
 					}
 				}
 
-				for (int j = 0; j < 18; j++) {
-					for (int i = 0; i < 5; i++) {
-						// Right Text
-						int x = 5 * j + 100;
-						int y = 5 * i + 250;
-						int width = 5;
-						int height = 5;
-
-						if (AssetManager.RightText[i][j] != 0) {
-
-							g.setColor(colors[6]);
-							g.fillRect(x, y, width, height);
-						}
-					}
-				}
-
+				ArrayBuilder(g, 100, 260, 5, ColorWave[0], AssetManager.RightText);
 				// ----------
 
-				for (int j = 0; j < 17; j++) {
-					for (int i = 0; i < 9; i++) {
-						// Enter
-						int x = 5 * j + 30;
-						int y = 5 * i + 300;
-						int width = 5;
-						int height = 5;
+				ArrayBuilder(g, 30, 300, 5, 1, AssetManager.Enter);
 
-						if (AssetManager.Enter[i][j] != 0) {
-
-							g.setColor(colors[6]);
-							g.fillRect(x, y, width, height);
-						}
-					}
-				}
-
-				for (int j = 0; j < 18; j++) {
-					for (int i = 0; i < 5; i++) {
-						// counter clock wis rot
-						int x = 5 * j + 150;
-						int y = 5 * i + 300;
-						int width = 5;
-						int height = 5;
-
-						if (AssetManager.DownText[i][j] != 0) {
-
-							g.setColor(colors[6]);
-							g.fillRect(x, y, width, height);
-						}
-					}
-				}
-
-//--------------
-
-				for (int j = 0; j < 12; j++) {
-					for (int i = 0; i < 9; i++) {
-						// Esc
-						int x = 5 * j + 30;
-						int y = 5 * i + 350;
-						int width = 5;
-						int height = 5;
-
-						if (AssetManager.Esc[i][j] != 0) {
-
-							g.setColor(colors[6]);
-							g.fillRect(x, y, width, height);
-						}
-					}
-				}
-
-				for (int j = 0; j < 19; j++) {
-					for (int i = 0; i < 5; i++) {
-						// counter clock wis rot
-						int x = 5 * j + 120;
-						int y = 5 * i + 350;
-						int width = 5;
-						int height = 5;
-
-						if (AssetManager.PauseText[i][j] != 0) {
-
-							g.setColor(colors[6]);
-							g.fillRect(x, y, width, height);
-						}
-					}
-				}
-
+				ArrayBuilder(g, 150, 310, 5, ColorWave[0], AssetManager.DownText);
 				// --------------
 
+				ArrayBuilder(g, 30, 350, 5, 1, AssetManager.Esc);
+
+				ArrayBuilder(g, 120, 360, 5, ColorWave[0], AssetManager.PauseText);
+				// --------------
+
+			} else if (GameStateManager.CurrentState == "Splash") {
+				// splash screen
+
+				ArrayBuilder(g, 50, 450, 10, 4, AssetManager.CreditNick);
+
+				ArrayBuilder(g, 300, 450, 10, 1, AssetManager.CreditSile);
+
+				ArrayBuilder(g, 5, 250, 5, 1, AssetManager.Company);
+
+				int[][] SplashMatrix = { { 0, 2, 0 }, { 1, 2, 2 }, { 1, 0, 2 }, { 1, 1, 0 } };
+
+				int[][] SplashMatrix2 = { { 0, 0, 0 }, { 1, 2, 0 }, { 1, 2, 2 }, { 1, 1, 2 } };
+
+				// ArrayBuilder(g, 200, 50, 40, 2, Blocks.LShape);
+
+				for (int j = 0; j < 3; j++) {
+					for (int i = 0; i < 4; i++) {
+
+						int x = 30 * j + 220;
+						int y = 30 * i + 120;
+						int width = 30;
+						int height = 30;
+
+						if (SplashMatrix[i][j] == 0) {
+							g.setColor(colors[1]);
+						} else if (SplashMatrix[i][j] == 1) {
+							g.setColor(colors[2]);
+						} else if (SplashMatrix[i][j] == 2) {
+							g.setColor(colors[3]);
+						}
+
+						g.drawLine(x, y + height - 1, x, y);
+						g.drawLine(x, y, x + height - 1, y);
+						g.drawLine(x + 1, y + height - 1, x + height - 1, y + height - 1);
+						g.drawLine(x + height - 1, y + height - 1, x + height - 1, y + 1);
+
+					}
+				}
 			}
 
 		} else {
-//Game Over
-			for (int j = 0; j < 36; j++) {
-				for (int i = 0; i < 5; i++) {
 
-					int x = 13 * j + 13;
-					int y = 13 * i + 150;
-					int width = 13;
-					int height = 13;
+			// Game Over
 
-					if (AssetManager.GameOverText[i][j] != 0) {
-
-						g.setColor(colors[2]);
-						g.fillRect(x, y, width, height);
-					}
-				}
-			}
+			ArrayBuilder(g, 13, 150, 13, 2, AssetManager.GameOverText);
 
 			if (ScoreManager.NewHighScore) {
 
-				for (int j = 0; j < 53; j++) {
-					for (int i = 0; i < 5; i++) {
-
-						int x = 8 * j + 40;
-						int y = 8 * i + 250;
-						int width = 8;
-						int height = 8;
-
-						if (AssetManager.NewHighScoreText[i][j] != 0) {
-
-							g.setColor(colors[2]);
-							g.fillRect(x, y, width, height);
-						}
-					}
-				}
+				ArrayBuilder(g, 40, 250, 8, 2, AssetManager.NewHighScoreText);
 
 			}
 
