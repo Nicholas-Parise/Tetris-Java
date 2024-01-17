@@ -1,67 +1,63 @@
 import java.awt.event.KeyEvent;
-
 import java.awt.event.KeyListener;
-
 import javax.swing.JPanel;
 
+///Handles Keyboard input
 public class KeyBoard extends JPanel implements KeyListener {
 
 	public void keyPressed(KeyEvent evt) {
 		int keyCode = evt.getKeyCode();
 
-		/*
-		int d;
-		if (evt.isShiftDown())
-			d = 5;
-		else
-			d = 1;
-		*/
-
-		if(keyCode == KeyEvent.VK_ESCAPE){
-
+		if (keyCode == KeyEvent.VK_ESCAPE) {
+			// escape key
 			GameStateManager.StartPause();
 		}
 
-		if(keyCode == KeyEvent.VK_SPACE){
-
+		if (keyCode == KeyEvent.VK_SPACE) {
+			// space key
 			GameStateManager.StartGame();
 		}
 
+		if (keyCode == KeyEvent.VK_ENTER) {
+			// Enter key
+			Blocks.FastFall();
+			System.out.println("Enter");
+		}
 
 		if (keyCode == KeyEvent.VK_LEFT) {
+			// left arrow key
+			if (Blocks.CanMove) {
+				Blocks.GoLeft();
+			}
 			System.out.println("Left");
-			
-			if(Blocks.CanMove){
-			Blocks.GoLeft();
-			}
-
 		} else if (keyCode == KeyEvent.VK_RIGHT) {
-			
-			if(Blocks.CanMove){
-			Blocks.GoRight();
+			// right arrow key
+			if (Blocks.CanMove) {
+				Blocks.GoRight();
 			}
-
 			System.out.println("Right");
+
 		} else if (keyCode == KeyEvent.VK_UP) {
+			// up arrow key
+			if (Blocks.CanMove) {
+				Blocks.ClockRotate();
+			}
 			System.out.println("Up");
-		
-			if(Blocks.CanMove){
-			Blocks.ClockRotate();
-			}
 		} else if (keyCode == KeyEvent.VK_DOWN) {
-			System.out.println("Down");
-			if(Blocks.CanMove){
-			Blocks.CounterClockRotate();
+			// down arrow key
+			if (Blocks.CanMove) {
+				Blocks.CounterClockRotate();
 			}
+			System.out.println("Down");
 		}
 	}
 
 	public void keyTyped(KeyEvent e) {
-		//System.out.println("keyTyped: " + e);
+		// System.out.println("keyTyped: " + e);
 	}
 
 	public void keyReleased(KeyEvent e) {
-	//	System.out.println("keyReleased: " + e);
+		// System.out.println("keyReleased: " + e);
 	}
 
 }

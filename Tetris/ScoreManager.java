@@ -1,23 +1,24 @@
 public class ScoreManager {
 
+	public static int score = 0;
+	public static int Highscore = 0;
+	public static Boolean NewHighScore = false;
 
+	public static void saveScore() {
 
-    public static int score = 0;
-    public static int Highscore = 0;
-    public static Boolean NewHighScore = false;
+		if (score > Highscore) {
+			Highscore = score;
+			NewHighScore = true;
 
-    public static void saveScore() {
+			// saves high score
 
-        if (score > Highscore) {
-            Highscore = score;
-            NewHighScore = true;
-        }else{
-            NewHighScore = false;
-        }
-    }
+		} else {
+			NewHighScore = false;
+		}
+	}
 
-    public static void GetScore() {
+	public static void GetScore() {
 
-    }
+	}
 
 }

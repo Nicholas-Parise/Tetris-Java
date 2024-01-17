@@ -3,52 +3,53 @@ import java.util.ArrayList;
 
 public class Blocks {
 
-	public static int[][] LShape = { { 1, 0, 0, 0 }, { 1, 0, 0, 0 }, { 1, 1, 0, 0 }, { 0, 0, 0, 0 } };
+	// Shapes
 
-	public static int[][] L2Shape = { { 0, 2, 0, 0 }, { 0, 2, 0, 0 }, { 2, 2, 0, 0 }, { 0, 0, 0, 0 } };
+	private static int[][] LShape = { { 1, 0, 0, 0 }, { 1, 0, 0, 0 }, { 1, 1, 0, 0 }, { 0, 0, 0, 0 } };
 
-	public static int[][] SShape = { { 3, 0, 0, 0 }, { 3, 3, 0, 0 }, { 0, 3, 0, 0 }, { 0, 0, 0, 0 } };
+	private static int[][] L2Shape = { { 0, 2, 0, 0 }, { 0, 2, 0, 0 }, { 2, 2, 0, 0 }, { 0, 0, 0, 0 } };
 
-	public static int[][] ZShape = { { 0, 4, 0, 0 }, { 4, 4, 0, 0 }, { 4, 0, 0, 0 }, { 0, 0, 0, 0 } };
+	private static int[][] SShape = { { 3, 0, 0, 0 }, { 3, 3, 0, 0 }, { 0, 3, 0, 0 }, { 0, 0, 0, 0 } };
 
-	public static int[][] IShape = { { 0, 5, 0, 0 }, { 0, 5, 0, 0 }, { 0, 5, 0, 0 }, { 0, 5, 0, 0 } };
+	private static int[][] ZShape = { { 0, 4, 0, 0 }, { 4, 4, 0, 0 }, { 4, 0, 0, 0 }, { 0, 0, 0, 0 } };
 
-	public static int[][] SquShape = { { 6, 6, 0, 0 }, { 6, 6, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
+	private static int[][] IShape = { { 0, 5, 0, 0 }, { 0, 5, 0, 0 }, { 0, 5, 0, 0 }, { 0, 5, 0, 0 } };
 
-	public static int[][] TShape = { { 7, 0, 0, 0 }, { 7, 7, 0, 0 }, { 7, 0, 0, 0 }, { 0, 0, 0, 0 } };
+	private static int[][] SquShape = { { 6, 6, 0, 0 }, { 6, 6, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
 
-	/////
+	private static int[][] TShape = { { 7, 0, 0, 0 }, { 7, 7, 0, 0 }, { 7, 0, 0, 0 }, { 0, 0, 0, 0 } };
 
-	public static int[][] SpriteShape = new int[4][4];
+	// private Variables
 
-	public static int[][] OldSpriteShape = new int[4][4];
+	private static int[][] SpriteShape = new int[4][4];
+
+	private static int[][] OldSpriteShape = new int[4][4];
+
+	private static int[][] TempGameMatrix = new int[20][10];
+
+	private static int[] BlockQueueNeg = { -1, -1, -1, -1, -1, -1, -1 };
+
+	private static int CurrentShape = 0;
+
+	private static int CurrentSymbol = 0;
+
+	private static int CurrentRotation = 0;
+
+	// public Variables
 
 	public static int[][] GameMatrix = new int[20][10];
 
 	public static int[][] FuturePosition = new int[20][10];
 
-	public static int[][] TempGameMatrix = new int[20][10];
-
 	public static int[] BlockQueue = new int[7];
-
-	private static int[] BlockQueueNeg = { -1, -1, -1, -1, -1, -1, -1 };
-
-	public static int CurrentShape = 0;
 
 	public static int offsetX = 2;
 
 	public static int offsetY = 0;
 
-	public static int CurrentSymbol = 0;
-
-	public static int BlockQueuePlace = 0;
-
-	private static int CurrentRotation = 0;
-
-	private static int LastRotation = 0;
-
 	public static Boolean CanMove = true;
 
+	public static int BlockQueuePlace = 0;
 
 	// Returns current shape
 	public static int[][] GetCurrent(int Shape) {
@@ -79,33 +80,23 @@ public class Blocks {
 		return LShape;
 	}
 
-	// I don't know how yet but stop it from rotating into wall
-	// return true; if it can rotate
-	// return false; if it can't rotate
-	public static Boolean BlockHandler(int rotation) {
-		// Handles Block rotations
+	// Handles Block rotations
+	private static Boolean BlockHandler(int rotation) {
+
+		// return true; if it can rotate
+		// return false; if it can't rotate
 
 		int temp = 0;
 		int temp2 = 0;
 
-		int[][] CurrentShapeTemp = new int[4][4];
-
-		CurrentShapeTemp = GetCurrent(CurrentShape);
-
-		OldSpriteShape = SpriteShape;
+		int[][] CurrentShapeTemp = GetCurrent(CurrentShape);
 
 		int[][] SpriteShapeTemp = new int[4][4];
 
-		SpriteShape = new int[4][4];
-
-		// rotation = "U";
-		// rotation = "D";
-		// rotation = "L";
-		// rotation = "R";
-		// [up][right]
+		OldSpriteShape = SpriteShape;
 
 		if (rotation == 3) {
-			// works
+			// Left Rotation
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < 4; j++) {
 					if (CurrentShapeTemp[i][j] != 0) {
@@ -114,15 +105,12 @@ public class Blocks {
 							return false;
 						}
 
-						if (GameMatrix[j + offsetY][i + offsetX] > 0){
-						//	return false;
-						}
-
 						if (j == 1)
 							temp = 0;
 
 						if (j == 0)
 							temp = 1;
+
 						CurrentSymbol = CurrentShapeTemp[i][j];
 
 						SpriteShapeTemp[temp][i] = CurrentSymbol;
@@ -134,21 +122,15 @@ public class Blocks {
 
 		} else if (rotation == 1) {
 
-			// works
+			// right Rotation
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < 4; j++) {
 
 					if (CurrentShapeTemp[i][j] != 0) {
 
-
 						if (j + offsetY > 19 || i + offsetX > 9 || i + offsetX < 0) {
 							return false;
 						}
-
-						if (GameMatrix[j + offsetY][i + offsetX] > 0){
-						//	return false;
-						}
-
 
 						if (CurrentShape != 4) {
 
@@ -191,23 +173,19 @@ public class Blocks {
 			System.out.println("-Rigth-");
 
 		} else if (rotation == 0) {
-
+			// Up Rotation
 			SpriteShapeTemp = GetCurrent(CurrentShape);
 
 			System.out.println("-Up-");
 
 		} else if (rotation == 2) {
-			// Works
+			// down Rotation
 			for (int i = 0; i < 4; i++) {
 
 				for (int j = 0; j < 4; j++) {
 
 					if (j + offsetY > 19 || i + offsetX > 9 || i + offsetX < 0) {
 						return false;
-					}
-
-					if (GameMatrix[j + offsetY][i + offsetX] > 0){
-					//	return false;
 					}
 
 					if (CurrentShapeTemp[i][j] != 0) {
@@ -258,19 +236,15 @@ public class Blocks {
 			}
 
 			System.out.println("-Down-");
-
 		}
 
-		SpriteShape = SpriteShapeTemp;
-
-
-		//test if rotates into another block
+		// test if rotates into another block
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 
-				if (SpriteShape[i][j] != 0) {
+				if (SpriteShapeTemp[i][j] != 0) {
 
-					//if it does return false
+					// if it does return false
 					if (GameMatrix[i + offsetY][j + offsetX] > 0) {
 
 						return false;
@@ -279,14 +253,18 @@ public class Blocks {
 			}
 		}
 
+		// if it passes all the other tests reset sprite shape and make it equal to
+		// sprite shape temp
 
+		SpriteShape = SpriteShapeTemp;
 
 		return true;
 	}
 
 	// returns true if can move left
 	public static Boolean CanLeft() {
-
+		// returns false if can't
+		// returns true if can
 		ArrayList<Integer> LowestPointsY = new ArrayList<>();
 		ArrayList<Integer> LowestPointsX = new ArrayList<>();
 
@@ -301,12 +279,13 @@ public class Blocks {
 					temp = i + Blocks.offsetY;
 					temp2 = j + Blocks.offsetX;
 
-					System.out.println(offsetX + " " + offsetY);
-					System.out.println(temp2 + " " + temp);
+					// System.out.println(offsetX + " " + offsetY);
+					// System.out.println(temp2 + " " + temp);
 
 					LowestPointsY.add(temp);
 					LowestPointsX.add(temp2);
 
+					// make sure it's not going into wall
 					if (temp2 == 0) {
 						return false;
 					}
@@ -314,9 +293,8 @@ public class Blocks {
 			}
 		}
 
-		// This part is broken and I don't know why
+		// Tests if it will go through a shape
 		for (int k = 0; k < LowestPointsY.size(); k++) {
-
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < 4; j++) {
 					if (SpriteShape[i][j] != 0) {
@@ -338,6 +316,8 @@ public class Blocks {
 
 	// returns true if can move right
 	public static Boolean CanRight() {
+		// returns false if can't
+		// returns true if can
 
 		ArrayList<Integer> LowestPointsY = new ArrayList<>();
 		ArrayList<Integer> LowestPointsX = new ArrayList<>();
@@ -353,12 +333,12 @@ public class Blocks {
 					temp = i + Blocks.offsetY;
 					temp2 = j + Blocks.offsetX;
 
-					System.out.println(offsetX + " " + offsetY);
-					System.out.println(temp2 + " " + temp);
+					// System.out.println(offsetX + " " + offsetY);
+					// System.out.println(temp2 + " " + temp);
 
 					LowestPointsY.add(temp);
 					LowestPointsX.add(temp2);
-
+					// make sure it's not going into wall
 					if (temp2 == 9) {
 						return false;
 					}
@@ -366,9 +346,8 @@ public class Blocks {
 			}
 		}
 
-		// This part is broken and I don't know why
+		// Tests if it will go through a shape
 		for (int k = 0; k < LowestPointsY.size(); k++) {
-
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < 4; j++) {
 
@@ -407,14 +386,14 @@ public class Blocks {
 
 					LowestPointsY.add(temp);
 					LowestPointsX.add(temp2);
-
+					// tests if on floor
 					if (temp > 18) {
 						return true;
 					}
 				}
 			}
 		}
-
+		// Tests if it will go through a shape
 		for (int k = 0; k < LowestPointsY.size(); k++) {
 
 			for (int i = 0; i < 4; i++) {
@@ -436,29 +415,20 @@ public class Blocks {
 	}
 
 	// Updates the matrix to new position of sprite
-	public static void UpdateMatrix() {
+	private static void UpdateMatrix() {
 
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 
 				if (SpriteShape[i][j] != 0) {
 
-
-					if (GameMatrix[i + offsetY][j + offsetX] > 0 && offsetY <2) {
-
-						System.out.println("GAMe over");
+					if (GameMatrix[i + offsetY][j + offsetX] > 0 && offsetY < 2) {
+						// if a shape is in another shape and the height is less than 2
+						// game over
+						System.out.println("Game over");
 						GameStateManager.StartEnd();
 						GameStateManager.StartMenu();
 					}
-
-
-					//test if rotates into itself
-					if (GameMatrix[i + offsetY][j + offsetX] > 0) {
-
-		
-					}
-
-
 
 					GameMatrix[i + offsetY][j + offsetX] = SpriteShape[i][j];
 					TempGameMatrix[i + offsetY][j + offsetX] = SpriteShape[i][j];
@@ -482,7 +452,7 @@ public class Blocks {
 	}
 
 	// 0's out game matrix
-	public static void ResetMatrix() {
+	private static void ResetMatrix() {
 
 		for (int i = 0; i < 20; i++) {
 			for (int j = 0; j < 10; j++) {
@@ -492,6 +462,7 @@ public class Blocks {
 		}
 	}
 
+	// Showes the future position of the shape
 	public static void ShowFuture() {
 
 		int tempOffY = offsetY;
@@ -502,31 +473,25 @@ public class Blocks {
 			}
 		}
 
-		while (!WhereFloor(offsetX, tempOffY)&&tempOffY<20) {
+		while (!WhereFloor(offsetX, tempOffY) && tempOffY < 20) {
 
-		//	if(tempOffY<18){
 			tempOffY++;
-		//	}else{
-		//		break;
-		//	}
+			// finds floor
 		}
 
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
 
-			for (int i = 0; i < 4; i++) {
-				for (int j = 0; j < 4; j++) {
+				if (SpriteShape[i][j] != 0) {
 
-					if (SpriteShape[i][j] != 0) {
-						
-						FuturePosition[i+tempOffY][j+offsetX] = SpriteShape[i][j];
-					}
+					FuturePosition[i + tempOffY][j + offsetX] = SpriteShape[i][j];
 				}
 			}
 		}
-
-	
+	}
 
 	// removes the sprite from the Game matrix
-	public static void DeleteLastPos() {
+	private static void DeleteLastPos() {
 
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
@@ -554,7 +519,6 @@ public class Blocks {
 
 			System.out.println("Cant go down");
 		}
-
 	}
 
 	// Makes the sprite go Right
@@ -587,28 +551,10 @@ public class Blocks {
 		}
 	}
 
-	// Reverts the action done by block handler
-	public static void PreviousRotation() {
-
-		DeleteLastPos();
-
-		if (BlockHandler(LastRotation)) {
-
-			CurrentRotation = LastRotation;
-			System.out.println("Rotate");
-
-			
-		}
-		UpdateMatrix();
-	}
-
 	// makes the sprite rotate clockwise
 	public static void ClockRotate() {
 
-		// CurrentRotation
-
 		if (CurrentShape != 5) {
-			// System.out.println(CurrentShape);
 			if (CurrentShape == 0 || CurrentShape == 1 || CurrentShape == 6) {
 
 				if (CurrentRotation > 3) {
@@ -624,29 +570,27 @@ public class Blocks {
 		DeleteLastPos();
 
 		if (BlockHandler(CurrentRotation)) {
-
+			// if can rotate rotate
 			System.out.println("Rotate");
-
-			LastRotation = CurrentRotation;
-			UpdateMatrix();
 
 			if (CurrentShape != 5) {
 				CurrentRotation++;
 			}
 
 		} else {
-			PreviousRotation();
+			// if can't rotate revert
+			SpriteShape = OldSpriteShape;
 			System.out.println("Previous Rot");
 		}
+
+		UpdateMatrix();
 
 	}
 
 	// makes the sprite rotate counter clockwise
 	public static void CounterClockRotate() {
 
-		// CurrentRotation
 		if (CurrentShape != 5) {
-			// System.out.println(CurrentShape);
 			if (CurrentShape == 0 || CurrentShape == 1 || CurrentShape == 6) {
 
 				if (CurrentRotation < 0) {
@@ -664,21 +608,21 @@ public class Blocks {
 		if (BlockHandler(CurrentRotation)) {
 
 			System.out.println("Rotate");
-			LastRotation = CurrentRotation;
-			UpdateMatrix();
+			// if can rotate rotate
 			if (CurrentShape != 5) {
 				CurrentRotation--;
 			}
-
 		} else {
+			// if can't rotate revert
 			System.out.println("Previous Rot");
-
-			PreviousRotation();
+			SpriteShape = OldSpriteShape;
 		}
+
+		UpdateMatrix();
 	}
 
 	// Creates Random Queue for the blocks
-	public static void MakeBlockQueue() {
+	private static void MakeBlockQueue() {
 
 		BlockQueue = BlockQueueNeg;
 
@@ -707,31 +651,53 @@ public class Blocks {
 					break;
 				}
 
-				for (int k = 0; k < 7; k++) {
-					System.out.print(BlockQueue[k] + " ");
-				}
-				System.out.println();
-
 			} while (Temp);
 
 			if (Temp == false) {
 				BlockQueue[i] = TryWhere;
 			}
-
 		}
+	}
 
-		for (int i = 0; i < 7; i++) {
-			System.out.print(BlockQueue[i] + " ");
+	// Tests if the row is full
+	public static void FullRow() {
+
+		Boolean fullRown = false;
+
+		for (int i = 0; i < 20; i++) {
+			fullRown = true;
+			for (int j = 0; j < 10; j++) {
+
+				if (GameMatrix[i][j] == 0) {
+
+					fullRown = false;
+				}
+			}
+
+			if (fullRown) {
+
+				for (int j = 0; j < 10; j++) {
+					GameMatrix[i][j] = 0;
+					ScoreManager.score += 100;
+				}
+
+				for (int k = i; k > 0; k--) {
+
+					for (int l = 0; l < 10; l++) {
+						// moves the blocks above the full row down
+						GameMatrix[k][l] = GameMatrix[k - 1][l];
+					}
+				}
+			}
 		}
-		System.out.println();
-
 	}
 
 	// changes the Sprite to a new shape
 	public static void NextBlock() {
 
 		CurrentRotation = 0;
-		LastRotation = 0;
+
+		CanMove = true;
 
 		CurrentShape = BlockQueue[BlockQueuePlace];
 
@@ -756,19 +722,48 @@ public class Blocks {
 		UpdateMatrix();
 	}
 
-	public static void ResetGame() {
-	
-	ResetMatrix();
+	public static void OnFloor() {
 
-	MakeBlockQueue();
-	NextBlock();
-	BlockHandler(0);
-	CanMove = true;
+		FullRow();
+		NextBlock();
 
-	
-	ScoreManager.score = 0;
+		ScoreManager.score += 30;
 	}
 
+	public static void FastFall() {
 
+		DeleteLastPos();
+		int tempOffY = offsetY;
+
+		while (!WhereFloor(offsetX, tempOffY) && tempOffY < 20) {
+
+			tempOffY++;
+			// finds floor
+		}
+
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+
+				if (SpriteShape[i][j] != 0) {
+
+					GameMatrix[i + tempOffY][j + offsetX] = SpriteShape[i][j];
+				}
+			}
+		}
+
+		OnFloor();
+	}
+
+	// resets game for next time
+	public static void ResetGame() {
+
+		ResetMatrix();
+
+		MakeBlockQueue();
+		NextBlock();
+		CanMove = true;
+
+		ScoreManager.score = 0;
+	}
 
 }

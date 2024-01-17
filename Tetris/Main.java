@@ -7,9 +7,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		// Arr[Y][X]
-
 		Render.construc();
-
 		Blocks.ResetGame();
 
 		int fallTimer = 0;
@@ -26,7 +24,6 @@ public class Main {
 			last_time = time;
 
 			GameStateManager.Delta(delta_time);
-
 			GameStateManager.SwitchPause();
 			GameStateManager.SwitchEnd();
 			GameStateManager.SwitchMenu();
@@ -41,13 +38,9 @@ public class Main {
 						Blocks.CanMove = false;
 
 						if (floorTimer > 1000) {
-							GameLogic.FullRow();
-							Blocks.NextBlock();
 							floorTimer = 0;
 
-							Blocks.CanMove = true;
-
-							ScoreManager.score += 30;
+							Blocks.OnFloor();
 						}
 					}
 
@@ -59,6 +52,9 @@ public class Main {
 						fallTimer = 0;
 					}
 				}
+
+				fallTimer += delta_time;
+				floorTimer += delta_time;
 			}
 
 			Blocks.ShowFuture();
@@ -68,8 +64,6 @@ public class Main {
 			}
 
 			Render.DeltaTitle += delta_time;
-			fallTimer += delta_time;
-			floorTimer += delta_time;
 
 			try {
 				Render.Update();
@@ -80,7 +74,5 @@ public class Main {
 			}
 
 		} while (true);
-
 	}
-
 }
