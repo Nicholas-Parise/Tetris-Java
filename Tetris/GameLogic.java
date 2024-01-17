@@ -2,11 +2,6 @@
 public class GameLogic {
 
 
-    public static Boolean GameOver = false;
-
-    
-
-
     public static void FullRow() {
 
         Boolean fullRown = false;
@@ -27,7 +22,7 @@ public class GameLogic {
                 for (int j = 0; j < 10; j++) {
 
                     Blocks.GameMatrix[i][j] = 0;
-                    Main.score +=100;
+                    ScoreManager.score +=100;
                 }
             
             

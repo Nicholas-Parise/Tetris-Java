@@ -25,7 +25,7 @@ public class Blocks {
 
 	public static int[][] GameMatrix = new int[20][10];
 
-	public static int[][] FuturePosition = new int[30][20];
+	public static int[][] FuturePosition = new int[20][10];
 
 	public static int[][] TempGameMatrix = new int[20][10];
 
@@ -49,9 +49,6 @@ public class Blocks {
 
 	public static Boolean CanMove = true;
 
-	private static Boolean OnceQueue = false;
-
-	private static int LastQueue = -1;
 
 	// Returns current shape
 	public static int[][] GetCurrent(int Shape) {
@@ -266,14 +263,23 @@ public class Blocks {
 
 		SpriteShape = SpriteShapeTemp;
 
+
+		//test if rotates into another block
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 
-				System.out.print(SpriteShape[i][j]);
+				if (SpriteShape[i][j] != 0) {
 
+					//if it does return false
+					if (GameMatrix[i + offsetY][j + offsetX] > 0) {
+
+						return false;
+					}
+				}
 			}
-			System.out.println();
 		}
+
+
 
 		return true;
 	}
@@ -437,11 +443,22 @@ public class Blocks {
 
 				if (SpriteShape[i][j] != 0) {
 
+
+					if (GameMatrix[i + offsetY][j + offsetX] > 0 && offsetY <2) {
+
+						System.out.println("GAMe over");
+						GameStateManager.StartEnd();
+						GameStateManager.StartMenu();
+					}
+
+
+					//test if rotates into itself
 					if (GameMatrix[i + offsetY][j + offsetX] > 0) {
 
-						GameLogic.GameOver = true;
-						System.out.println("GAMe over");
+		
 					}
+
+
 
 					GameMatrix[i + offsetY][j + offsetX] = SpriteShape[i][j];
 					TempGameMatrix[i + offsetY][j + offsetX] = SpriteShape[i][j];
@@ -485,13 +502,13 @@ public class Blocks {
 			}
 		}
 
-		while (!WhereFloor(offsetX, tempOffY)) {
+		while (!WhereFloor(offsetX, tempOffY)&&tempOffY<20) {
 
-			if(tempOffY<18){
+		//	if(tempOffY<18){
 			tempOffY++;
-			}else{
-				break;
-			}
+		//	}else{
+		//		break;
+		//	}
 		}
 
 
@@ -534,6 +551,7 @@ public class Blocks {
 			offsetY++;
 			UpdateMatrix();
 		} else {
+
 			System.out.println("Cant go down");
 		}
 
@@ -723,8 +741,6 @@ public class Blocks {
 
 		if (BlockQueuePlace == 7) {
 			BlockQueuePlace = 0;
-			LastQueue = BlockQueue[6];
-			OnceQueue = true;
 			MakeBlockQueue();
 		}
 
@@ -738,7 +754,21 @@ public class Blocks {
 		offsetY = 0;
 
 		UpdateMatrix();
-
 	}
+
+	public static void ResetGame() {
+	
+	ResetMatrix();
+
+	MakeBlockQueue();
+	NextBlock();
+	BlockHandler(0);
+	CanMove = true;
+
+	
+	ScoreManager.score = 0;
+	}
+
+
 
 }
