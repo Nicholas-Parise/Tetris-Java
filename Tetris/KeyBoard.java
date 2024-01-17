@@ -17,6 +17,17 @@ public class KeyBoard extends JPanel implements KeyListener {
 			d = 1;
 		*/
 
+		if(keyCode == KeyEvent.VK_ESCAPE){
+
+			GameStateManager.StartPause();
+		}
+
+		if(keyCode == KeyEvent.VK_SPACE){
+
+			GameStateManager.StartGame();
+		}
+
+
 		if (keyCode == KeyEvent.VK_LEFT) {
 			System.out.println("Left");
 			

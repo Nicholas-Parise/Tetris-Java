@@ -2,6 +2,11 @@
 public class GameLogic {
 
 
+    public static Boolean GameOver = false;
+
+    
+
+
     public static void FullRow() {
 
         Boolean fullRown = false;
@@ -36,4 +41,17 @@ public class GameLogic {
             }
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

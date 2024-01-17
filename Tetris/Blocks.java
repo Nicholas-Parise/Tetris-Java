@@ -17,13 +17,15 @@ public class Blocks {
 
 	public static int[][] TShape = { { 7, 0, 0, 0 }, { 7, 7, 0, 0 }, { 7, 0, 0, 0 }, { 0, 0, 0, 0 } };
 
+	/////
+
 	public static int[][] SpriteShape = new int[4][4];
 
 	public static int[][] OldSpriteShape = new int[4][4];
 
-	public static int BlockPosition[][] = new int[4][4];
-
 	public static int[][] GameMatrix = new int[20][10];
+
+	public static int[][] FuturePosition = new int[30][20];
 
 	public static int[][] TempGameMatrix = new int[20][10];
 
@@ -47,7 +49,9 @@ public class Blocks {
 
 	public static Boolean CanMove = true;
 
+	private static Boolean OnceQueue = false;
 
+	private static int LastQueue = -1;
 
 	// Returns current shape
 	public static int[][] GetCurrent(int Shape) {
@@ -109,6 +113,14 @@ public class Blocks {
 				for (int j = 0; j < 4; j++) {
 					if (CurrentShapeTemp[i][j] != 0) {
 
+						if (j + offsetY > 19 || i + offsetX > 9 || i + offsetX < 0) {
+							return false;
+						}
+
+						if (GameMatrix[j + offsetY][i + offsetX] > 0){
+						//	return false;
+						}
+
 						if (j == 1)
 							temp = 0;
 
@@ -117,12 +129,6 @@ public class Blocks {
 						CurrentSymbol = CurrentShapeTemp[i][j];
 
 						SpriteShapeTemp[temp][i] = CurrentSymbol;
-
-						if(temp + offsetY>19 || i + offsetX>9){
-							return false;
-						}
-
-
 					}
 				}
 			}
@@ -137,46 +143,50 @@ public class Blocks {
 
 					if (CurrentShapeTemp[i][j] != 0) {
 
-						if (CurrentShape != 4) {
-						
-							if (i == 0) {
-							temp = 2;
-						}
-						if (i == 1) {
-							temp = 1;
-						}
-						if (i == 2) {
-							temp = 0;
-						}
-						if (i == 3) {
-							temp = 0;
-						}
-						
-					}else{
 
-						if (i == 0) {
-							temp = 3;
-						}
-						if (i == 1) {
-							temp = 2;
-						}
-						if (i == 2) {
-							temp = 1;
-						}
-						if (i == 3) {
-							temp = 0;
-						}
-
-					}
-
-						CurrentSymbol = CurrentShapeTemp[i][j];
-						SpriteShapeTemp[j][temp] = CurrentSymbol;
-
-
-						if(j + offsetY>19 || temp + offsetX>9){
+						if (j + offsetY > 19 || i + offsetX > 9 || i + offsetX < 0) {
 							return false;
 						}
 
+						if (GameMatrix[j + offsetY][i + offsetX] > 0){
+						//	return false;
+						}
+
+
+						if (CurrentShape != 4) {
+
+							if (i == 0) {
+								temp = 2;
+							}
+							if (i == 1) {
+								temp = 1;
+							}
+							if (i == 2) {
+								temp = 0;
+							}
+							if (i == 3) {
+								temp = 0;
+							}
+
+						} else {
+
+							if (i == 0) {
+								temp = 3;
+							}
+							if (i == 1) {
+								temp = 2;
+							}
+							if (i == 2) {
+								temp = 1;
+							}
+							if (i == 3) {
+								temp = 0;
+							}
+
+						}
+
+						CurrentSymbol = CurrentShapeTemp[i][j];
+						SpriteShapeTemp[j][temp] = CurrentSymbol;
 					}
 				}
 			}
@@ -193,7 +203,15 @@ public class Blocks {
 			// Works
 			for (int i = 0; i < 4; i++) {
 
-				for (int j = 0; j < 2; j++) {
+				for (int j = 0; j < 4; j++) {
+
+					if (j + offsetY > 19 || i + offsetX > 9 || i + offsetX < 0) {
+						return false;
+					}
+
+					if (GameMatrix[j + offsetY][i + offsetX] > 0){
+					//	return false;
+					}
 
 					if (CurrentShapeTemp[i][j] != 0) {
 
@@ -205,48 +223,40 @@ public class Blocks {
 						}
 
 						if (CurrentShape != 4) {
-						
+
 							if (i == 0) {
-							temp = 2;
-						}
-						if (i == 1) {
-							temp = 1;
-						}
-						if (i == 2) {
-							temp = 0;
-						}
-						if (i == 3) {
-							temp = 0;
-						}
-						
-					}else{
+								temp = 2;
+							}
+							if (i == 1) {
+								temp = 1;
+							}
+							if (i == 2) {
+								temp = 0;
+							}
+							if (i == 3) {
+								temp = 0;
+							}
 
-						if (i == 0) {
-							temp = 3;
-						}
-						if (i == 1) {
-							temp = 2;
-						}
-						if (i == 2) {
-							temp = 1;
-						}
-						if (i == 3) {
-							temp = 0;
-						}
+						} else {
 
-					}
+							if (i == 0) {
+								temp = 3;
+							}
+							if (i == 1) {
+								temp = 2;
+							}
+							if (i == 2) {
+								temp = 1;
+							}
+							if (i == 3) {
+								temp = 0;
+							}
+
+						}
 
 						CurrentSymbol = CurrentShapeTemp[i][j];
 						SpriteShapeTemp[temp][temp2] = CurrentSymbol;
-
-						if(temp + offsetY>19 || temp2 + offsetX>9){
-							return false;
-						}
-
-
-
 					}
-
 				}
 			}
 
@@ -373,7 +383,7 @@ public class Blocks {
 	}
 
 	// returns false if can move down
-	public static Boolean WhereFloor() {
+	public static Boolean WhereFloor(int ShapeOffsetx, int ShapeOffsety) {
 
 		ArrayList<Integer> LowestPointsY = new ArrayList<>();
 		ArrayList<Integer> LowestPointsX = new ArrayList<>();
@@ -386,11 +396,8 @@ public class Blocks {
 
 				if (SpriteShape[i][j] != 0) {
 
-					temp = i + Blocks.offsetY;
-					temp2 = j + Blocks.offsetX;
-
-					// System.out.println(offsetX + " " + offsetY);
-					// System.out.println(temp2 + " " + temp);
+					temp = i + ShapeOffsety;
+					temp2 = j + ShapeOffsetx;
 
 					LowestPointsY.add(temp);
 					LowestPointsX.add(temp2);
@@ -398,12 +405,9 @@ public class Blocks {
 					if (temp > 18) {
 						return true;
 					}
-
 				}
 			}
 		}
-
-		// There is a bug where it reconises it's self as a floor
 
 		for (int k = 0; k < LowestPointsY.size(); k++) {
 
@@ -432,6 +436,12 @@ public class Blocks {
 			for (int j = 0; j < 4; j++) {
 
 				if (SpriteShape[i][j] != 0) {
+
+					if (GameMatrix[i + offsetY][j + offsetX] > 0) {
+
+						GameLogic.GameOver = true;
+						System.out.println("GAMe over");
+					}
 
 					GameMatrix[i + offsetY][j + offsetX] = SpriteShape[i][j];
 					TempGameMatrix[i + offsetY][j + offsetX] = SpriteShape[i][j];
@@ -465,6 +475,39 @@ public class Blocks {
 		}
 	}
 
+	public static void ShowFuture() {
+
+		int tempOffY = offsetY;
+
+		for (int i = 0; i < 20; i++) {
+			for (int j = 0; j < 10; j++) {
+				FuturePosition[i][j] = 0;
+			}
+		}
+
+		while (!WhereFloor(offsetX, tempOffY)) {
+
+			if(tempOffY<18){
+			tempOffY++;
+			}else{
+				break;
+			}
+		}
+
+
+			for (int i = 0; i < 4; i++) {
+				for (int j = 0; j < 4; j++) {
+
+					if (SpriteShape[i][j] != 0) {
+						
+						FuturePosition[i+tempOffY][j+offsetX] = SpriteShape[i][j];
+					}
+				}
+			}
+		}
+
+	
+
 	// removes the sprite from the Game matrix
 	public static void DeleteLastPos() {
 
@@ -483,7 +526,7 @@ public class Blocks {
 	// Makes the sprite fall
 	public static void Gravity() {
 
-		if (!WhereFloor()) {
+		if (!WhereFloor(offsetX, offsetY)) {
 			System.out.println("Went Down");
 
 			DeleteLastPos();
@@ -533,12 +576,12 @@ public class Blocks {
 
 		if (BlockHandler(LastRotation)) {
 
-			CurrentRotation  = LastRotation;
+			CurrentRotation = LastRotation;
 			System.out.println("Rotate");
 
-			UpdateMatrix();
+			
 		}
-
+		UpdateMatrix();
 	}
 
 	// makes the sprite rotate clockwise
@@ -547,7 +590,7 @@ public class Blocks {
 		// CurrentRotation
 
 		if (CurrentShape != 5) {
-		//	System.out.println(CurrentShape);
+			// System.out.println(CurrentShape);
 			if (CurrentShape == 0 || CurrentShape == 1 || CurrentShape == 6) {
 
 				if (CurrentRotation > 3) {
@@ -570,9 +613,9 @@ public class Blocks {
 			UpdateMatrix();
 
 			if (CurrentShape != 5) {
-			CurrentRotation++;
+				CurrentRotation++;
 			}
-		
+
 		} else {
 			PreviousRotation();
 			System.out.println("Previous Rot");
@@ -585,8 +628,8 @@ public class Blocks {
 
 		// CurrentRotation
 		if (CurrentShape != 5) {
-		//	System.out.println(CurrentShape);
-			if (CurrentShape == 0 || CurrentShape == 1 ||CurrentShape == 6) {
+			// System.out.println(CurrentShape);
+			if (CurrentShape == 0 || CurrentShape == 1 || CurrentShape == 6) {
 
 				if (CurrentRotation < 0) {
 					CurrentRotation = 3;
@@ -606,11 +649,11 @@ public class Blocks {
 			LastRotation = CurrentRotation;
 			UpdateMatrix();
 			if (CurrentShape != 5) {
-			CurrentRotation--;
+				CurrentRotation--;
 			}
 
 		} else {
-System.out.println("Previous Rot");
+			System.out.println("Previous Rot");
 
 			PreviousRotation();
 		}
@@ -680,10 +723,10 @@ System.out.println("Previous Rot");
 
 		if (BlockQueuePlace == 7) {
 			BlockQueuePlace = 0;
+			LastQueue = BlockQueue[6];
+			OnceQueue = true;
 			MakeBlockQueue();
 		}
-
-
 
 		for (int i = 0; i < 20; i++) {
 			for (int j = 0; j < 10; j++) {
@@ -691,8 +734,11 @@ System.out.println("Previous Rot");
 			}
 		}
 
-		offsetX = 2;
+		offsetX = 4;
 		offsetY = 0;
+
+		UpdateMatrix();
+
 	}
 
 }
