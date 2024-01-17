@@ -1,6 +1,5 @@
 import java.util.Random;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Blocks {
 
@@ -20,13 +19,15 @@ public class Blocks {
 
 	public static int[][] SpriteShape = new int[4][4];
 
+	public static int[][] OldSpriteShape = new int[4][4];
+
 	public static int BlockPosition[][] = new int[4][4];
 
 	public static int[][] GameMatrix = new int[20][10];
 
 	public static int[][] TempGameMatrix = new int[20][10];
 
-	private static int[] BlockQueue = new int[7];
+	public static int[] BlockQueue = new int[7];
 
 	private static int[] BlockQueueNeg = { -1, -1, -1, -1, -1, -1, -1 };
 
@@ -38,32 +39,38 @@ public class Blocks {
 
 	public static int CurrentSymbol = 0;
 
-	private static int BlockQueuePlace = 0;
+	public static int BlockQueuePlace = 0;
 
 	private static int CurrentRotation = 0;
 
-	// Returns current shape
-	public static int[][] GetCurrent() {
+	private static int LastRotation = 0;
 
-		if (CurrentShape == 0) {
+	public static Boolean CanMove = true;
+
+
+
+	// Returns current shape
+	public static int[][] GetCurrent(int Shape) {
+
+		if (Shape == 0) {
 
 			return LShape;
-		} else if (CurrentShape == 1) {
+		} else if (Shape == 1) {
 
 			return L2Shape;
-		} else if (CurrentShape == 2) {
+		} else if (Shape == 2) {
 
 			return SShape;
-		} else if (CurrentShape == 3) {
+		} else if (Shape == 3) {
 
 			return ZShape;
-		} else if (CurrentShape == 4) {
+		} else if (Shape == 4) {
 
 			return IShape;
-		} else if (CurrentShape == 5) {
+		} else if (Shape == 5) {
 
 			return SquShape;
-		} else if (CurrentShape == 6) {
+		} else if (Shape == 6) {
 
 			return TShape;
 		}
@@ -82,7 +89,9 @@ public class Blocks {
 
 		int[][] CurrentShapeTemp = new int[4][4];
 
-		CurrentShapeTemp = GetCurrent();
+		CurrentShapeTemp = GetCurrent(CurrentShape);
+
+		OldSpriteShape = SpriteShape;
 
 		int[][] SpriteShapeTemp = new int[4][4];
 
@@ -94,7 +103,7 @@ public class Blocks {
 		// rotation = "R";
 		// [up][right]
 
-		if (rotation == 0) {
+		if (rotation == 3) {
 			// works
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < 4; j++) {
@@ -109,11 +118,16 @@ public class Blocks {
 
 						SpriteShapeTemp[temp][i] = CurrentSymbol;
 
+						if(temp + offsetY>19 || i + offsetX>9){
+							return false;
+						}
+
+
 					}
 				}
 			}
 
-			System.out.println("-Up-");
+			System.out.println("-Left-");
 
 		} else if (rotation == 1) {
 
@@ -123,7 +137,9 @@ public class Blocks {
 
 					if (CurrentShapeTemp[i][j] != 0) {
 
-						if (i == 0) {
+						if (CurrentShape != 4) {
+						
+							if (i == 0) {
 							temp = 2;
 						}
 						if (i == 1) {
@@ -135,22 +151,45 @@ public class Blocks {
 						if (i == 3) {
 							temp = 0;
 						}
+						
+					}else{
+
+						if (i == 0) {
+							temp = 3;
+						}
+						if (i == 1) {
+							temp = 2;
+						}
+						if (i == 2) {
+							temp = 1;
+						}
+						if (i == 3) {
+							temp = 0;
+						}
+
+					}
+
 						CurrentSymbol = CurrentShapeTemp[i][j];
 						SpriteShapeTemp[j][temp] = CurrentSymbol;
+
+
+						if(j + offsetY>19 || temp + offsetX>9){
+							return false;
+						}
 
 					}
 				}
 			}
 
-			System.out.println("-Down-");
-
-		} else if (rotation == 2) {
-
-			SpriteShapeTemp = GetCurrent();
-
 			System.out.println("-Rigth-");
 
-		} else if (rotation == 3) {
+		} else if (rotation == 0) {
+
+			SpriteShapeTemp = GetCurrent(CurrentShape);
+
+			System.out.println("-Up-");
+
+		} else if (rotation == 2) {
 			// Works
 			for (int i = 0; i < 4; i++) {
 
@@ -165,7 +204,9 @@ public class Blocks {
 							temp2 = 0;
 						}
 
-						if (i == 0) {
+						if (CurrentShape != 4) {
+						
+							if (i == 0) {
 							temp = 2;
 						}
 						if (i == 1) {
@@ -177,15 +218,39 @@ public class Blocks {
 						if (i == 3) {
 							temp = 0;
 						}
+						
+					}else{
+
+						if (i == 0) {
+							temp = 3;
+						}
+						if (i == 1) {
+							temp = 2;
+						}
+						if (i == 2) {
+							temp = 1;
+						}
+						if (i == 3) {
+							temp = 0;
+						}
+
+					}
+
 						CurrentSymbol = CurrentShapeTemp[i][j];
 						SpriteShapeTemp[temp][temp2] = CurrentSymbol;
+
+						if(temp + offsetY>19 || temp2 + offsetX>9){
+							return false;
+						}
+
+
 
 					}
 
 				}
 			}
 
-			System.out.println("-Left-");
+			System.out.println("-Down-");
 
 		}
 
@@ -466,8 +531,9 @@ public class Blocks {
 
 		DeleteLastPos();
 
-		if (BlockHandler(CurrentRotation)) {
+		if (BlockHandler(LastRotation)) {
 
+			CurrentRotation  = LastRotation;
 			System.out.println("Rotate");
 
 			UpdateMatrix();
@@ -481,6 +547,7 @@ public class Blocks {
 		// CurrentRotation
 
 		if (CurrentShape != 5) {
+		//	System.out.println(CurrentShape);
 			if (CurrentShape == 0 || CurrentShape == 1 || CurrentShape == 6) {
 
 				if (CurrentRotation > 3) {
@@ -492,16 +559,23 @@ public class Blocks {
 				}
 			}
 		}
+
 		DeleteLastPos();
 
 		if (BlockHandler(CurrentRotation)) {
 
 			System.out.println("Rotate");
 
+			LastRotation = CurrentRotation;
 			UpdateMatrix();
+
+			if (CurrentShape != 5) {
 			CurrentRotation++;
+			}
+		
 		} else {
 			PreviousRotation();
+			System.out.println("Previous Rot");
 		}
 
 	}
@@ -511,7 +585,8 @@ public class Blocks {
 
 		// CurrentRotation
 		if (CurrentShape != 5) {
-			if (CurrentShape == 0 || CurrentShape == 1 || CurrentShape == 6) {
+		//	System.out.println(CurrentShape);
+			if (CurrentShape == 0 || CurrentShape == 1 ||CurrentShape == 6) {
 
 				if (CurrentRotation < 0) {
 					CurrentRotation = 3;
@@ -528,10 +603,15 @@ public class Blocks {
 		if (BlockHandler(CurrentRotation)) {
 
 			System.out.println("Rotate");
-
+			LastRotation = CurrentRotation;
 			UpdateMatrix();
+			if (CurrentShape != 5) {
 			CurrentRotation--;
+			}
+
 		} else {
+System.out.println("Previous Rot");
+
 			PreviousRotation();
 		}
 	}
@@ -589,15 +669,21 @@ public class Blocks {
 	// changes the Sprite to a new shape
 	public static void NextBlock() {
 
-		if (BlockQueuePlace == 7) {
-			BlockQueuePlace = 0;
-		}
+		CurrentRotation = 0;
+		LastRotation = 0;
 
 		CurrentShape = BlockQueue[BlockQueuePlace];
 
-		SpriteShape = GetCurrent();
+		SpriteShape = GetCurrent(CurrentShape);
 
 		BlockQueuePlace++;
+
+		if (BlockQueuePlace == 7) {
+			BlockQueuePlace = 0;
+			MakeBlockQueue();
+		}
+
+
 
 		for (int i = 0; i < 20; i++) {
 			for (int j = 0; j < 10; j++) {
