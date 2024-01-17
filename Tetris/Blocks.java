@@ -35,6 +35,10 @@ public class Blocks {
 
 	private static int CurrentRotation = 0;
 
+	private static int fallTimer = 0;
+
+	private static int floorTimer = 0;
+
 	// public Variables
 
 	public static int[][] GameMatrix = new int[20][10];
@@ -50,6 +54,12 @@ public class Blocks {
 	public static Boolean CanMove = true;
 
 	public static int BlockQueuePlace = 0;
+
+	public static int Fallen = 0;
+
+	public static int level = 1;
+
+	// --------------------------------------
 
 	// Returns current shape
 	public static int[][] GetCurrent(int Shape) {
@@ -524,7 +534,7 @@ public class Blocks {
 	// Makes the sprite go Right
 	public static void GoRight() {
 
-		if (CanRight()) {
+		if (CanRight() && CanMove) {
 			System.out.println("Went Right");
 
 			DeleteLastPos();
@@ -539,7 +549,7 @@ public class Blocks {
 	// Makes the sprite go left
 	public static void GoLeft() {
 
-		if (CanLeft()) {
+		if (CanLeft() && CanMove) {
 			System.out.println("Went Left");
 
 			DeleteLastPos();
@@ -554,71 +564,78 @@ public class Blocks {
 	// makes the sprite rotate clockwise
 	public static void ClockRotate() {
 
-		if (CurrentShape != 5) {
-			if (CurrentShape == 0 || CurrentShape == 1 || CurrentShape == 6) {
-
-				if (CurrentRotation > 3) {
-					CurrentRotation = 0;
-				}
-			} else {
-				if (CurrentRotation > 1) {
-					CurrentRotation = 0;
-				}
-			}
-		}
-
-		DeleteLastPos();
-
-		if (BlockHandler(CurrentRotation)) {
-			// if can rotate rotate
-			System.out.println("Rotate");
+		if (CanMove) {
 
 			if (CurrentShape != 5) {
-				CurrentRotation++;
+				if (CurrentShape == 0 || CurrentShape == 1 || CurrentShape == 6) {
+
+					if (CurrentRotation > 3) {
+						CurrentRotation = 0;
+					}
+				} else {
+					if (CurrentRotation > 1) {
+						CurrentRotation = 0;
+					}
+				}
 			}
 
-		} else {
-			// if can't rotate revert
-			SpriteShape = OldSpriteShape;
-			System.out.println("Previous Rot");
-		}
+			DeleteLastPos();
 
-		UpdateMatrix();
+			if (BlockHandler(CurrentRotation)) {
+				// if can rotate rotate
+				System.out.println("Rotate");
+
+				if (CurrentShape != 5) {
+					CurrentRotation++;
+				}
+
+			} else {
+				// if can't rotate revert
+				SpriteShape = OldSpriteShape;
+				System.out.println("Previous Rot");
+			}
+
+			UpdateMatrix();
+		}
 
 	}
 
 	// makes the sprite rotate counter clockwise
 	public static void CounterClockRotate() {
 
-		if (CurrentShape != 5) {
-			if (CurrentShape == 0 || CurrentShape == 1 || CurrentShape == 6) {
+		if (CanMove) {
 
-				if (CurrentRotation < 0) {
-					CurrentRotation = 3;
+			if (CurrentShape != 5) {
+				if (CurrentShape == 0 || CurrentShape == 1 || CurrentShape == 6) {
+
+					if (CurrentRotation < 0) {
+						CurrentRotation = 3;
+					}
+				} else {
+					if (CurrentRotation < 0) {
+						CurrentRotation = 1;
+					}
+				}
+			}
+
+			DeleteLastPos();
+
+			if (BlockHandler(CurrentRotation)) {
+
+				System.out.println("Rotate");
+				// if can rotate rotate
+				if (CurrentShape != 5) {
+					CurrentRotation--;
 				}
 			} else {
-				if (CurrentRotation < 0) {
-					CurrentRotation = 1;
-				}
+				// if can't rotate revert
+				System.out.println("Previous Rot");
+				SpriteShape = OldSpriteShape;
 			}
+
+			UpdateMatrix();
 		}
 
-		DeleteLastPos();
-
-		if (BlockHandler(CurrentRotation)) {
-
-			System.out.println("Rotate");
-			// if can rotate rotate
-			if (CurrentShape != 5) {
-				CurrentRotation--;
-			}
-		} else {
-			// if can't rotate revert
-			System.out.println("Previous Rot");
-			SpriteShape = OldSpriteShape;
-		}
-
-		UpdateMatrix();
 	}
 
 	// Creates Random Queue for the blocks
@@ -724,45 +741,110 @@ public class Blocks {
 
 	public static void OnFloor() {
 
+		Fallen++;
+
 		FullRow();
 		NextBlock();
+		TryNext();
 
+		System.out.println(Fallen);
 		ScoreManager.score += 30;
+	}
+
+	private static void TryNext() {
+
+		if (Fallen > 30) {
+			Fallen = 0;
+			GameStateManager.NextLevel();
+			CanMove = false;
+		}
+	}
+
+	public static void NextLevel() {
+
+		ResetMatrix();
+		MakeBlockQueue();
+		NextBlock();
+		CanMove = true;
+		level++;
+	}
+
+	public static void Delta(int time) {
+
+		fallTimer += time;
+		floorTimer += time;
+	}
+
+	public static void onFloor() {
+
+		fallTimer = 0;
+
+		if (floorTimer > 800) {
+
+			CanMove = false;
+
+			if (floorTimer > 1000) {
+				floorTimer = 0;
+
+				OnFloor();
+			}
+		}
+
+	}
+
+	public static void NotonFloor() {
+
+		floorTimer = 0;
+
+		int FallTemp = 510 - (10 * level);
+
+		if (FallTemp < 150) {
+			FallTemp = 150;
+		}
+
+		if (fallTimer > FallTemp) {
+
+			Gravity();
+			fallTimer = 0;
+		}
 	}
 
 	public static void FastFall() {
 
-		DeleteLastPos();
-		int tempOffY = offsetY;
+		if (GameStateManager.CurrentState == "Game" && CanMove) {
+			DeleteLastPos();
+			int tempOffY = offsetY;
 
-		while (!WhereFloor(offsetX, tempOffY) && tempOffY < 20) {
+			while (!WhereFloor(offsetX, tempOffY) && tempOffY < 20) {
 
-			tempOffY++;
-			// finds floor
-		}
+				tempOffY++;
+				// finds floor
+			}
 
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
+			for (int i = 0; i < 4; i++) {
+				for (int j = 0; j < 4; j++) {
 
-				if (SpriteShape[i][j] != 0) {
+					if (SpriteShape[i][j] != 0) {
 
-					GameMatrix[i + tempOffY][j + offsetX] = SpriteShape[i][j];
+						GameMatrix[i + tempOffY][j + offsetX] = SpriteShape[i][j];
+					}
 				}
 			}
+
+			OnFloor();
 		}
 
-		OnFloor();
 	}
 
 	// resets game for next time
 	public static void ResetGame() {
 
 		ResetMatrix();
-
 		MakeBlockQueue();
 		NextBlock();
 		CanMove = true;
-
+		level = 1;
+		Fallen = 0;
 		ScoreManager.score = 0;
 	}
 

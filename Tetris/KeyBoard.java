@@ -26,28 +26,28 @@ public class KeyBoard extends JPanel implements KeyListener {
 
 		if (keyCode == KeyEvent.VK_LEFT) {
 			// left arrow key
-			if (Blocks.CanMove) {
-				Blocks.GoLeft();
-			}
+
+			Blocks.GoLeft();
+
 			System.out.println("Left");
+
 		} else if (keyCode == KeyEvent.VK_RIGHT) {
 			// right arrow key
-			if (Blocks.CanMove) {
-				Blocks.GoRight();
-			}
+
+			Blocks.GoRight();
 			System.out.println("Right");
 
 		} else if (keyCode == KeyEvent.VK_UP) {
 			// up arrow key
-			if (Blocks.CanMove) {
-				Blocks.ClockRotate();
-			}
+
+			Blocks.ClockRotate();
+
 			System.out.println("Up");
 		} else if (keyCode == KeyEvent.VK_DOWN) {
 			// down arrow key
-			if (Blocks.CanMove) {
-				Blocks.CounterClockRotate();
-			}
+
+			Blocks.CounterClockRotate();
+
 			System.out.println("Down");
 		}
 	}

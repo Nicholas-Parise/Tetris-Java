@@ -1,6 +1,5 @@
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.*;
 import java.awt.event.*;
 import javax.swing.JPanel;
 
@@ -14,10 +13,6 @@ public class Mouse extends JPanel implements MouseListener, MouseMotionListener 
 		x = e.getX();
 		y = e.getY();
 
-		if (Button.isButtonHover(x, y)) {
-		//	System.out.println("On Button");
-
-		}
 	}
 
 	public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -25,9 +20,14 @@ public class Mouse extends JPanel implements MouseListener, MouseMotionListener 
 		x = evt.getX();
 		y = evt.getY();
 
-		if (Button.isButtonHover(x, y)) {
-		//	System.out.println("Button Clicked");
-			GameStateManager.StartPause();
+		if (GameStateManager.CurrentState == "Menu" || GameStateManager.CurrentState == "Help") {
+			if (Button.isButtonHover(x, y, 140, 450, 330, 540)) {
+				GameStateManager.StartPause();
+			}
+
+			if (Button.isButtonHover(x, y, 120, 280, 350, 370)) {
+				GameStateManager.StartGame();
+			}
 		}
 
 	}

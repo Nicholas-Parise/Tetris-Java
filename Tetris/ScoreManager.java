@@ -1,10 +1,5 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import java.io.*;
+import java.util.Scanner;
 
 public class ScoreManager {
 
@@ -38,7 +33,6 @@ public class ScoreManager {
 
 	public static void GetHighScore() {
 
-
 		try {
 			File myObj = new File("Saves.txt");
 			if (myObj.createNewFile()) {
@@ -53,7 +47,7 @@ public class ScoreManager {
 					myObj = new File("Saves.txt");
 					Scanner myReader = new Scanner(myObj);
 					while (myReader.hasNextLine()) {
-					
+
 						String data = myReader.nextLine();
 
 						Highscore = Integer.parseInt(data);

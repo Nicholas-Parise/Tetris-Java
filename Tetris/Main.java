@@ -6,20 +6,16 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		// Arr[Y][X]
 		Render.construc();
 		Blocks.ResetGame();
 
-		int fallTimer = 0;
-		int floorTimer = 0;
-
-		long last_time = System.nanoTime();
-		long time = 0;
+		float last_time = System.nanoTime();
+		float time = 0;
 		int delta_time = 0;
 
 		ScoreManager.GetHighScore();
 
-		// GameStateManager.EndSplash();
+		GameStateManager.EndSplash();
 
 		do {
 
@@ -32,50 +28,30 @@ public class Main {
 			GameStateManager.SwitchEnd();
 			GameStateManager.SwitchMenu();
 			GameStateManager.SwitchSplash();
+			GameStateManager.SwitchLevel();
+
+			Render.Delta(delta_time);
 
 			if (GameStateManager.CurrentState == "Game") {
 
 				if (Blocks.WhereFloor(Blocks.offsetX, Blocks.offsetY)) {
-					fallTimer = 0;
 
-					if (floorTimer > 800) {
-
-						Blocks.CanMove = false;
-
-						if (floorTimer > 1000) {
-							floorTimer = 0;
-
-							Blocks.OnFloor();
-						}
-					}
+					Blocks.onFloor();
 
 				} else {
-					floorTimer = 0;
 
-					if (fallTimer > 500) {
-						Blocks.Gravity();
-						fallTimer = 0;
-					}
+					Blocks.NotonFloor();
 				}
 
-				fallTimer += delta_time;
-				floorTimer += delta_time;
+				Blocks.ShowFuture();
+				Blocks.Delta(delta_time);
 			}
-
-			Blocks.ShowFuture();
-
-			if (Render.DeltaTitle > 2400) {
-				Render.DeltaTitle = 0;
-			}
-
-			Render.DeltaTitle += delta_time;
 
 			try {
 				Render.Update();
 
-				TimeUnit.MILLISECONDS.sleep(10);
+				TimeUnit.MILLISECONDS.sleep(5);
 			} catch (Exception e) {
-				System.out.println("Failed To draw");
 			}
 
 		} while (true);

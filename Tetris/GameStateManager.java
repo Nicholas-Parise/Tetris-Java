@@ -11,6 +11,9 @@ public class GameStateManager {
 	private static Boolean SplashCount = false;
 	private static int SplashTime = 0;
 
+	private static Boolean NextCount = false;
+	private static int NextTime = 0;
+
 	public static void Delta(int DeltaTime) {
 		// adds delta time to individual times
 
@@ -27,6 +30,22 @@ public class GameStateManager {
 
 		if (SplashCount) {
 			SplashTime += DeltaTime;
+		}
+
+		if (NextCount) {
+			NextTime += DeltaTime;
+		}
+	}
+
+	public static void SwitchLevel() {
+
+		if (NextCount) {
+			if (NextTime > 1000) {
+				NextTime = 0;
+				CurrentState = "Game";
+				NextCount = false;
+				Blocks.NextLevel();
+			}
 		}
 	}
 
@@ -108,12 +127,20 @@ public class GameStateManager {
 		SplashCount = true;
 	}
 
+	public static void NextLevel() {
+		NextCount = true;
+		CurrentState = "Next";
+	}
+
 	// ---------
 
 	// instanly switches state
 	public static void StartGame() {
-		CurrentState = "Game";
-		Blocks.ResetGame();
+
+		if (CurrentState == "Menu") {
+			CurrentState = "Game";
+			Blocks.ResetGame();
+		}
 	}
 
 	public static void GameOver() {
