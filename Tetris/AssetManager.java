@@ -1,6 +1,12 @@
+/***************************
+ * Nicholas Parise, 
+ * Sile Keenan, 
+ * ICS4U, 
+ * Tetris
+ ****************************/
 
-//This class deals with assets
 
+// This class deals with assets
 public class AssetManager {
 
 	// Numbers
@@ -74,36 +80,27 @@ public class AssetManager {
 	private static int[][] WLetter = { { 1, 0, 0, 0, 1 }, { 1, 0, 1, 0, 1 }, { 1, 1, 1, 1, 1 }, { 1, 1, 0, 1, 1 },
 			{ 1, 0, 0, 0, 1 } };
 
-	private static int[][] XLetter = { { 1, 0, 0, 0, 1 }, { 0, 1, 0, 1, 0 }, { 0, 0, 1, 0, 0 }, { 0, 1, 0, 1, 0 },
-			{ 1, 0, 0, 0, 1 } };
+	private static int[][] XLetter = { { 1, 0, 1 }, { 1, 0, 1 }, { 0, 1, 0 }, { 1, 0, 1 }, { 1, 0, 1 } };
 
 	private static int[][] YLetter = { { 1, 0, 1 }, { 1, 0, 1 }, { 0, 1, 0 }, { 0, 1, 0 }, { 0, 1, 0 } };
 
 	private static int[][] ZLetter = { { 1, 1, 1, 1 }, { 0, 0, 0, 1 }, { 0, 1, 1, 0 }, { 1, 0, 0, 0 }, { 1, 1, 1, 1 } };
 
-	private static int[][] DashLetter = { 
-		{ 0, 0, 0 }, 
-	{ 0, 0, 0 }, 
-	{ 1, 1, 1 }, 
-	{ 0, 0, 0 }, 
-	{ 0, 0, 0 } };
+	// there are a few symbols I needed here also so here they are
 
-	private static int[][] ColonLetter = { 
-	{ 0, 0, 0 }, 
-	{ 0, 1, 0 }, 
-	{ 0, 0, 0 }, 
-	{ 0, 1, 0 }, 
-	{ 0, 0, 0 } };
+	private static int[][] DashLetter = { { 0, 0, 0 }, { 0, 0, 0 }, { 1, 1, 1 }, { 0, 0, 0 }, { 0, 0, 0 } };
 
-
+	private static int[][] ColonLetter = { { 0, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 } };
 
 	// ----------------------------------------
 
 	// Assets
 
+	// pause bars
 	public static int[][] Pause = { { 1, 1, 0, 0, 1, 1 }, { 1, 1, 0, 0, 1, 1 }, { 1, 1, 0, 0, 1, 1 },
 			{ 1, 1, 0, 0, 1, 1 } };
 
+	// help button
 	public static int[][] HelpButton = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 			{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 0, 2, 2, 2, 0, 1 },
@@ -114,6 +111,7 @@ public class AssetManager {
 			{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 } };
 
+	// StartButton
 	public static int[][] StartButton = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 			{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 0, 0, 2, 2, 0, 2, 2, 2, 0, 2, 2, 2, 0, 2, 2, 0, 0, 2, 2, 2, 0, 1 },
@@ -124,6 +122,7 @@ public class AssetManager {
 			{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 } };
 
+	// BackButton
 	public static int[][] BackButton = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 			{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 0, 2, 2, 0, 0, 2, 2, 2, 0, 2, 2, 2, 0, 2, 0, 2, 0, 1 },
@@ -134,6 +133,12 @@ public class AssetManager {
 			{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 } };
 
+	// -------------------
+	// Arrows
+
+	// origonaly there was only one arrow matrix but when I rewrote the render class
+	// I needed each arrow to be it's own matrix or else there would be a lot of 2d
+	// arrays and for loops
 	public static int[][] Arrow = { { 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 0, 0, 0, 1, 0, 0, 0, 1 }, { 1, 0, 0, 1, 1, 1, 0, 0, 1 }, { 1, 0, 1, 1, 1, 1, 1, 0, 1 },
 			{ 1, 0, 0, 0, 1, 0, 0, 0, 1 }, { 1, 0, 0, 0, 1, 0, 0, 0, 1 }, { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
@@ -154,12 +159,16 @@ public class AssetManager {
 			{ 1, 0, 0, 0, 1, 1, 0, 0, 1 }, { 1, 0, 0, 0, 1, 0, 0, 0, 1 }, { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1 } };
 
+	// ---------------
+
+	// esc button
 	public static int[][] Esc = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1 }, { 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1 },
 			{ 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1 }, { 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1 },
 			{ 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1 }, { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 } };
 
+	// enter
 	public static int[][] Enter = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 			{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
@@ -169,6 +178,10 @@ public class AssetManager {
 			{ 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 } };
+
+	// --------------------
+
+	// This is the splash screen animation of a block falling
 
 	public static int[][] SplashMatrix = { { 0, 2, 0 }, { 0, 2, 2 }, { 1, 0, 2 }, { 1, 0, 0 }, { 1, 1, 0 } };
 
@@ -180,7 +193,10 @@ public class AssetManager {
 
 	public static int[][] SplashMatrix4 = { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 }, { 1, 2, 0 }, { 1, 2, 2 } };
 
+	// --------------
+
 	// Words
+	// calls the AssetCreater function to create a 2d array from a String
 
 	public static int[][] Title = AssetCreater("tetris");
 
@@ -218,11 +234,9 @@ public class AssetManager {
 
 	public static int[][] Company = AssetCreater("snuffleupagus-pemphigus");
 
-
 	public static int[][] EnterName = AssetCreater("enter name:");
 
 	public static int[][] EnterToEnd = AssetCreater("press enter to finish");
-
 
 	// ---------------------------
 
@@ -236,28 +250,21 @@ public class AssetManager {
 			if (srt.charAt(k) == 'g') {
 
 				length += 1;
-
 			} else if (srt.charAt(k) == 'j') {
 
 				length += 1;
-
 			} else if (srt.charAt(k) == 'm') {
 
 				length += 2;
-
 			} else if (srt.charAt(k) == 'n') {
 
 				length += 1;
 			} else if (srt.charAt(k) == 'w') {
 
 				length += 2;
-			} else if (srt.charAt(k) == 'x') {
-
-				length += 2;
 			} else if (srt.charAt(k) == 'z') {
 
 				length += 1;
-
 			} else if (srt.charAt(k) == ' ') {
 				length -= 2;
 			}
@@ -266,6 +273,20 @@ public class AssetManager {
 		}
 
 		return length;
+	}
+
+	private static int[][] AddToArr(int[][] arr, int[][] symbol, int length, int offset) {
+		// Takes old array and returns new arr with new letter / number
+
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < length; j++) {
+				if (symbol[i][j] > 0) {
+
+					arr[i][j + offset] = 1;
+				}
+			}
+		}
+		return arr;
 	}
 
 	public static int[][] AssetCreater(String srt) {
@@ -278,441 +299,183 @@ public class AssetManager {
 		int Xoffset = 0;
 
 		// goes through entire word and if any letter corrisponds with a letter it's
-		// testing for: the 2d array assigned to that number/ letter will be added to
-		// the
-		// final array
+		// testing for
+		// it calls a function to add the new symbol to 2d array
+
+		// I considered commenting all this but I think it's pretty self explanitory
 
 		for (int k = 0; k < srt.length(); k++) {
 
 			if (srt.charAt(k) == '0') {
-
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (Zero[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				// if it's 0 add Zero Matrix to the matrix
+				TempArr = AddToArr(TempArr, Zero, 3, Xoffset);
 
 			} else if (srt.charAt(k) == '1') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (One[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, One, 3, Xoffset);
 
 			} else if (srt.charAt(k) == '2') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (Two[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, Two, 3, Xoffset);
 
 			} else if (srt.charAt(k) == '3') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (Three[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, Three, 3, Xoffset);
 
 			} else if (srt.charAt(k) == '4') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (Four[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, Four, 3, Xoffset);
 
 			} else if (srt.charAt(k) == '5') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (Five[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, Five, 3, Xoffset);
 
 			} else if (srt.charAt(k) == '6') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (Six[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, Six, 3, Xoffset);
 
 			} else if (srt.charAt(k) == '7') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (Seven[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, Seven, 3, Xoffset);
 
 			} else if (srt.charAt(k) == '8') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (Eight[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, Eight, 3, Xoffset);
 
 			} else if (srt.charAt(k) == '9') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (Nine[i][j] > 0) {
+				TempArr = AddToArr(TempArr, Nine, 3, Xoffset);
 
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
 			} else if (srt.charAt(k) == 'a') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (ALetter[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, ALetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'b') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (BLetter[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, BLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'c') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (CLetter[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, CLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'd') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (DLetter[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, DLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'e') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (ELetter[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, ELetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'f') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (FLetter[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, FLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'g') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 4; j++) {
-						if (GLetter[i][j] > 0) {
+				TempArr = AddToArr(TempArr, GLetter, 4, Xoffset);
 
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
-
+				// G is a bigger number so I just add 1 to offset
 				Xoffset += 1;
 
 			} else if (srt.charAt(k) == 'h') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (HLetter[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, HLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'i') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (ILetter[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, ILetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'j') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 4; j++) {
-						if (JLetter[i][j] > 0) {
+				TempArr = AddToArr(TempArr, JLetter, 4, Xoffset);
 
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
 				Xoffset += 1;
 
 			} else if (srt.charAt(k) == 'k') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (KLetter[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, KLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'l') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (LLetter[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, LLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'm') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 5; j++) {
-						if (MLetter[i][j] > 0) {
+				TempArr = AddToArr(TempArr, MLetter, 5, Xoffset);
 
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
 				Xoffset += 2;
 
 			} else if (srt.charAt(k) == 'n') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 4; j++) {
-						if (NLetter[i][j] > 0) {
+				TempArr = AddToArr(TempArr, NLetter, 4, Xoffset);
 
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
 				Xoffset += 1;
 			} else if (srt.charAt(k) == 'o') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (OLetter[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, OLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'p') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (PLetter[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, PLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'q') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (QLetter[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, QLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'r') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (RLetter[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, RLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 's') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (SLetter[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, SLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 't') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (TLetter[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, TLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'u') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (ULetter[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, ULetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'v') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (VLetter[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+				TempArr = AddToArr(TempArr, VLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'w') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 5; j++) {
-						if (WLetter[i][j] > 0) {
+				TempArr = AddToArr(TempArr, WLetter, 5, Xoffset);
 
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
 				Xoffset += 2;
 			} else if (srt.charAt(k) == 'x') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 5; j++) {
-						if (XLetter[i][j] > 0) {
+				TempArr = AddToArr(TempArr, XLetter, 3, Xoffset);
 
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
-				Xoffset += 2;
 			} else if (srt.charAt(k) == 'y') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (YLetter[i][j] > 0) {
+				TempArr = AddToArr(TempArr, YLetter, 3, Xoffset);
 
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
 			} else if (srt.charAt(k) == 'z') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 4; j++) {
-						if (ZLetter[i][j] > 0) {
+				TempArr = AddToArr(TempArr, ZLetter, 4, Xoffset);
 
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
 				Xoffset += 1;
 			} else if (srt.charAt(k) == ' ') {
 				Xoffset -= 2;
+				// space is too big number so I just sub 2 from offset
 
 			} else if (srt.charAt(k) == '-') {
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (DashLetter[i][j] > 0) {
+				TempArr = AddToArr(TempArr, DashLetter, 3, Xoffset);
 
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
+			} else if (srt.charAt(k) == ':') {
 
-			}else if (srt.charAt(k) == ':') {
+				TempArr = AddToArr(TempArr, ColonLetter, 3, Xoffset);
 
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 3; j++) {
-						if (ColonLetter[i][j] > 0) {
-
-							TempArr[i][j + Xoffset] = 1;
-						}
-					}
-				}
 			}
 
 			Xoffset += 4;
 		}
-
 		return TempArr;
-
 	}
-
 }

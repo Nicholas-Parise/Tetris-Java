@@ -1,11 +1,21 @@
 import java.util.Random;
 import java.util.ArrayList;
 
+/***************************
+ * Nicholas Parise, 
+ * Sile Keenan, 
+ * ICS4U, 
+ * Tetris
+ ****************************/
+
+
+// This class deals with all functionality with the board and the blocks
+// biggest class very poorly documented
 public class Blocks {
 
 	// Shapes
-
-	public static int[][] LShape = { { 1, 0, 0, 0 }, { 1, 0, 0, 0 }, { 1, 1, 0, 0 }, { 0, 0, 0, 0 } };
+	// could be in assetmanager but are only accesed here so here they are
+	private static int[][] LShape = { { 1, 0, 0, 0 }, { 1, 0, 0, 0 }, { 1, 1, 0, 0 }, { 0, 0, 0, 0 } };
 
 	private static int[][] L2Shape = { { 0, 2, 0, 0 }, { 0, 2, 0, 0 }, { 2, 2, 0, 0 }, { 0, 0, 0, 0 } };
 
@@ -38,6 +48,8 @@ public class Blocks {
 	private static int fallTimer = 0;
 
 	private static int floorTimer = 0;
+
+	private static Boolean CanNextLevel = false;
 
 	// public Variables
 
@@ -105,6 +117,10 @@ public class Blocks {
 
 		OldSpriteShape = SpriteShape;
 
+		// uses the magic of for loops and if statments to switch values in the origonal
+		// matrix
+		// into a new temp matrix
+
 		if (rotation == 3) {
 			// Left Rotation
 			for (int i = 0; i < 4; i++) {
@@ -114,7 +130,6 @@ public class Blocks {
 						if (j + offsetY > 19 || i + offsetX > 9 || i + offsetX < 0) {
 							return false;
 						}
-
 						if (j == 1)
 							temp = 0;
 
@@ -180,11 +195,13 @@ public class Blocks {
 				}
 			}
 
-			System.out.println("-Rigth-");
+			System.out.println("-Right-");
 
 		} else if (rotation == 0) {
 			// Up Rotation
 			SpriteShapeTemp = GetCurrent(CurrentShape);
+
+			// just sets the sprite to the origional shape
 
 			System.out.println("-Up-");
 
@@ -271,10 +288,9 @@ public class Blocks {
 		return true;
 	}
 
-	// returns true if can move left
-	public static Boolean CanLeft() {
+	private static Boolean CanLeft() {
 		// returns false if can't
-		// returns true if can
+		// returns true if can move left
 		ArrayList<Integer> LowestPointsY = new ArrayList<>();
 		ArrayList<Integer> LowestPointsX = new ArrayList<>();
 
@@ -288,9 +304,6 @@ public class Blocks {
 
 					temp = i + Blocks.offsetY;
 					temp2 = j + Blocks.offsetX;
-
-					// System.out.println(offsetX + " " + offsetY);
-					// System.out.println(temp2 + " " + temp);
 
 					LowestPointsY.add(temp);
 					LowestPointsX.add(temp2);
@@ -310,6 +323,7 @@ public class Blocks {
 					if (SpriteShape[i][j] != 0) {
 						if (i + offsetY != LowestPointsY.get(k) && j + offsetX != LowestPointsX.get(k) - 1) {
 
+							// tests if the game matrix cell to the left is empty or full
 							if (GameMatrix[LowestPointsY.get(k)][LowestPointsX.get(k) - 1] > 0
 									&& TempGameMatrix[LowestPointsY.get(k)][LowestPointsX.get(k) - 1] == 0) {
 
@@ -317,17 +331,15 @@ public class Blocks {
 							}
 						}
 					}
-
 				}
 			}
 		}
 		return true;
 	}
 
-	// returns true if can move right
-	public static Boolean CanRight() {
+	private static Boolean CanRight() {
 		// returns false if can't
-		// returns true if can
+		// returns true if can move right
 
 		ArrayList<Integer> LowestPointsY = new ArrayList<>();
 		ArrayList<Integer> LowestPointsX = new ArrayList<>();
@@ -342,9 +354,6 @@ public class Blocks {
 
 					temp = i + Blocks.offsetY;
 					temp2 = j + Blocks.offsetX;
-
-					// System.out.println(offsetX + " " + offsetY);
-					// System.out.println(temp2 + " " + temp);
 
 					LowestPointsY.add(temp);
 					LowestPointsX.add(temp2);
@@ -364,7 +373,7 @@ public class Blocks {
 					if (SpriteShape[i][j] != 0) {
 						if (i + offsetY != LowestPointsY.get(k) && j + offsetX != LowestPointsX.get(k) + 1
 								&& TempGameMatrix[LowestPointsY.get(k)][LowestPointsX.get(k) + 1] == 0) {
-
+							// tests if the game matrix cell to the right is empty or full
 							if (GameMatrix[LowestPointsY.get(k)][LowestPointsX.get(k) + 1] > 0) {
 
 								return false;
@@ -413,7 +422,7 @@ public class Blocks {
 
 						if (GameMatrix[LowestPointsY.get(k) + 1][LowestPointsX.get(k)] > 0
 								&& TempGameMatrix[LowestPointsY.get(k) + 1][LowestPointsX.get(k)] == 0) {
-
+							// tests if the game matrix cell on the bottow is empty or full
 							return true;
 						}
 
@@ -426,18 +435,21 @@ public class Blocks {
 
 	// Updates the matrix to new position of sprite
 	private static void UpdateMatrix() {
+		
+		CanNextLevel = true;
 
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 
 				if (SpriteShape[i][j] != 0) {
 
-					if (GameMatrix[i + offsetY][j + offsetX] > 0 && offsetY < 2) {
-						// if a shape is in another shape and the height is less than 2
+					if (GameMatrix[i + offsetY][j + offsetX] > 0 && offsetY < 1) {
+						// if a shape is in another shape and the height is less than 1
 						// game over
 						System.out.println("Game over");
 
 						GameStateManager.StartEnd();
+						CanNextLevel = false;
 					}
 
 					GameMatrix[i + offsetY][j + offsetX] = SpriteShape[i][j];
@@ -449,6 +461,7 @@ public class Blocks {
 	}
 
 	// prints the game matrix to screen
+	// this is more of a debug thing
 	public static void PrintMatrix() {
 
 		System.out.println();
@@ -461,7 +474,7 @@ public class Blocks {
 		System.out.println();
 	}
 
-	// 0's out game matrix
+	// 0's out all game matrix's
 	private static void ResetMatrix() {
 
 		for (int i = 0; i < 20; i++) {
@@ -473,27 +486,27 @@ public class Blocks {
 	}
 
 	// Showes the future position of the shape
-	public static void ShowFuture() {
+	private static void ShowFuture() {
 
 		int tempOffY = offsetY;
 
 		for (int i = 0; i < 20; i++) {
 			for (int j = 0; j < 10; j++) {
 				FuturePosition[i][j] = 0;
+				// 0 out future position array
 			}
 		}
 
 		while (!WhereFloor(offsetX, tempOffY) && tempOffY < 20) {
-
+			// while there is no floor keep going down
 			tempOffY++;
-			// finds floor
 		}
 
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 
 				if (SpriteShape[i][j] != 0) {
-
+					// put the future position with the down offset calculated in it's own array
 					FuturePosition[i + tempOffY][j + offsetX] = SpriteShape[i][j];
 				}
 			}
@@ -516,19 +529,14 @@ public class Blocks {
 	}
 
 	// Makes the sprite fall
-	public static void Gravity() {
+	private static void Gravity() {
 
-		if (!WhereFloor(offsetX, offsetY)) {
-			System.out.println("Went Down");
+		System.out.println("Went Down");
 
-			DeleteLastPos();
+		DeleteLastPos();
 
-			offsetY++;
-			UpdateMatrix();
-		} else {
-
-			System.out.println("Cant go down");
-		}
+		offsetY++;
+		UpdateMatrix();
 	}
 
 	// Makes the sprite go Right
@@ -541,8 +549,6 @@ public class Blocks {
 
 			offsetX++;
 			UpdateMatrix();
-		} else {
-			System.out.println("Cant go right");
 		}
 	}
 
@@ -556,8 +562,6 @@ public class Blocks {
 
 			offsetX--;
 			UpdateMatrix();
-		} else {
-			System.out.println("Cant go left");
 		}
 	}
 
@@ -597,7 +601,6 @@ public class Blocks {
 
 			UpdateMatrix();
 		}
-
 	}
 
 	// makes the sprite rotate counter clockwise
@@ -635,7 +638,6 @@ public class Blocks {
 
 			UpdateMatrix();
 		}
-
 	}
 
 	// Creates Random Queue for the blocks
@@ -677,7 +679,7 @@ public class Blocks {
 	}
 
 	// Tests if the row is full
-	public static void FullRow() {
+	private static void FullRow() {
 
 		Boolean fullRown = false;
 
@@ -710,7 +712,7 @@ public class Blocks {
 	}
 
 	// changes the Sprite to a new shape
-	public static void NextBlock() {
+	private static void NextBlock() {
 
 		CurrentRotation = 0;
 
@@ -739,29 +741,28 @@ public class Blocks {
 		UpdateMatrix();
 	}
 
-	public static void OnFloor() {
-
+	private static void BlockOnFloor() {
+		// When the block is on a floor
 		Fallen++;
 
 		FullRow();
 		NextBlock();
 		TryNext();
 
-		System.out.println(Fallen);
 		ScoreManager.score += 30;
 	}
 
 	private static void TryNext() {
-
-		if (Fallen > 30) {
+		// Tests if can change level
+		if (Fallen > 30 && CanNextLevel) {
 			Fallen = 0;
-			GameStateManager.NextLevel();
+			GameStateManager.StartNextLevel();
 			CanMove = false;
 		}
 	}
 
 	public static void NextLevel() {
-
+		// instantly changes level
 		ResetMatrix();
 		MakeBlockQueue();
 		NextBlock();
@@ -770,30 +771,32 @@ public class Blocks {
 	}
 
 	public static void Delta(int time) {
+		// Delta time for falling and how long you can move on the floor
 
 		fallTimer += time;
 		floorTimer += time;
 	}
 
-	public static void onFloor() {
-
+	public static void WaitOnFloor() {
+		// when the block is on the ground
+		// it waits
 		fallTimer = 0;
-
 		if (floorTimer > 800) {
 
 			CanMove = false;
+			// if the floor timer is less than 800 the block can still move
 
 			if (floorTimer > 1000) {
 				floorTimer = 0;
-
-				OnFloor();
+				// if the floor timer is past 1000 the block is really on the floor
+				// so it calls
+				BlockOnFloor();
 			}
 		}
-
 	}
 
 	public static void NotonFloor() {
-
+		// if the block is in the air
 		floorTimer = 0;
 
 		int FallTemp = 510 - (10 * level);
@@ -807,10 +810,13 @@ public class Blocks {
 			Gravity();
 			fallTimer = 0;
 		}
+
+		// Shows the future position of the blocks
+		ShowFuture();
 	}
 
 	public static void FastFall() {
-
+		// if the enter key is pressed instantly teleport the block to the bottom
 		if (GameStateManager.CurrentState == "Game" && CanMove) {
 			DeleteLastPos();
 			int tempOffY = offsetY;
@@ -831,9 +837,8 @@ public class Blocks {
 				}
 			}
 
-			OnFloor();
+			BlockOnFloor();
 		}
-
 	}
 
 	// resets game for next time

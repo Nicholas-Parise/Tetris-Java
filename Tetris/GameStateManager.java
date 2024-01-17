@@ -1,7 +1,15 @@
+/***************************
+ * Nicholas Parise, 
+ * Sile Keenan, 
+ * ICS4U, 
+ * Tetris
+ ****************************/
+
+
+//Manages Game states
 public class GameStateManager {
-
-	public static String CurrentState = "Splash";
-
+	
+	// private var
 	private static Boolean PauseCount = false;
 	private static int PauseTime = 0;
 	private static Boolean EndCount = false;
@@ -10,9 +18,13 @@ public class GameStateManager {
 	private static int MenuTime = 0;
 	private static Boolean SplashCount = false;
 	private static int SplashTime = 0;
-
 	private static Boolean NextCount = false;
 	private static int NextTime = 0;
+
+	// public var
+	public static String CurrentState = "Splash";
+
+	//-----------------
 
 	public static void Delta(int DeltaTime) {
 		// adds delta time to individual times
@@ -37,8 +49,12 @@ public class GameStateManager {
 		}
 	}
 
-	public static void SwitchLevel() {
+	//-----------------
+	
+	//switchs game states if conditions meet
 
+	public static void SwitchLevel() {
+		// changes the level 
 		if (NextCount) {
 			if (NextTime > 1000) {
 				NextTime = 0;
@@ -50,9 +66,9 @@ public class GameStateManager {
 	}
 
 	public static void SwitchSplash() {
-
+		// makes the game go to menu from the splash screen
 		if (SplashCount) {
-			if (SplashTime > 2000) {
+			if (SplashTime > 1000) {
 				CurrentState = "Menu";
 				SplashCount = false;
 			}
@@ -90,19 +106,21 @@ public class GameStateManager {
 		if (EndCount) {
 			if (EndTime > 500) {
 				EndCount = false;
-				ScoreManager.saveScore();
+
 				CurrentState = "GameOver";
 				EndTime = 0;
 				Blocks.CanMove = false;
 
+				// checks if new High score
+				ScoreManager.TestHS();
+
 				if(ScoreManager.NewHighScore){
 					ScoreManager.StartInput();
+					// starts the input of name
 				}else{
+					// if not new highscore go to menu
 					StartMenu();
 				}
-
-
-
 			}
 		}
 	}
@@ -116,6 +134,8 @@ public class GameStateManager {
 			}
 		}
 	}
+	
+	// ---------
 
 	// allows timer to start
 	public static void StartPause() {
@@ -134,7 +154,7 @@ public class GameStateManager {
 		SplashCount = true;
 	}
 
-	public static void NextLevel() {
+	public static void StartNextLevel() {
 		NextCount = true;
 		CurrentState = "Next";
 	}
@@ -150,8 +170,6 @@ public class GameStateManager {
 		MenuTime = 0;
 		Blocks.CanMove = false;
 	}
-
-
 
 	public static void StartGame() {
 

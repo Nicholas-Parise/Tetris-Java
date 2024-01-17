@@ -1,9 +1,18 @@
 import java.awt.*;
 import javax.swing.*;
 
-//This class deals with rendering
+/***************************
+ * Nicholas Parise, 
+ * Sile Keenan, 
+ * ICS4U, 
+ * Tetris
+ ****************************/
 
+
+// This class deals with the rendering window
 public class Render extends JPanel {
+
+	// Private var
 
 	// colors
 	private Color colors[] = { new Color(80, 80, 80), new Color(255, 255, 255), new Color(255, 50, 50),
@@ -28,9 +37,13 @@ public class Render extends JPanel {
 
 	private int[][] TempMatrix = new int[5][3];
 
+	// public var
+
 	public static JFrame frame = new JFrame();
 	public static KeyBoard keyboard = new KeyBoard();
 	public static Mouse mouse = new Mouse();
+
+	// ----------------------------
 
 	public static void construc() {
 		// inits variables
@@ -59,7 +72,7 @@ public class Render extends JPanel {
 
 	private void ArrayBuilder(Graphics g, int xOff, int yOff, int blockSize, int color, int colors2, int color3,
 			int[][] arr) {
-		// Takes nessisary variables and draws an array
+		// Takes x,y size, color and 2d arr and draws it to the screen
 
 		int numberOfColumns = arr[0].length;
 		int numberOfRows = arr.length;
@@ -84,40 +97,30 @@ public class Render extends JPanel {
 	}
 
 	private void WireBox(Graphics g, int xOff, int yOff, int Width, int Height, int color) {
-
+		// Takes x,y, color, width, hight and draws a square wire frame to the screen
 		g.setColor(colors[color]);
 
 		g.drawLine(xOff, yOff + Width - 1, xOff, yOff);
 		g.drawLine(xOff, yOff, xOff + Height - 1, yOff);
 		g.drawLine(xOff + 1, yOff + Width - 1, xOff + Height - 1, yOff + Width - 1);
 		g.drawLine(xOff + Height - 1, yOff + Width - 1, xOff + Height - 1, yOff + 1);
-
 	}
 
 	public static void Delta(int time) {
-		// uses delta-time to add to the falling and title
+		// uses delta-time to :
 
+		// and add to title screen
 		if (DeltaTitle > 2400) {
 			DeltaTitle = 0;
 		}
-
 		DeltaTitle += time;
+
+		// add to the splash screen animation
 		SplashFall += time;
 	}
 
+	// actually draws stuff
 	public void paint(Graphics g) {
-
-		if (SplashFall < 400) {
-			TempMatrix = AssetManager.SplashMatrix;
-		} else if (SplashFall > 400 && SplashFall < 800) {
-			TempMatrix = AssetManager.SplashMatrix1;
-		} else if (SplashFall > 800 && SplashFall < 1200) {
-			TempMatrix = AssetManager.SplashMatrix2;
-		} else if (SplashFall > 1200 && SplashFall < 1600) {
-			TempMatrix = AssetManager.SplashMatrix3;
-		} else if (SplashFall > 1600) {
-			TempMatrix = AssetManager.SplashMatrix4;
-		}
 
 		// -------------
 
@@ -271,6 +274,9 @@ public class Render extends JPanel {
 
 			} else if (GameStateManager.CurrentState == "Menu") {
 
+				// Title screen
+
+				// Title animation timer
 				if (DeltaTitle > 2000) {
 					ColorWave = ColorWave6;
 				} else if (DeltaTitle > 1600) {
@@ -317,12 +323,13 @@ public class Render extends JPanel {
 						}
 					}
 				}
+				// ------
 
 				// ArrayBuilder(g, 35, 300, 10, ColorWave[0], 0, 0, AssetManager.PressStart);
 
 				// start Button
 				if (Button.isButtonHover(mouse.x, mouse.y, 120, 280, 350, 370)) {
-
+					// if hovering change color of button
 					ArrayBuilder(g, 120, 280, 10, ColorWave[0], 1, ColorWave[0], AssetManager.StartButton);
 				} else {
 					ArrayBuilder(g, 120, 280, 10, ColorWave[0], 1, 0, AssetManager.StartButton);
@@ -330,7 +337,7 @@ public class Render extends JPanel {
 
 				// Help Button
 				if (Button.isButtonHover(mouse.x, mouse.y, 140, 450, 350, 540)) {
-
+					// if hovering change color of button
 					ArrayBuilder(g, 140, 450, 10, 4, 1, 4, AssetManager.HelpButton);
 				} else {
 					ArrayBuilder(g, 140, 450, 10, 4, 1, 0, AssetManager.HelpButton);
@@ -343,15 +350,15 @@ public class Render extends JPanel {
 
 				// Back Button
 				if (Button.isButtonHover(mouse.x, mouse.y, 140, 450, 350, 540)) {
-
+					// if hovering change color of button
 					ArrayBuilder(g, 140, 450, 10, 4, 1, 4, AssetManager.BackButton);
 				} else {
 					ArrayBuilder(g, 140, 450, 10, 4, 1, 0, AssetManager.BackButton);
 				}
 
-				// prints the Key bindings
-
 				//// ------------
+
+				// draws the Key bindings
 
 				ArrayBuilder(g, 5, 20, 10, ColorWave[0], 0, 0, AssetManager.KeyBindings);
 
@@ -359,28 +366,31 @@ public class Render extends JPanel {
 
 				ArrayBuilder(g, 30, 100, 5, 1, 0, 0, AssetManager.Arrow);
 				ArrayBuilder(g, 100, 110, 5, ColorWave[0], 0, 0, AssetManager.TextCRotation);
-
+				// up arrow
 				/// -------------
 
 				ArrayBuilder(g, 30, 150, 5, 1, 0, 0, AssetManager.ArrowDown);
 				ArrayBuilder(g, 100, 160, 5, ColorWave[0], 0, 0, AssetManager.TextRotation);
-
+				// down arrow
 				/// --------------
 
 				ArrayBuilder(g, 30, 200, 5, 1, 0, 0, AssetManager.ArrowLeft);
 				ArrayBuilder(g, 100, 210, 5, ColorWave[0], 0, 0, AssetManager.LeftText);
-
+				// left arrow
 				/// -------------
 				ArrayBuilder(g, 30, 250, 5, 1, 0, 0, AssetManager.ArrowRight);
 				ArrayBuilder(g, 100, 260, 5, ColorWave[0], 0, 0, AssetManager.RightText);
+				// right arrow
 				// ----------
 
 				ArrayBuilder(g, 30, 300, 5, 1, 0, 0, AssetManager.Enter);
 				ArrayBuilder(g, 150, 310, 5, ColorWave[0], 0, 0, AssetManager.DownText);
+				// enter key
 				// --------------
 
 				ArrayBuilder(g, 30, 350, 5, 1, 0, 0, AssetManager.Esc);
 				ArrayBuilder(g, 120, 360, 5, ColorWave[0], 0, 0, AssetManager.PauseText);
+				// esc key
 				// --------------
 
 			} else if (GameStateManager.CurrentState == "Splash") {
@@ -389,11 +399,24 @@ public class Render extends JPanel {
 				// credits and company name
 				ArrayBuilder(g, 50, 450, 10, 4, 0, 0, AssetManager.CreditNick);
 
-				ArrayBuilder(g, 300, 450, 10, 1, 0, 0, AssetManager.CreditSile);
+				ArrayBuilder(g, 300, 450, 10, 6, 0, 0, AssetManager.CreditSile);
 
 				ArrayBuilder(g, 5, 250, 5, 1, 0, 0, AssetManager.Company);
 
 				// falling animation
+
+				// splahs screen animation Timing
+				if (SplashFall < 200) {
+					TempMatrix = AssetManager.SplashMatrix;
+				} else if (SplashFall > 200 && SplashFall < 400) {
+					TempMatrix = AssetManager.SplashMatrix1;
+				} else if (SplashFall > 400 && SplashFall < 600) {
+					TempMatrix = AssetManager.SplashMatrix2;
+				} else if (SplashFall > 600 && SplashFall < 800) {
+					TempMatrix = AssetManager.SplashMatrix3;
+				} else if (SplashFall > 800) {
+					TempMatrix = AssetManager.SplashMatrix4;
+				}
 
 				for (int j = 0; j < 3; j++) {
 					for (int i = 0; i < 5; i++) {
@@ -435,17 +458,17 @@ public class Render extends JPanel {
 		} else {
 			// Game Over
 
-			ArrayBuilder(g, 13, 150, 13, 2, 0, 0, AssetManager.GameOverText);
+			ArrayBuilder(g, 13, 100, 13, 2, 0, 0, AssetManager.GameOverText);
 			// say game over
 			if (ScoreManager.NewHighScore) {
 				// if there is a new high score
 				// say there is a new high score
 
-				ArrayBuilder(g, 25, 250, 8, 2, 0, 0, AssetManager.NewHighScoreText);
+				ArrayBuilder(g, 25, 200, 8, 2, 0, 0, AssetManager.NewHighScoreText);
 
-				ArrayBuilder(g, 50, 350, 8, 2, 0, 0, AssetManager.EnterName);
+				ArrayBuilder(g, 50, 300, 8, 2, 0, 0, AssetManager.EnterName);
 
-				ArrayBuilder(g, 50, 500, 5, 2, 0, 0, AssetManager.EnterToEnd);
+				ArrayBuilder(g, 40, 500, 5, 2, 0, 0, AssetManager.EnterToEnd);
 
 				int[][] InputArr = AssetManager.AssetCreater(ScoreManager.InputString);
 
@@ -459,9 +482,29 @@ public class Render extends JPanel {
 
 				int Temp2 = AssetManager.ArrLength(str2);
 
-				int Temp3 = Temp1 - Temp2;
+				int Temp4 = AssetManager.ArrLength(ScoreManager.InputString);
 
-				WireBox(g, ((Temp2 * 10) + 50), 400, 53, Temp3 * 10 - 10, 4);
+				WireBox(g, ((Temp2 * 10) + 50), 400, 53, (Temp1 - Temp2) * 10 - 10, 4);
+
+				ArrayBuilder(g, 10, 410, 3, 1, 0, 0, AssetManager.ArrowLeft);
+
+				ArrayBuilder(g, (Temp4 * 10) + 50, 410, 3, 1, 0, 0, AssetManager.ArrowRight);
+
+				ArrayBuilder(g, ((Temp2 * 10) + 50), 370, 3, 1, 0, 0, AssetManager.Arrow);
+
+				ArrayBuilder(g, ((Temp2 * 10) + 50), 455, 3, 1, 0, 0, AssetManager.ArrowDown);
+
+			} else {
+
+				int[][] InputArr = AssetManager.AssetCreater(ScoreManager.HighScoreHolder);
+				String HighscoreString = Integer.toString(ScoreManager.Highscore);
+				int[][] HighScoreArr = AssetManager.AssetCreater(HighscoreString);
+
+				ArrayBuilder(g, 50, 250, 10, 1, 0, 0, AssetManager.HighScoreText);
+
+				ArrayBuilder(g, 50, 350, 10, 1, 0, 0, InputArr);
+
+				ArrayBuilder(g, 50, 450, 10, 1, 0, 0, HighScoreArr);
 
 			}
 
