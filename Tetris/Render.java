@@ -83,6 +83,17 @@ public class Render extends JPanel {
 		}
 	}
 
+	private void WireBox(Graphics g, int xOff, int yOff, int Width, int Height, int color) {
+
+		g.setColor(colors[color]);
+
+		g.drawLine(xOff, yOff + Width - 1, xOff, yOff);
+		g.drawLine(xOff, yOff, xOff + Height - 1, yOff);
+		g.drawLine(xOff + 1, yOff + Width - 1, xOff + Height - 1, yOff + Width - 1);
+		g.drawLine(xOff + Height - 1, yOff + Width - 1, xOff + Height - 1, yOff + 1);
+
+	}
+
 	public static void Delta(int time) {
 		// uses delta-time to add to the falling and title
 
@@ -106,20 +117,6 @@ public class Render extends JPanel {
 			TempMatrix = AssetManager.SplashMatrix3;
 		} else if (SplashFall > 1600) {
 			TempMatrix = AssetManager.SplashMatrix4;
-		}
-
-		if (DeltaTitle > 2000) {
-			ColorWave = ColorWave6;
-		} else if (DeltaTitle > 1600) {
-			ColorWave = ColorWave5;
-		} else if (DeltaTitle > 1200) {
-			ColorWave = ColorWave4;
-		} else if (DeltaTitle > 800) {
-			ColorWave = ColorWave3;
-		} else if (DeltaTitle > 400) {
-			ColorWave = ColorWave2;
-		} else {
-			ColorWave = ColorWave1;
 		}
 
 		// -------------
@@ -210,14 +207,8 @@ public class Render extends JPanel {
 				ArrayBuilder(g, 288, 350, 5, 2, 0, 0, AssetManager.HighScoreText);
 
 				// Box
-				int xx = 300;
-				int yy = 50;
 
-				g.setColor(colors[1]);
-				g.drawLine(xx, yy + 100 - 1, xx, yy);
-				g.drawLine(xx, yy, xx + 100 - 1, yy);
-				g.drawLine(xx + 1, yy + 100 - 1, xx + 100 - 1, yy + 100 - 1);
-				g.drawLine(xx + 100 - 1, yy + 100 - 1, xx + 100 - 1, yy + 1);
+				WireBox(g, 300, 50, 100, 100, 1);
 
 				// Next block
 				for (int j = 0; j < 4; j++) {
@@ -279,6 +270,20 @@ public class Render extends JPanel {
 				}
 
 			} else if (GameStateManager.CurrentState == "Menu") {
+
+				if (DeltaTitle > 2000) {
+					ColorWave = ColorWave6;
+				} else if (DeltaTitle > 1600) {
+					ColorWave = ColorWave5;
+				} else if (DeltaTitle > 1200) {
+					ColorWave = ColorWave4;
+				} else if (DeltaTitle > 800) {
+					ColorWave = ColorWave3;
+				} else if (DeltaTitle > 400) {
+					ColorWave = ColorWave2;
+				} else {
+					ColorWave = ColorWave1;
+				}
 
 				// Title screen
 				for (int j = 0; j < 23; j++) {
@@ -435,8 +440,31 @@ public class Render extends JPanel {
 			if (ScoreManager.NewHighScore) {
 				// if there is a new high score
 				// say there is a new high score
-				ArrayBuilder(g, 40, 250, 8, 2, 0, 0, AssetManager.NewHighScoreText);
+
+				ArrayBuilder(g, 25, 250, 8, 2, 0, 0, AssetManager.NewHighScoreText);
+
+				ArrayBuilder(g, 50, 350, 8, 2, 0, 0, AssetManager.EnterName);
+
+				ArrayBuilder(g, 50, 500, 5, 2, 0, 0, AssetManager.EnterToEnd);
+
+				int[][] InputArr = AssetManager.AssetCreater(ScoreManager.InputString);
+
+				ArrayBuilder(g, 50, 400, 10, 1, 0, 0, InputArr);
+
+				String str = ScoreManager.InputString.substring(0, ScoreManager.CurrentLetter + 1);
+
+				String str2 = ScoreManager.InputString.substring(0, ScoreManager.CurrentLetter);
+
+				int Temp1 = AssetManager.ArrLength(str);
+
+				int Temp2 = AssetManager.ArrLength(str2);
+
+				int Temp3 = Temp1 - Temp2;
+
+				WireBox(g, ((Temp2 * 10) + 50), 400, 53, Temp3 * 10 - 10, 4);
+
 			}
+
 		}
 	}
 

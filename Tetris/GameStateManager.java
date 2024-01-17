@@ -94,6 +94,15 @@ public class GameStateManager {
 				CurrentState = "GameOver";
 				EndTime = 0;
 				Blocks.CanMove = false;
+
+				if(ScoreManager.NewHighScore){
+					ScoreManager.StartInput();
+				}else{
+					StartMenu();
+				}
+
+
+
 			}
 		}
 	}
@@ -102,10 +111,8 @@ public class GameStateManager {
 		// switches to menu
 		if (MenuCount) {
 			if (MenuTime > 2500) {
-				MenuCount = false;
-				CurrentState = "Menu";
-				MenuTime = 0;
-				Blocks.CanMove = false;
+
+				Menu();
 			}
 		}
 	}
@@ -135,6 +142,17 @@ public class GameStateManager {
 	// ---------
 
 	// instanly switches state
+
+	public static void Menu() {
+
+		MenuCount = false;
+		CurrentState = "Menu";
+		MenuTime = 0;
+		Blocks.CanMove = false;
+	}
+
+
+
 	public static void StartGame() {
 
 		if (CurrentState == "Menu") {

@@ -1,11 +1,103 @@
 import java.io.*;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class ScoreManager {
 
 	public static int score = 0;
 	public static int Highscore = 0;
 	public static Boolean NewHighScore = false;
+
+	public static int[] Letter = new int[9];
+
+	public static int CurrentLetter = 0;
+
+	public static Boolean CanInput = false;
+
+	public static String InputString = "aaaaaaaaa";
+
+	// --------------------
+
+	public static void AddCurrent() {
+
+		if (CanInput) {
+			CurrentLetter++;
+
+			if (CurrentLetter == 9) {
+				CurrentLetter = 0;
+			}
+		}
+		UpdateString();
+	}
+
+	public static void SubCurrent() {
+
+		if (CanInput) {
+			CurrentLetter--;
+
+			if (CurrentLetter == -1) {
+				CurrentLetter = 8;
+			}
+		}
+		UpdateString();
+	}
+
+	public static void AddLetter() {
+
+		if (CanInput) {
+			Letter[CurrentLetter]++;
+
+			if (Letter[CurrentLetter] == 27) {
+				Letter[CurrentLetter] = 0;
+			}
+		}
+		UpdateString();
+	}
+
+	public static void SubLetter() {
+
+		if (CanInput) {
+			Letter[CurrentLetter]--;
+
+			if (Letter[CurrentLetter] == -1) {
+				Letter[CurrentLetter] = 26;
+			}
+		}
+
+		UpdateString();
+
+	}
+
+	public static void UpdateString() {
+
+		for (int i = 0; i < 9; i++) {
+
+			int Letssee = Letter[i] + 97;
+
+			char Test = (char) Letssee;
+
+			StringBuilder myName = new StringBuilder(InputString);
+			myName.setCharAt(i, Test);
+
+			InputString = myName.toString();
+
+		}
+
+	}
+
+	public static void StopInput() {
+
+		if(CanInput){
+		CanInput = false;
+		GameStateManager.Menu();
+		}
+
+	}
+
+	public static void StartInput() {
+
+		CanInput = true;
+	}
 
 	public static void saveScore() {
 

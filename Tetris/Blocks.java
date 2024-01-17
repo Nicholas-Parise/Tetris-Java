@@ -436,8 +436,8 @@ public class Blocks {
 						// if a shape is in another shape and the height is less than 2
 						// game over
 						System.out.println("Game over");
+
 						GameStateManager.StartEnd();
-						GameStateManager.StartMenu();
 					}
 
 					GameMatrix[i + offsetY][j + offsetX] = SpriteShape[i][j];

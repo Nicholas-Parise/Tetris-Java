@@ -81,7 +81,21 @@ public class AssetManager {
 
 	private static int[][] ZLetter = { { 1, 1, 1, 1 }, { 0, 0, 0, 1 }, { 0, 1, 1, 0 }, { 1, 0, 0, 0 }, { 1, 1, 1, 1 } };
 
-	private static int[][] DashLetter = { { 0, 0, 0 }, { 0, 0, 0 }, { 1, 1, 1 }, { 0, 0, 0 }, { 0, 0, 0 } };
+	private static int[][] DashLetter = { 
+		{ 0, 0, 0 }, 
+	{ 0, 0, 0 }, 
+	{ 1, 1, 1 }, 
+	{ 0, 0, 0 }, 
+	{ 0, 0, 0 } };
+
+	private static int[][] ColonLetter = { 
+	{ 0, 0, 0 }, 
+	{ 0, 1, 0 }, 
+	{ 0, 0, 0 }, 
+	{ 0, 1, 0 }, 
+	{ 0, 0, 0 } };
+
+
 
 	// ----------------------------------------
 
@@ -203,6 +217,12 @@ public class AssetManager {
 	public static int[][] CreditSile = AssetCreater("sile");
 
 	public static int[][] Company = AssetCreater("snuffleupagus-pemphigus");
+
+
+	public static int[][] EnterName = AssetCreater("enter name:");
+
+	public static int[][] EnterToEnd = AssetCreater("press enter to finish");
+
 
 	// ---------------------------
 
@@ -676,6 +696,16 @@ public class AssetManager {
 					}
 				}
 
+			}else if (srt.charAt(k) == ':') {
+
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 3; j++) {
+						if (ColonLetter[i][j] > 0) {
+
+							TempArr[i][j + Xoffset] = 1;
+						}
+					}
+				}
 			}
 
 			Xoffset += 4;

@@ -21,6 +21,9 @@ public class KeyBoard extends JPanel implements KeyListener {
 		if (keyCode == KeyEvent.VK_ENTER) {
 			// Enter key
 			Blocks.FastFall();
+
+			ScoreManager.StopInput();
+
 			System.out.println("Enter");
 		}
 
@@ -29,31 +32,72 @@ public class KeyBoard extends JPanel implements KeyListener {
 
 			Blocks.GoLeft();
 
+
+			ScoreManager.SubCurrent();
+
 			System.out.println("Left");
 
-		} else if (keyCode == KeyEvent.VK_RIGHT) {
+		} 
+		 if (keyCode == KeyEvent.VK_RIGHT) {
 			// right arrow key
 
 			Blocks.GoRight();
+
+			ScoreManager.AddCurrent();
+
 			System.out.println("Right");
 
-		} else if (keyCode == KeyEvent.VK_UP) {
+		} 
+		 if (keyCode == KeyEvent.VK_UP) {
 			// up arrow key
 
 			Blocks.ClockRotate();
 
+			ScoreManager.AddLetter();
+
+
 			System.out.println("Up");
-		} else if (keyCode == KeyEvent.VK_DOWN) {
+		} 
+		 if (keyCode == KeyEvent.VK_DOWN) {
 			// down arrow key
 
 			Blocks.CounterClockRotate();
+
+			ScoreManager.SubLetter();
+
 
 			System.out.println("Down");
 		}
 	}
 
 	public void keyTyped(KeyEvent e) {
-		// System.out.println("keyTyped: " + e);
+		
+		int keyCode = e.getKeyCode();
+
+
+		if (keyCode == KeyEvent.VK_LEFT) {
+			// left arrow key
+			ScoreManager.SubCurrent();
+
+
+		} else if (keyCode == KeyEvent.VK_RIGHT) {
+			// right arrow key
+			
+			ScoreManager.AddCurrent();
+
+
+		} else if (keyCode == KeyEvent.VK_UP) {
+			// up arrow key
+
+			ScoreManager.AddLetter();
+
+		} else if (keyCode == KeyEvent.VK_DOWN) {
+			// down arrow key
+
+			ScoreManager.SubLetter();
+
+		}
+	
 	}
 
 	public void keyReleased(KeyEvent e) {

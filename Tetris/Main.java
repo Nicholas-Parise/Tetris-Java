@@ -18,7 +18,7 @@ public class Main {
 		GameStateManager.EndSplash();
 
 		do {
-
+			
 			time = System.nanoTime();
 			delta_time = (int) ((time - last_time) / 1000000);
 			last_time = time;
