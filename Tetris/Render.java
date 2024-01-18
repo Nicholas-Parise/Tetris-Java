@@ -1,3 +1,4 @@
+package Tetris;
 import java.awt.*;
 import javax.swing.*;
 
@@ -23,8 +24,8 @@ public class Render extends JPanel {
 	// Normal: black0,white1,red2,green3,blue4,yellow5,purple6,cyan7,orange8,
 	// Lighter: red9,green10,blue11,yellow12,purple13,cyan14,orange15,
 
-	private static int DeltaTitle = 0;
-	private static int SplashFall = 0;
+	private int DeltaTitle = 0;
+	private int SplashFall = 0;
 
 	private int[] ColorWave = new int[6];
 
@@ -39,16 +40,30 @@ public class Render extends JPanel {
 
 	// public var
 
-	public static JFrame frame = new JFrame();
-	public static KeyBoard keyboard = new KeyBoard();
-	public static Mouse mouse = new Mouse();
+	public JFrame frame;
+	public KeyBoard keyboard;
+	public Mouse mouse;
+
 
 	// ----------------------------
 
-	public static void construc() {
-		// inits variables
 
-		frame.getContentPane().add(new Render());
+	ScoreManager sm;
+	GameStateManager gsm;
+	Blocks bl;
+
+	public Render(ScoreManager s, GameStateManager g, Blocks b) {
+
+		sm = s;
+		gsm = g;
+		bl = b;
+
+		frame = new JFrame();
+		keyboard = new KeyBoard(sm,gsm,bl);
+		mouse = new Mouse(gsm,bl);
+
+
+		frame.getContentPane().add(this);
 
 		frame.setTitle("Tetris");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -106,7 +121,7 @@ public class Render extends JPanel {
 		g.drawLine(xOff + Height - 1, yOff + Width - 1, xOff + Height - 1, yOff + 1);
 	}
 
-	public static void Delta(int time) {
+	public void Delta(int time) {
 		// uses delta-time to :
 
 		// and add to title screen
@@ -128,9 +143,9 @@ public class Render extends JPanel {
 		g.setColor(colors[0]);
 		g.fillRect(0, 0, 1000, 1000);
 
-		if (GameStateManager.CurrentState != "GameOver") {
+		if (gsm.CurrentState != "GameOver") {
 
-			if (GameStateManager.CurrentState == "Game" || GameStateManager.CurrentState == "Pause") {
+			if (gsm.CurrentState == "Game" || gsm.CurrentState == "Pause") {
 
 				// Game matrix
 
@@ -144,40 +159,40 @@ public class Render extends JPanel {
 
 						var color = colors[0];
 
-						if (Blocks.GameMatrix[i][j] != 0) {
+						if (bl.GameMatrix[i][j] != 0) {
 
-							if (Blocks.GameMatrix[i][j] == 1) {
+							if (bl.GameMatrix[i][j] == 1) {
 
 								color = colors[2];
-							} else if (Blocks.GameMatrix[i][j] == 2) {
+							} else if (bl.GameMatrix[i][j] == 2) {
 								color = colors[3];
-							} else if (Blocks.GameMatrix[i][j] == 3) {
+							} else if (bl.GameMatrix[i][j] == 3) {
 								color = colors[4];
-							} else if (Blocks.GameMatrix[i][j] == 4) {
+							} else if (bl.GameMatrix[i][j] == 4) {
 								color = colors[5];
-							} else if (Blocks.GameMatrix[i][j] == 5) {
+							} else if (bl.GameMatrix[i][j] == 5) {
 								color = colors[6];
-							} else if (Blocks.GameMatrix[i][j] == 6) {
+							} else if (bl.GameMatrix[i][j] == 6) {
 								color = colors[7];
-							} else if (Blocks.GameMatrix[i][j] == 7) {
+							} else if (bl.GameMatrix[i][j] == 7) {
 								color = colors[8];
 							}
 
 						} else {
 
-							if (Blocks.FuturePosition[i][j] == 1) {
+							if (bl.FuturePosition[i][j] == 1) {
 								color = colors[9];
-							} else if (Blocks.FuturePosition[i][j] == 2) {
+							} else if (bl.FuturePosition[i][j] == 2) {
 								color = colors[10];
-							} else if (Blocks.FuturePosition[i][j] == 3) {
+							} else if (bl.FuturePosition[i][j] == 3) {
 								color = colors[11];
-							} else if (Blocks.FuturePosition[i][j] == 4) {
+							} else if (bl.FuturePosition[i][j] == 4) {
 								color = colors[12];
-							} else if (Blocks.FuturePosition[i][j] == 5) {
+							} else if (bl.FuturePosition[i][j] == 5) {
 								color = colors[13];
-							} else if (Blocks.FuturePosition[i][j] == 6) {
+							} else if (bl.FuturePosition[i][j] == 6) {
 								color = colors[14];
-							} else if (Blocks.FuturePosition[i][j] == 7) {
+							} else if (bl.FuturePosition[i][j] == 7) {
 								color = colors[15];
 							} else {
 								color = colors[1];
@@ -193,8 +208,8 @@ public class Render extends JPanel {
 				/////
 
 				// score and high score
-				String HighscoreString = Integer.toString(ScoreManager.Highscore);
-				String ScoreString = Integer.toString(ScoreManager.score);
+				String HighscoreString = Integer.toString(sm.getHighscore());
+				String ScoreString = Integer.toString(sm.getScore());
 
 				int[][] ScoreArr = AssetManager.AssetCreater(ScoreString);
 				int[][] HighScoreArr = AssetManager.AssetCreater(HighscoreString);
@@ -224,22 +239,22 @@ public class Render extends JPanel {
 
 						var color = colors[0];
 
-						if (Blocks.GetCurrent(Blocks.BlockQueue[Blocks.BlockQueuePlace])[i][j] != 0) {
+						if (bl.GetCurrent(bl.BlockQueue[bl.BlockQueuePlace])[i][j] != 0) {
 
-							if (Blocks.GetCurrent(Blocks.BlockQueue[Blocks.BlockQueuePlace])[i][j] == 1) {
+							if (bl.GetCurrent(bl.BlockQueue[bl.BlockQueuePlace])[i][j] == 1) {
 
 								color = colors[2];
-							} else if (Blocks.GetCurrent(Blocks.BlockQueue[Blocks.BlockQueuePlace])[i][j] == 2) {
+							} else if (bl.GetCurrent(bl.BlockQueue[bl.BlockQueuePlace])[i][j] == 2) {
 								color = colors[3];
-							} else if (Blocks.GetCurrent(Blocks.BlockQueue[Blocks.BlockQueuePlace])[i][j] == 3) {
+							} else if (bl.GetCurrent(bl.BlockQueue[bl.BlockQueuePlace])[i][j] == 3) {
 								color = colors[4];
-							} else if (Blocks.GetCurrent(Blocks.BlockQueue[Blocks.BlockQueuePlace])[i][j] == 4) {
+							} else if (bl.GetCurrent(bl.BlockQueue[bl.BlockQueuePlace])[i][j] == 4) {
 								color = colors[5];
-							} else if (Blocks.GetCurrent(Blocks.BlockQueue[Blocks.BlockQueuePlace])[i][j] == 5) {
+							} else if (bl.GetCurrent(bl.BlockQueue[bl.BlockQueuePlace])[i][j] == 5) {
 								color = colors[6];
-							} else if (Blocks.GetCurrent(Blocks.BlockQueue[Blocks.BlockQueuePlace])[i][j] == 6) {
+							} else if (bl.GetCurrent(bl.BlockQueue[bl.BlockQueuePlace])[i][j] == 6) {
 								color = colors[7];
-							} else if (Blocks.GetCurrent(Blocks.BlockQueue[Blocks.BlockQueuePlace])[i][j] == 7) {
+							} else if (bl.GetCurrent(bl.BlockQueue[bl.BlockQueuePlace])[i][j] == 7) {
 								color = colors[8];
 							}
 
@@ -250,7 +265,7 @@ public class Render extends JPanel {
 				}
 				// ------------
 
-				if (GameStateManager.CurrentState == "Pause") {
+				if (gsm.CurrentState == "Pause") {
 
 					// pause blocks
 
@@ -272,7 +287,7 @@ public class Render extends JPanel {
 
 				}
 
-			} else if (GameStateManager.CurrentState == "Menu") {
+			} else if (gsm.CurrentState == "Menu") {
 
 				// Title screen
 
@@ -345,7 +360,7 @@ public class Render extends JPanel {
 
 				// ---------------------------
 
-			} else if (GameStateManager.CurrentState == "Help") {
+			} else if (gsm.CurrentState == "Help") {
 				// Help
 
 				// Back Button
@@ -393,7 +408,7 @@ public class Render extends JPanel {
 				// esc key
 				// --------------
 
-			} else if (GameStateManager.CurrentState == "Splash") {
+			} else if (gsm.CurrentState == "Splash") {
 				// splash screen
 
 				// credits and company name
@@ -442,12 +457,12 @@ public class Render extends JPanel {
 
 				// ----------
 
-			} else if (GameStateManager.CurrentState == "Next") {
+			} else if (gsm.CurrentState == "Next") {
 
 				ArrayBuilder(g, 50, 200, 10, 1, 0, 0, AssetManager.NextLevel);
 
 				// level
-				String Level = Integer.toString(Blocks.level);
+				String Level = Integer.toString(bl.level);
 
 				int[][] LevelArr = AssetManager.AssetCreater(Level);
 
@@ -460,7 +475,7 @@ public class Render extends JPanel {
 
 			ArrayBuilder(g, 13, 100, 13, 2, 0, 0, AssetManager.GameOverText);
 			// say game over
-			if (ScoreManager.NewHighScore) {
+			if (sm.TestHS()) {
 				// if there is a new high score
 				// say there is a new high score
 
@@ -470,19 +485,19 @@ public class Render extends JPanel {
 
 				ArrayBuilder(g, 40, 500, 5, 2, 0, 0, AssetManager.EnterToEnd);
 
-				int[][] InputArr = AssetManager.AssetCreater(ScoreManager.InputString);
+				int[][] InputArr = AssetManager.AssetCreater(sm.getInputString());
 
 				ArrayBuilder(g, 50, 400, 10, 1, 0, 0, InputArr);
 
-				String str = ScoreManager.InputString.substring(0, ScoreManager.CurrentLetter + 1);
+				String str = sm.getInputString().substring(0, sm.getCurrentLetter() + 1);
 
-				String str2 = ScoreManager.InputString.substring(0, ScoreManager.CurrentLetter);
+				String str2 = sm.getInputString().substring(0, sm.getCurrentLetter());
 
 				int Temp1 = AssetManager.ArrLength(str);
 
 				int Temp2 = AssetManager.ArrLength(str2);
 
-				int Temp4 = AssetManager.ArrLength(ScoreManager.InputString);
+				int Temp4 = AssetManager.ArrLength(sm.getInputString());
 
 				WireBox(g, ((Temp2 * 10) + 50), 400, 53, (Temp1 - Temp2) * 10 - 10, 4);
 
@@ -496,8 +511,8 @@ public class Render extends JPanel {
 
 			} else {
 
-				int[][] InputArr = AssetManager.AssetCreater(ScoreManager.HighScoreHolder);
-				String HighscoreString = Integer.toString(ScoreManager.Highscore);
+				int[][] InputArr = AssetManager.AssetCreater(sm.getHighScoreHolder());
+				String HighscoreString = Integer.toString(sm.getHighscore());
 				int[][] HighScoreArr = AssetManager.AssetCreater(HighscoreString);
 
 				ArrayBuilder(g, 50, 250, 10, 1, 0, 0, AssetManager.HighScoreText);
@@ -511,7 +526,7 @@ public class Render extends JPanel {
 		}
 	}
 
-	public static void Update() {
+	public void Update() {
 		// updates the render window
 		frame.validate();
 		frame.repaint();

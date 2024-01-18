@@ -1,3 +1,4 @@
+package Tetris;
 import java.util.concurrent.TimeUnit;
 
 /***************************
@@ -20,15 +21,17 @@ public class Main {
 		float time = 0;
 		int delta_time = 0;
 
-		// Sets up the game by
-		// init the render window
-		Render.construc();
-		// reseting game matrix
-		Blocks.ResetGame();
-		// retriving highscore
-		ScoreManager.GetHighScore();
+
+		ScoreManager sm = new ScoreManager();
+		GameStateManager gsm = new GameStateManager(sm);
+		Blocks bl = new Blocks(sm,gsm);
+
+		Render r = new Render(sm,gsm,bl);
+
+
+
 		// ending the splash screen
-		GameStateManager.EndSplash();
+		gsm.EndSplash();
 
 		do {
 			// changes delta time
@@ -37,28 +40,32 @@ public class Main {
 			last_time = time;
 
 			// adds delta time to Gamestates and to the render class
-			GameStateManager.Delta(delta_time);
-			Render.Delta(delta_time);
+			gsm.Delta(delta_time);
+			r.Delta(delta_time);
 
 			// Tests if the game state switches can switch game states every frame
-			GameStateManager.SwitchPause();
-			GameStateManager.SwitchEnd();
-			GameStateManager.SwitchMenu();
-			GameStateManager.SwitchSplash();
-			GameStateManager.SwitchLevel();
+			gsm.SwitchMenu();
+			gsm.SwitchEnd();
+			gsm.SwitchSplash();
+			bl.CanMove = gsm.SwitchPause();
+			if(gsm.SwitchLevel())
+				bl.NextLevel();
 
-			if (GameStateManager.CurrentState == "Game") {
 
-				if (Blocks.WhereFloor(Blocks.offsetX, Blocks.offsetY)) {
+
+
+			if (gsm.CurrentState == "Game") {
+
+				if (bl.WhereFloor(bl.offsetX, bl.offsetY)) {
 					// if the block is on the floor
-					Blocks.WaitOnFloor();
+					bl.WaitOnFloor();
 				} else {
 					// if it's not
-					Blocks.NotonFloor();
+					bl.NotonFloor();
 				}
 
 				// this only needs to be updated when in game mode
-				Blocks.Delta(delta_time);
+				bl.Delta(delta_time);
 			}
 
 			// for some reason .sleep must be in a try catch or else there is a compiler
@@ -66,7 +73,7 @@ public class Main {
 			try {
 
 				// update render window
-				Render.Update();
+				r.Update();
 
 				// wait 5 MILLISECONDS
 				// people on the internet said this would help stop crashing

@@ -1,3 +1,4 @@
+package Tetris;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
@@ -17,6 +18,16 @@ public class Mouse extends JPanel implements MouseListener, MouseMotionListener 
 	public int x = 0;
 	public int y = 0;
 
+	private GameStateManager gsm;
+	private Blocks bl;
+
+	public Mouse(GameStateManager g, Blocks b){
+		gsm = g;
+		bl = b;
+	}
+
+
+
 	public void mouseMoved(MouseEvent e) {
 
 		// changes the loction of mouse when the mouse is moved
@@ -32,13 +43,14 @@ public class Mouse extends JPanel implements MouseListener, MouseMotionListener 
 
 		// if the mouse is clicked and the mouse in hovered on the button, button is
 		// clicked
-		if (GameStateManager.CurrentState == "Menu" || GameStateManager.CurrentState == "Help") {
+		if (gsm.getCurrentState() == "Menu" || gsm.getCurrentState() == "Help") {
 			if (Button.isButtonHover(x, y, 140, 450, 330, 540)) {
-				GameStateManager.StartPause();
+				gsm.StartPause();
 			}
 
 			if (Button.isButtonHover(x, y, 120, 280, 350, 370)) {
-				GameStateManager.StartGame();
+				gsm.StartGame();
+				bl.ResetGame();
 			}
 		}
 	}

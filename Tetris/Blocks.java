@@ -1,3 +1,4 @@
+package Tetris;
 import java.util.Random;
 import java.util.ArrayList;
 
@@ -15,66 +16,78 @@ public class Blocks {
 
 	// Shapes
 	// could be in assetmanager but are only accesed here so here they are
-	private static int[][] LShape = { { 1, 0, 0, 0 }, { 1, 0, 0, 0 }, { 1, 1, 0, 0 }, { 0, 0, 0, 0 } };
+	private int[][] LShape = { { 1, 0, 0, 0 }, { 1, 0, 0, 0 }, { 1, 1, 0, 0 }, { 0, 0, 0, 0 } };
 
-	private static int[][] L2Shape = { { 0, 2, 0, 0 }, { 0, 2, 0, 0 }, { 2, 2, 0, 0 }, { 0, 0, 0, 0 } };
+	private int[][] L2Shape = { { 0, 2, 0, 0 }, { 0, 2, 0, 0 }, { 2, 2, 0, 0 }, { 0, 0, 0, 0 } };
 
-	private static int[][] SShape = { { 3, 0, 0, 0 }, { 3, 3, 0, 0 }, { 0, 3, 0, 0 }, { 0, 0, 0, 0 } };
+	private int[][] SShape = { { 3, 0, 0, 0 }, { 3, 3, 0, 0 }, { 0, 3, 0, 0 }, { 0, 0, 0, 0 } };
 
-	private static int[][] ZShape = { { 0, 4, 0, 0 }, { 4, 4, 0, 0 }, { 4, 0, 0, 0 }, { 0, 0, 0, 0 } };
+	private int[][] ZShape = { { 0, 4, 0, 0 }, { 4, 4, 0, 0 }, { 4, 0, 0, 0 }, { 0, 0, 0, 0 } };
 
-	private static int[][] IShape = { { 0, 5, 0, 0 }, { 0, 5, 0, 0 }, { 0, 5, 0, 0 }, { 0, 5, 0, 0 } };
+	private int[][] IShape = { { 0, 5, 0, 0 }, { 0, 5, 0, 0 }, { 0, 5, 0, 0 }, { 0, 5, 0, 0 } };
 
-	private static int[][] SquShape = { { 6, 6, 0, 0 }, { 6, 6, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
+	private int[][] SquShape = { { 6, 6, 0, 0 }, { 6, 6, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
 
-	private static int[][] TShape = { { 7, 0, 0, 0 }, { 7, 7, 0, 0 }, { 7, 0, 0, 0 }, { 0, 0, 0, 0 } };
+	private int[][] TShape = { { 7, 0, 0, 0 }, { 7, 7, 0, 0 }, { 7, 0, 0, 0 }, { 0, 0, 0, 0 } };
 
 	// private Variables
 
-	private static int[][] SpriteShape = new int[4][4];
+	private int[][] SpriteShape = new int[4][4];
 
-	private static int[][] OldSpriteShape = new int[4][4];
+	private int[][] OldSpriteShape = new int[4][4];
 
-	private static int[][] TempGameMatrix = new int[20][10];
+	private int[][] TempGameMatrix = new int[20][10];
 
-	private static int[] BlockQueueNeg = { -1, -1, -1, -1, -1, -1, -1 };
+	private int[] BlockQueueNeg = { -1, -1, -1, -1, -1, -1, -1 };
 
-	private static int CurrentShape = 0;
+	private int CurrentShape = 0;
 
-	private static int CurrentSymbol = 0;
+	private int CurrentSymbol = 0;
 
-	private static int CurrentRotation = 0;
+	private int CurrentRotation = 0;
 
-	private static int fallTimer = 0;
+	private int fallTimer = 0;
 
-	private static int floorTimer = 0;
+	private int floorTimer = 0;
 
-	private static Boolean CanNextLevel = false;
+	private Boolean CanNextLevel = false;
 
 	// public Variables
 
-	public static int[][] GameMatrix = new int[20][10];
+	public int[][] GameMatrix = new int[20][10];
 
-	public static int[][] FuturePosition = new int[20][10];
+	public int[][] FuturePosition = new int[20][10];
 
-	public static int[] BlockQueue = new int[7];
+	public int[] BlockQueue = new int[7];
 
-	public static int offsetX = 2;
+	public int offsetX = 2;
 
-	public static int offsetY = 0;
+	public int offsetY = 0;
 
-	public static Boolean CanMove = true;
+	public Boolean CanMove = true;
 
-	public static int BlockQueuePlace = 0;
+	public int BlockQueuePlace = 0;
 
-	public static int Fallen = 0;
+	public int Fallen = 0;
 
-	public static int level = 1;
+	public int level = 1;
 
 	// --------------------------------------
 
+	ScoreManager sm;
+	GameStateManager gsm;
+
+	public Blocks(ScoreManager s, GameStateManager g){
+
+		sm = s;
+		gsm = g;
+
+		ResetGame();
+	}
+
+
 	// Returns current shape
-	public static int[][] GetCurrent(int Shape) {
+	public int[][] GetCurrent(int Shape) {
 
 		if (Shape == 0) {
 
@@ -103,7 +116,7 @@ public class Blocks {
 	}
 
 	// Handles Block rotations
-	private static Boolean BlockHandler(int rotation) {
+	private Boolean BlockHandler(int rotation) {
 
 		// return true; if it can rotate
 		// return false; if it can't rotate
@@ -288,7 +301,7 @@ public class Blocks {
 		return true;
 	}
 
-	private static Boolean CanLeft() {
+	private Boolean CanLeft() {
 		// returns false if can't
 		// returns true if can move left
 		ArrayList<Integer> LowestPointsY = new ArrayList<>();
@@ -302,8 +315,8 @@ public class Blocks {
 
 				if (SpriteShape[i][j] != 0) {
 
-					temp = i + Blocks.offsetY;
-					temp2 = j + Blocks.offsetX;
+					temp = i + offsetY;
+					temp2 = j + offsetX;
 
 					LowestPointsY.add(temp);
 					LowestPointsX.add(temp2);
@@ -337,7 +350,7 @@ public class Blocks {
 		return true;
 	}
 
-	private static Boolean CanRight() {
+	private Boolean CanRight() {
 		// returns false if can't
 		// returns true if can move right
 
@@ -352,8 +365,8 @@ public class Blocks {
 
 				if (SpriteShape[i][j] != 0) {
 
-					temp = i + Blocks.offsetY;
-					temp2 = j + Blocks.offsetX;
+					temp = i + offsetY;
+					temp2 = j + offsetX;
 
 					LowestPointsY.add(temp);
 					LowestPointsX.add(temp2);
@@ -387,7 +400,7 @@ public class Blocks {
 	}
 
 	// returns false if can move down
-	public static Boolean WhereFloor(int ShapeOffsetx, int ShapeOffsety) {
+	public Boolean WhereFloor(int ShapeOffsetx, int ShapeOffsety) {
 
 		ArrayList<Integer> LowestPointsY = new ArrayList<>();
 		ArrayList<Integer> LowestPointsX = new ArrayList<>();
@@ -434,7 +447,7 @@ public class Blocks {
 	}
 
 	// Updates the matrix to new position of sprite
-	private static void UpdateMatrix() {
+	private void UpdateMatrix() {
 		
 		CanNextLevel = true;
 
@@ -448,7 +461,7 @@ public class Blocks {
 						// game over
 						System.out.println("Game over");
 
-						GameStateManager.StartEnd();
+						gsm.StartEnd();
 						CanNextLevel = false;
 					}
 
@@ -462,7 +475,7 @@ public class Blocks {
 
 	// prints the game matrix to screen
 	// this is more of a debug thing
-	public static void PrintMatrix() {
+	public void PrintMatrix() {
 
 		System.out.println();
 		for (int i = 0; i < 20; i++) {
@@ -475,7 +488,7 @@ public class Blocks {
 	}
 
 	// 0's out all game matrix's
-	private static void ResetMatrix() {
+	private void ResetMatrix() {
 
 		for (int i = 0; i < 20; i++) {
 			for (int j = 0; j < 10; j++) {
@@ -486,7 +499,7 @@ public class Blocks {
 	}
 
 	// Showes the future position of the shape
-	private static void ShowFuture() {
+	private void ShowFuture() {
 
 		int tempOffY = offsetY;
 
@@ -514,7 +527,7 @@ public class Blocks {
 	}
 
 	// removes the sprite from the Game matrix
-	private static void DeleteLastPos() {
+	private void DeleteLastPos() {
 
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
@@ -529,7 +542,7 @@ public class Blocks {
 	}
 
 	// Makes the sprite fall
-	private static void Gravity() {
+	private void Gravity() {
 
 		System.out.println("Went Down");
 
@@ -540,7 +553,7 @@ public class Blocks {
 	}
 
 	// Makes the sprite go Right
-	public static void GoRight() {
+	public void GoRight() {
 
 		if (CanRight() && CanMove) {
 			System.out.println("Went Right");
@@ -553,7 +566,7 @@ public class Blocks {
 	}
 
 	// Makes the sprite go left
-	public static void GoLeft() {
+	public void GoLeft() {
 
 		if (CanLeft() && CanMove) {
 			System.out.println("Went Left");
@@ -566,7 +579,7 @@ public class Blocks {
 	}
 
 	// makes the sprite rotate clockwise
-	public static void ClockRotate() {
+	public void ClockRotate() {
 
 		if (CanMove) {
 
@@ -604,7 +617,7 @@ public class Blocks {
 	}
 
 	// makes the sprite rotate counter clockwise
-	public static void CounterClockRotate() {
+	public void CounterClockRotate() {
 
 		if (CanMove) {
 
@@ -641,7 +654,7 @@ public class Blocks {
 	}
 
 	// Creates Random Queue for the blocks
-	private static void MakeBlockQueue() {
+	private void MakeBlockQueue() {
 
 		BlockQueue = BlockQueueNeg;
 
@@ -679,7 +692,7 @@ public class Blocks {
 	}
 
 	// Tests if the row is full
-	private static void FullRow() {
+	private void FullRow() {
 
 		Boolean fullRown = false;
 
@@ -697,7 +710,7 @@ public class Blocks {
 
 				for (int j = 0; j < 10; j++) {
 					GameMatrix[i][j] = 0;
-					ScoreManager.score += 100;
+					sm.setScore(sm.getScore()+100);
 				}
 
 				for (int k = i; k > 0; k--) {
@@ -712,7 +725,7 @@ public class Blocks {
 	}
 
 	// changes the Sprite to a new shape
-	private static void NextBlock() {
+	private void NextBlock() {
 
 		CurrentRotation = 0;
 
@@ -741,7 +754,7 @@ public class Blocks {
 		UpdateMatrix();
 	}
 
-	private static void BlockOnFloor() {
+	private void BlockOnFloor() {
 		// When the block is on a floor
 		Fallen++;
 
@@ -749,19 +762,19 @@ public class Blocks {
 		NextBlock();
 		TryNext();
 
-		ScoreManager.score += 30;
+		sm.setScore(sm.getScore()+30);
 	}
 
-	private static void TryNext() {
+	private void TryNext() {
 		// Tests if can change level
 		if (Fallen > 30 && CanNextLevel) {
 			Fallen = 0;
-			GameStateManager.StartNextLevel();
+			gsm.StartNextLevel();
 			CanMove = false;
 		}
 	}
 
-	public static void NextLevel() {
+	public void NextLevel() {
 		// instantly changes level
 		ResetMatrix();
 		MakeBlockQueue();
@@ -770,14 +783,14 @@ public class Blocks {
 		level++;
 	}
 
-	public static void Delta(int time) {
+	public void Delta(int time) {
 		// Delta time for falling and how long you can move on the floor
 
 		fallTimer += time;
 		floorTimer += time;
 	}
 
-	public static void WaitOnFloor() {
+	public void WaitOnFloor() {
 		// when the block is on the ground
 		// it waits
 		fallTimer = 0;
@@ -795,7 +808,7 @@ public class Blocks {
 		}
 	}
 
-	public static void NotonFloor() {
+	public void NotonFloor() {
 		// if the block is in the air
 		floorTimer = 0;
 
@@ -815,9 +828,9 @@ public class Blocks {
 		ShowFuture();
 	}
 
-	public static void FastFall() {
+	public void FastFall() {
 		// if the enter key is pressed instantly teleport the block to the bottom
-		if (GameStateManager.CurrentState == "Game" && CanMove) {
+		if (gsm.CurrentState == "Game" && CanMove) {
 			DeleteLastPos();
 			int tempOffY = offsetY;
 
@@ -842,7 +855,7 @@ public class Blocks {
 	}
 
 	// resets game for next time
-	public static void ResetGame() {
+	public void ResetGame() {
 
 		ResetMatrix();
 		MakeBlockQueue();
@@ -850,7 +863,7 @@ public class Blocks {
 		CanMove = true;
 		level = 1;
 		Fallen = 0;
-		ScoreManager.score = 0;
+		sm.setScore(0);
 	}
 
 }

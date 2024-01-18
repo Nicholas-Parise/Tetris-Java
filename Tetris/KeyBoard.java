@@ -1,3 +1,4 @@
+package Tetris;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JPanel;
@@ -13,66 +14,81 @@ import javax.swing.JPanel;
 /// Handles Keyboard input
 public class KeyBoard extends JPanel implements KeyListener {
 
+	ScoreManager sm;
+	GameStateManager gsm;
+	Blocks bl;
+
+	public KeyBoard(ScoreManager s, GameStateManager g, Blocks b){
+		sm = s;
+		gsm = g;
+		bl = b;
+	}
+
+
 	public void keyPressed(KeyEvent evt) {
 		int keyCode = evt.getKeyCode();
 
 		if (keyCode == KeyEvent.VK_ESCAPE) {
 			// escape key
-			GameStateManager.StartPause();
+			gsm.StartPause();
 			// allows the game to be paused
 		}
 
 		if (keyCode == KeyEvent.VK_SPACE) {
 			// space key
-			GameStateManager.StartGame();
+			if(gsm.StartGame()) {
+				bl.ResetGame();
+			}
 			// starts the game
 		}
 
 		if (keyCode == KeyEvent.VK_ENTER) {
 			// Enter key
-
+			System.out.println("test");
 			// if in game mode makes the blocks instantly teleport to the bottom
-			Blocks.FastFall();
+			bl.FastFall();
 
 			// if in game over stop input
-			ScoreManager.StopInput();
+			if(sm.StopInput()){
+				gsm.Menu();
+			}
 		}
 
 		if (keyCode == KeyEvent.VK_LEFT) {
 			// left arrow key
 
 			// if in game mode go left
-			Blocks.GoLeft();
+			bl.GoLeft();
 
 			// if in game over change change which letter can be changed
-			ScoreManager.SubCurrent();
+			sm.SubCurrent();
 		}
 		if (keyCode == KeyEvent.VK_RIGHT) {
 			// right arrow key
 
 			// if in game mode go right
-			Blocks.GoRight();
+			bl.GoRight();
 
-			ScoreManager.AddCurrent();
+			sm.AddCurrent();
 			// if in game over change change which letter can be changed
 		}
 		if (keyCode == KeyEvent.VK_UP) {
 			// up arrow key
 
 			// if in game mode clock rotate
-			Blocks.ClockRotate();
+			bl.ClockRotate();
 
 			// if in game over change change the current letter
-			ScoreManager.AddLetter();
+			sm.AddLetter();
 		}
 		if (keyCode == KeyEvent.VK_DOWN) {
 			// down arrow key
 
 			// if in game mode counter clock rotate
-			Blocks.CounterClockRotate();
+			bl.CounterClockRotate();
 
 			// if in game over change change the current letter
-			ScoreManager.SubLetter();
+			sm.SubLetter();
 		}
 	}
 
@@ -82,25 +98,25 @@ public class KeyBoard extends JPanel implements KeyListener {
 
 		if (keyCode == KeyEvent.VK_LEFT) {
 			// left arrow key
-			ScoreManager.SubCurrent();
+			sm.SubCurrent();
 
 			// if in game over change change which letter can be changed
 		} else if (keyCode == KeyEvent.VK_RIGHT) {
 			// right arrow key
 
-			ScoreManager.AddCurrent();
+			sm.AddCurrent();
 			// if in game over change change which letter can be changed
 
 		} else if (keyCode == KeyEvent.VK_UP) {
 			// up arrow key
 
-			ScoreManager.AddLetter();
+			sm.AddLetter();
 
 			// change change the current letter
 		} else if (keyCode == KeyEvent.VK_DOWN) {
 			// down arrow key
 			// change change the current letter
-			ScoreManager.SubLetter();
+			sm.SubLetter();
 		}
 	}
 

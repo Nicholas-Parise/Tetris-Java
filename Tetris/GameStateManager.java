@@ -1,3 +1,5 @@
+package Tetris;
+
 /***************************
  * Nicholas Parise, 
  * Sile Keenan, 
@@ -10,23 +12,37 @@
 public class GameStateManager {
 	
 	// private var
-	private static Boolean PauseCount = false;
-	private static int PauseTime = 0;
-	private static Boolean EndCount = false;
-	private static int EndTime = 0;
-	private static Boolean MenuCount = false;
-	private static int MenuTime = 0;
-	private static Boolean SplashCount = false;
-	private static int SplashTime = 0;
-	private static Boolean NextCount = false;
-	private static int NextTime = 0;
+	private Boolean PauseCount,EndCount,MenuCount,SplashCount,NextCount;
 
-	// public var
-	public static String CurrentState = "Splash";
+	private int PauseTime, EndTime, MenuTime, SplashTime, NextTime;
+
+	private ScoreManager sm;
+
+	public String CurrentState = "Splash";
+
+
+	public GameStateManager(ScoreManager s){
+		sm = s; // score manager
+
+		PauseCount = false;
+		PauseTime = 0;
+		EndCount = false;
+		EndTime = 0;
+		MenuCount = false;
+		MenuTime = 0;
+		SplashCount = false;
+		SplashTime = 0;
+		NextCount = false;
+		NextTime = 0;
+	}
 
 	//-----------------
 
-	public static void Delta(int DeltaTime) {
+	public String getCurrentState(){
+		return CurrentState;
+	}
+
+	public void Delta(int DeltaTime) {
 		// adds delta time to individual times
 
 		if (PauseCount) {
@@ -53,55 +69,55 @@ public class GameStateManager {
 	
 	//switchs game states if conditions meet
 
-	public static void SwitchLevel() {
+	public boolean SwitchLevel() {
 		// changes the level 
-		if (NextCount) {
-			if (NextTime > 1000) {
+		if (NextCount && NextTime > 1000) {
 				NextTime = 0;
 				CurrentState = "Game";
 				NextCount = false;
-				Blocks.NextLevel();
-			}
+				return true;
 		}
+		return false;
 	}
 
-	public static void SwitchSplash() {
+	public void SwitchSplash() {
 		// makes the game go to menu from the splash screen
-		if (SplashCount) {
-			if (SplashTime > 1000) {
+		if (SplashCount && SplashTime > 2000) {
 				CurrentState = "Menu";
 				SplashCount = false;
-			}
 		}
 	}
 
-	public static void SwitchPause() {
+	public boolean SwitchPause() {
 		// switches from paused to game
 		// or Menu to Help
+		if (PauseCount && PauseTime > 200) {
 
-		if (PauseCount) {
-			if (PauseTime > 200) {
-				// Pause
+			PauseCount = false;
+			PauseTime = 0;
+
+			// Pause
 				if (CurrentState == "Game") {
 					CurrentState = "Pause";
-					Blocks.CanMove = false;
+					//Blocks.CanMove = false;
+					return false;
 				} else if (CurrentState == "Pause") {
 					CurrentState = "Game";
-					Blocks.CanMove = true;
+					//Blocks.CanMove = true;
+					return true;
 					// Help
 				} else if (CurrentState == "Menu") {
 					CurrentState = "Help";
 				} else if (CurrentState == "Help") {
 					CurrentState = "Menu";
 				}
-				PauseCount = false;
-				PauseTime = 0;
-			}
-		}
 
+			}
+
+		return true;
 	}
 
-	public static void SwitchEnd() {
+	public void SwitchEnd() {
 		// switches to game over
 		if (EndCount) {
 			if (EndTime > 500) {
@@ -109,13 +125,12 @@ public class GameStateManager {
 
 				CurrentState = "GameOver";
 				EndTime = 0;
-				Blocks.CanMove = false;
+				//Blocks.CanMove = false;
 
-				// checks if new High score
-				ScoreManager.TestHS();
+				if(sm.TestHS()){
+					sm.StartInput();
+					sm.setHighscore(sm.getScore());
 
-				if(ScoreManager.NewHighScore){
-					ScoreManager.StartInput();
 					// starts the input of name
 				}else{
 					// if not new highscore go to menu
@@ -125,36 +140,43 @@ public class GameStateManager {
 		}
 	}
 
-	public static void SwitchMenu() {
+	public void SwitchMenu() {
 		// switches to menu
 		if (MenuCount) {
 			if (MenuTime > 2500) {
-
 				Menu();
 			}
 		}
 	}
-	
+
+
+	public void Help() {
+		if (CurrentState == "Menu") {
+			CurrentState = "Help";
+		}
+	}
+
+
 	// ---------
 
 	// allows timer to start
-	public static void StartPause() {
+	public void StartPause() {
 		PauseCount = true;
 	}
 
-	public static void StartEnd() {
+	public void StartEnd() {
 		EndCount = true;
 	}
 
-	public static void StartMenu() {
+	public void StartMenu() {
 		MenuCount = true;
 	}
 
-	public static void EndSplash() {
+	public void EndSplash() {
 		SplashCount = true;
 	}
 
-	public static void StartNextLevel() {
+	public void StartNextLevel() {
 		NextCount = true;
 		CurrentState = "Next";
 	}
@@ -163,30 +185,26 @@ public class GameStateManager {
 
 	// instanly switches state
 
-	public static void Menu() {
+	public void Menu() {
 
 		MenuCount = false;
 		CurrentState = "Menu";
 		MenuTime = 0;
-		Blocks.CanMove = false;
 	}
 
-	public static void StartGame() {
+	public boolean StartGame() {
 
 		if (CurrentState == "Menu") {
 			CurrentState = "Game";
-			Blocks.ResetGame();
+			return true;
 		}
+		return false;
 	}
 
-	public static void GameOver() {
+	public void GameOver() {
 		CurrentState = "GameOver";
 	}
 
-	public static void Help() {
-		if (CurrentState == "Menu") {
-			CurrentState = "Help";
-		}
-	}
+
 
 }

@@ -1,3 +1,4 @@
+package Tetris;
 import java.io.*;
 import java.util.Scanner;
 
@@ -12,23 +13,76 @@ import java.util.Scanner;
 // Manages the score and high score along with input and output
 public class ScoreManager {
 
-	// public var
-	public static int[] Letter = new int[9];
+	public int[] Letter;
 
-	public static int CurrentLetter = 0;
-	public static int score = 0;
-	public static int Highscore = 0;
+	public int CurrentLetter,score, Highscore;
 
-	public static Boolean CanInput = false;
-	public static Boolean NewHighScore = false;
+	public Boolean CanInput, NewHighScore;
 
-	public static String InputString = "aaaaaaaaa";
-	public static String HighScoreHolder = "aaaaaaaaa";
+	public  String InputString, HighScoreHolder;
+
+	public ScoreManager(){
+
+		Letter = new int[9];
+
+		CurrentLetter = 0;
+		score = 0;
+		Highscore = 0;
+
+		CanInput = false;
+		NewHighScore = false;
+
+		InputString = "aaaaaaaaa";
+		HighScoreHolder = "aaaaaaaaa";
+
+		getHighScore();
+	}
 
 	// --------------------
 
+	public int getScore(){
+		return score;
+	}
+
+	public void setScore(int s){
+		score = s;
+	}
+
+	public int getHighscore(){
+		return Highscore;
+	}
+
+	public void setHighscore(int hs){
+		score = hs;
+	}
+
+	public String getInputString(){
+		return InputString;
+	}
+
+	public void setInputString(String s){
+		InputString = s;
+	}
+
+	public int getCurrentLetter(){
+		return CurrentLetter;
+	}
+
+	public void setCurrentLetter(int s){
+		CurrentLetter = s;
+	}
+
+
+	public String getHighScoreHolder(){
+		return HighScoreHolder;
+	}
+
+
+
+
+
 	// changes the letter you can change
-	public static void AddCurrent() {
+	public void AddCurrent() {
 
 		if (CanInput) {
 			CurrentLetter++;
@@ -41,7 +95,7 @@ public class ScoreManager {
 	}
 
 	// changes the letter you can change
-	public static void SubCurrent() {
+	public void SubCurrent() {
 
 		if (CanInput) {
 			CurrentLetter--;
@@ -54,7 +108,7 @@ public class ScoreManager {
 	}
 
 	// changes the current letter
-	public static void AddLetter() {
+	public void AddLetter() {
 
 		if (CanInput) {
 			Letter[CurrentLetter]++;
@@ -67,7 +121,7 @@ public class ScoreManager {
 	}
 
 	// changes the current letter
-	public static void SubLetter() {
+	public void SubLetter() {
 
 		if (CanInput) {
 			Letter[CurrentLetter]--;
@@ -81,7 +135,7 @@ public class ScoreManager {
 	}
 
 	// Updates the input string
-	public static void UpdateString() {
+	public void UpdateString() {
 
 		for (int i = 0; i < 9; i++) {
 
@@ -98,39 +152,35 @@ public class ScoreManager {
 	}
 
 	// Stop the name input
-	public static void StopInput() {
+	public boolean StopInput() {
 
 		if (CanInput) {
 			CanInput = false;
-			ScoreManager.saveScore();
-			GameStateManager.Menu();
+			saveScore();
+			return true;
 		}
+	return false;
 	}
 
 	// Starts the name input
-	public static void StartInput() {
+	public void StartInput() {
 
 		CanInput = true;
 	}
 
 	// --------------------
 
-	public static void TestHS() {
+	public boolean TestHS() {
 
 		if (score > Highscore) {
-			// if its a high score
-			Highscore = score;
-			NewHighScore = true;
-			// saves high score
-
-		} else {
-			// if not don't do anything
-			NewHighScore = false;
+			return true;
 		}
+		return false;
 	}
 
+
 	// Saves the score to a file
-	public static void saveScore() {
+	public void saveScore() {
 
 		HighScoreHolder = InputString;
 
@@ -149,7 +199,7 @@ public class ScoreManager {
 		// if not don't do anything
 	}
 
-	public static void GetHighScore() {
+	public void getHighScore() {
 
 		try {
 			File myObj = new File("Saves");
