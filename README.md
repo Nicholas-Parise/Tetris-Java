@@ -2,6 +2,8 @@
 
 To-Do:
 -
+- Add objects
+- Add more encapsulated classes
 - fix resize so aspect ratio stays same
 
 <br>
