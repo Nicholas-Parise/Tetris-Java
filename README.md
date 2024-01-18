@@ -7,7 +7,7 @@ To-Do:
 <br>
 
 Doing:
--
+- Reformat this old project to use objects and fix the bugs
 
 
 <br>
