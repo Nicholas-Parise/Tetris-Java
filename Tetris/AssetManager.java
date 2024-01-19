@@ -11,98 +11,98 @@ package Tetris;
 public class AssetManager {
 
 	// Numbers
-	private static int[][] Zero = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 1, 1 } };
+	private static final int[][] Zero = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 1, 1 } };
 
-	private static int[][] One = { { 0, 1, 0 }, { 1, 1, 0 }, { 0, 1, 0 }, { 0, 1, 0 }, { 1, 1, 1 } };
+	private static final int[][] One = { { 0, 1, 0 }, { 1, 1, 0 }, { 0, 1, 0 }, { 0, 1, 0 }, { 1, 1, 1 } };
 
-	private static int[][] Two = { { 1, 1, 1 }, { 0, 0, 1 }, { 1, 1, 1 }, { 1, 0, 0 }, { 1, 1, 1 } };
+	private static final int[][] Two = { { 1, 1, 1 }, { 0, 0, 1 }, { 1, 1, 1 }, { 1, 0, 0 }, { 1, 1, 1 } };
 
-	private static int[][] Three = { { 1, 1, 1 }, { 0, 0, 1 }, { 0, 1, 1 }, { 0, 0, 1 }, { 1, 1, 1 } };
+	private static final int[][] Three = { { 1, 1, 1 }, { 0, 0, 1 }, { 0, 1, 1 }, { 0, 0, 1 }, { 1, 1, 1 } };
 
-	private static int[][] Four = { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 1, 1 }, { 0, 0, 1 }, { 0, 0, 1 } };
+	private static final int[][] Four = { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 1, 1 }, { 0, 0, 1 }, { 0, 0, 1 } };
 
-	private static int[][] Five = { { 1, 1, 1 }, { 1, 0, 0 }, { 1, 1, 1 }, { 0, 0, 1 }, { 1, 1, 1 } };
+	private static final int[][] Five = { { 1, 1, 1 }, { 1, 0, 0 }, { 1, 1, 1 }, { 0, 0, 1 }, { 1, 1, 1 } };
 
-	private static int[][] Six = { { 1, 0, 0 }, { 1, 0, 0 }, { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 } };
+	private static final int[][] Six = { { 1, 0, 0 }, { 1, 0, 0 }, { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 } };
 
-	private static int[][] Seven = { { 1, 1, 1 }, { 1, 0, 1 }, { 0, 0, 1 }, { 0, 0, 1 }, { 0, 0, 1 } };
+	private static final int[][] Seven = { { 1, 1, 1 }, { 1, 0, 1 }, { 0, 0, 1 }, { 0, 0, 1 }, { 0, 0, 1 } };
 
-	private static int[][] Eight = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 } };
+	private static final int[][] Eight = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 } };
 
-	private static int[][] Nine = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 }, { 0, 0, 1 }, { 0, 0, 1 } };
+	private static final int[][] Nine = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 }, { 0, 0, 1 }, { 0, 0, 1 } };
 
 	// letters
 
-	private static int[][] ALetter = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 }, { 1, 0, 1 }, { 1, 0, 1 } };
+	private static final int[][] ALetter = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 }, { 1, 0, 1 }, { 1, 0, 1 } };
 
-	private static int[][] BLetter = { { 1, 1, 0 }, { 1, 0, 1 }, { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 0 } };
+	private static final int[][] BLetter = { { 1, 1, 0 }, { 1, 0, 1 }, { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 0 } };
 
-	private static int[][] CLetter = { { 1, 1, 1 }, { 1, 0, 0 }, { 1, 0, 0 }, { 1, 0, 0 }, { 1, 1, 1 } };
+	private static final int[][] CLetter = { { 1, 1, 1 }, { 1, 0, 0 }, { 1, 0, 0 }, { 1, 0, 0 }, { 1, 1, 1 } };
 
-	private static int[][] DLetter = { { 1, 1, 0 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 1, 0 } };
+	private static final int[][] DLetter = { { 1, 1, 0 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 1, 0 } };
 
-	private static int[][] ELetter = { { 1, 1, 1 }, { 1, 0, 0 }, { 1, 1, 1 }, { 1, 0, 0 }, { 1, 1, 1 } };
+	private static final int[][] ELetter = { { 1, 1, 1 }, { 1, 0, 0 }, { 1, 1, 1 }, { 1, 0, 0 }, { 1, 1, 1 } };
 
-	private static int[][] FLetter = { { 1, 1, 1 }, { 1, 0, 0 }, { 1, 1, 1 }, { 1, 0, 0 }, { 1, 0, 0 } };
+	private static final int[][] FLetter = { { 1, 1, 1 }, { 1, 0, 0 }, { 1, 1, 1 }, { 1, 0, 0 }, { 1, 0, 0 } };
 
-	private static int[][] GLetter = { { 1, 1, 1, 1 }, { 1, 0, 0, 0 }, { 1, 0, 1, 1 }, { 1, 0, 0, 1 }, { 1, 1, 1, 1 } };
+	private static final int[][] GLetter = { { 1, 1, 1, 1 }, { 1, 0, 0, 0 }, { 1, 0, 1, 1 }, { 1, 0, 0, 1 }, { 1, 1, 1, 1 } };
 
-	private static int[][] HLetter = { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 1, 1 }, { 1, 0, 1 }, { 1, 0, 1 } };
+	private static final int[][] HLetter = { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 1, 1 }, { 1, 0, 1 }, { 1, 0, 1 } };
 
-	private static int[][] ILetter = { { 1, 1, 1 }, { 0, 1, 0 }, { 0, 1, 0 }, { 0, 1, 0 }, { 1, 1, 1 } };
+	private static final int[][] ILetter = { { 1, 1, 1 }, { 0, 1, 0 }, { 0, 1, 0 }, { 0, 1, 0 }, { 1, 1, 1 } };
 
-	private static int[][] JLetter = { { 0, 1, 1, 1 }, { 0, 0, 1, 0 }, { 0, 0, 1, 0 }, { 1, 0, 1, 0 }, { 1, 1, 1, 0 } };
+	private static final int[][] JLetter = { { 0, 1, 1, 1 }, { 0, 0, 1, 0 }, { 0, 0, 1, 0 }, { 1, 0, 1, 0 }, { 1, 1, 1, 0 } };
 
-	private static int[][] KLetter = { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 1, 0 }, { 1, 0, 1 }, { 1, 0, 1 } };
+	private static final int[][] KLetter = { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 1, 0 }, { 1, 0, 1 }, { 1, 0, 1 } };
 
-	private static int[][] LLetter = { { 1, 0, 0 }, { 1, 0, 0 }, { 1, 0, 0 }, { 1, 0, 0 }, { 1, 1, 1 } };
+	private static final int[][] LLetter = { { 1, 0, 0 }, { 1, 0, 0 }, { 1, 0, 0 }, { 1, 0, 0 }, { 1, 1, 1 } };
 
-	private static int[][] MLetter = { { 1, 0, 0, 0, 1 }, { 1, 1, 0, 1, 1 }, { 1, 1, 1, 1, 1 }, { 1, 0, 1, 0, 1 },
+	private static final int[][] MLetter = { { 1, 0, 0, 0, 1 }, { 1, 1, 0, 1, 1 }, { 1, 1, 1, 1, 1 }, { 1, 0, 1, 0, 1 },
 			{ 1, 0, 0, 0, 1 } };
 
-	private static int[][] NLetter = { { 1, 0, 0, 1 }, { 1, 1, 0, 1 }, { 1, 1, 0, 1 }, { 1, 0, 1, 1 }, { 1, 0, 0, 1 } };
+	private static final int[][] NLetter = { { 1, 0, 0, 1 }, { 1, 1, 0, 1 }, { 1, 1, 0, 1 }, { 1, 0, 1, 1 }, { 1, 0, 0, 1 } };
 
-	private static int[][] OLetter = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 1, 1 } };
+	private static final int[][] OLetter = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 1, 1 } };
 
-	private static int[][] PLetter = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 }, { 1, 0, 0 }, { 1, 0, 0 } };
+	private static final int[][] PLetter = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 }, { 1, 0, 0 }, { 1, 0, 0 } };
 
-	private static int[][] QLetter = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 1, 1 }, { 0, 0, 1 } };
+	private static final int[][] QLetter = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 1, 1 }, { 0, 0, 1 } };
 
-	private static int[][] RLetter = { { 1, 1, 0 }, { 1, 0, 1 }, { 1, 1, 0 }, { 1, 0, 1 }, { 1, 0, 1 } };
+	private static final int[][] RLetter = { { 1, 1, 0 }, { 1, 0, 1 }, { 1, 1, 0 }, { 1, 0, 1 }, { 1, 0, 1 } };
 
-	private static int[][] SLetter = { { 0, 1, 1 }, { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 1 }, { 1, 1, 0 } };
+	private static final int[][] SLetter = { { 0, 1, 1 }, { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 1 }, { 1, 1, 0 } };
 
-	private static int[][] TLetter = { { 1, 1, 1 }, { 0, 1, 0 }, { 0, 1, 0 }, { 0, 1, 0 }, { 0, 1, 0 } };
+	private static final int[][] TLetter = { { 1, 1, 1 }, { 0, 1, 0 }, { 0, 1, 0 }, { 0, 1, 0 }, { 0, 1, 0 } };
 
-	private static int[][] ULetter = { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 1, 1 } };
+	private static final int[][] ULetter = { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 1, 1 } };
 
-	private static int[][] VLetter = { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 0, 1, 0 } };
+	private static final int[][] VLetter = { { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 1, 0, 1 }, { 0, 1, 0 } };
 
-	private static int[][] WLetter = { { 1, 0, 0, 0, 1 }, { 1, 0, 1, 0, 1 }, { 1, 1, 1, 1, 1 }, { 1, 1, 0, 1, 1 },
+	private static final int[][] WLetter = { { 1, 0, 0, 0, 1 }, { 1, 0, 1, 0, 1 }, { 1, 1, 1, 1, 1 }, { 1, 1, 0, 1, 1 },
 			{ 1, 0, 0, 0, 1 } };
 
-	private static int[][] XLetter = { { 1, 0, 1 }, { 1, 0, 1 }, { 0, 1, 0 }, { 1, 0, 1 }, { 1, 0, 1 } };
+	private static final int[][] XLetter = { { 1, 0, 1 }, { 1, 0, 1 }, { 0, 1, 0 }, { 1, 0, 1 }, { 1, 0, 1 } };
 
-	private static int[][] YLetter = { { 1, 0, 1 }, { 1, 0, 1 }, { 0, 1, 0 }, { 0, 1, 0 }, { 0, 1, 0 } };
+	private static final int[][] YLetter = { { 1, 0, 1 }, { 1, 0, 1 }, { 0, 1, 0 }, { 0, 1, 0 }, { 0, 1, 0 } };
 
-	private static int[][] ZLetter = { { 1, 1, 1, 1 }, { 0, 0, 0, 1 }, { 0, 1, 1, 0 }, { 1, 0, 0, 0 }, { 1, 1, 1, 1 } };
+	private static final int[][] ZLetter = { { 1, 1, 1, 1 }, { 0, 0, 0, 1 }, { 0, 1, 1, 0 }, { 1, 0, 0, 0 }, { 1, 1, 1, 1 } };
 
 	// there are a few symbols I needed here also so here they are
 
-	private static int[][] DashLetter = { { 0, 0, 0 }, { 0, 0, 0 }, { 1, 1, 1 }, { 0, 0, 0 }, { 0, 0, 0 } };
+	private static final int[][] DashLetter = { { 0, 0, 0 }, { 0, 0, 0 }, { 1, 1, 1 }, { 0, 0, 0 }, { 0, 0, 0 } };
 
-	private static int[][] ColonLetter = { { 0, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 } };
+	private static final int[][] ColonLetter = { { 0, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 } };
 
 	// ----------------------------------------
 
 	// Assets
 
 	// pause bars
-	public static int[][] Pause = { { 1, 1, 0, 0, 1, 1 }, { 1, 1, 0, 0, 1, 1 }, { 1, 1, 0, 0, 1, 1 },
+	public static final int[][] Pause = { { 1, 1, 0, 0, 1, 1 }, { 1, 1, 0, 0, 1, 1 }, { 1, 1, 0, 0, 1, 1 },
 			{ 1, 1, 0, 0, 1, 1 } };
 
 	// help button
-	public static int[][] HelpButton = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+	public static final int[][] HelpButton = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 			{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 0, 2, 0, 2, 0, 2, 2, 2, 0, 2, 0, 0, 0, 2, 2, 2, 0, 1 },
 			{ 1, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 1 },
@@ -113,7 +113,7 @@ public class AssetManager {
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 } };
 
 	// StartButton
-	public static int[][] StartButton = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+	public static final int[][] StartButton = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 			{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 0, 0, 2, 2, 0, 2, 2, 2, 0, 2, 2, 2, 0, 2, 2, 0, 0, 2, 2, 2, 0, 1 },
 			{ 1, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 2, 0, 0, 1 },
@@ -124,7 +124,7 @@ public class AssetManager {
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 } };
 
 	// BackButton
-	public static int[][] BackButton = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+	public static final int[][] BackButton = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 			{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 0, 2, 2, 0, 0, 2, 2, 2, 0, 2, 2, 2, 0, 2, 0, 2, 0, 1 },
 			{ 1, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 0, 2, 0, 2, 0, 1 },
@@ -137,25 +137,25 @@ public class AssetManager {
 	// -------------------
 	// Arrows
 
-	// origonaly there was only one arrow matrix but when I rewrote the render class
-	// I needed each arrow to be it's own matrix or else there would be a lot of 2d
+	// originally there was only one arrow matrix but when I rewrote the render class
+	// I needed each arrow to be its own matrix or else there would be a lot of 2d
 	// arrays and for loops
-	public static int[][] Arrow = { { 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+	public static final int[][] Arrow = { { 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 0, 0, 0, 1, 0, 0, 0, 1 }, { 1, 0, 0, 1, 1, 1, 0, 0, 1 }, { 1, 0, 1, 1, 1, 1, 1, 0, 1 },
 			{ 1, 0, 0, 0, 1, 0, 0, 0, 1 }, { 1, 0, 0, 0, 1, 0, 0, 0, 1 }, { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1 } };
 
-	public static int[][] ArrowDown = { { 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+	public static final int[][] ArrowDown = { { 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 0, 0, 0, 1, 0, 0, 0, 1 }, { 1, 0, 0, 0, 1, 0, 0, 0, 1 }, { 1, 0, 1, 1, 1, 1, 1, 0, 1 },
 			{ 1, 0, 0, 1, 1, 1, 0, 0, 1 }, { 1, 0, 0, 0, 1, 0, 0, 0, 1 }, { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1 } };
 
-	public static int[][] ArrowLeft = { { 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+	public static final int[][] ArrowLeft = { { 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 0, 0, 0, 1, 0, 0, 0, 1 }, { 1, 0, 0, 1, 1, 0, 0, 0, 1 }, { 1, 0, 1, 1, 1, 1, 1, 0, 1 },
 			{ 1, 0, 0, 1, 1, 0, 0, 0, 1 }, { 1, 0, 0, 0, 1, 0, 0, 0, 1 }, { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1 } };
 
-	public static int[][] ArrowRight = { { 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+	public static final int[][] ArrowRight = { { 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 0, 0, 0, 1, 0, 0, 0, 1 }, { 1, 0, 0, 0, 1, 1, 0, 0, 1 }, { 1, 0, 1, 1, 1, 1, 1, 0, 1 },
 			{ 1, 0, 0, 0, 1, 1, 0, 0, 1 }, { 1, 0, 0, 0, 1, 0, 0, 0, 1 }, { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1 } };
@@ -163,14 +163,14 @@ public class AssetManager {
 	// ---------------
 
 	// esc button
-	public static int[][] Esc = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+	public static final int[][] Esc = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1 }, { 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1 },
 			{ 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1 }, { 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1 },
 			{ 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1 }, { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 } };
 
 	// enter
-	public static int[][] Enter = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+	public static final int[][] Enter = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 			{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 			{ 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
 			{ 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
@@ -184,15 +184,15 @@ public class AssetManager {
 
 	// This is the splash screen animation of a block falling
 
-	public static int[][] SplashMatrix = { { 0, 2, 0 }, { 0, 2, 2 }, { 1, 0, 2 }, { 1, 0, 0 }, { 1, 1, 0 } };
+	public static final int[][] SplashMatrix = { { 0, 2, 0 }, { 0, 2, 2 }, { 1, 0, 2 }, { 1, 0, 0 }, { 1, 1, 0 } };
 
-	public static int[][] SplashMatrix1 = { { 0, 0, 0 }, { 0, 2, 0 }, { 1, 2, 2 }, { 1, 0, 2 }, { 1, 1, 0 } };
+	public static final int[][] SplashMatrix1 = { { 0, 0, 0 }, { 0, 2, 0 }, { 1, 2, 2 }, { 1, 0, 2 }, { 1, 1, 0 } };
 
-	public static int[][] SplashMatrix2 = { { 0, 0, 0 }, { 0, 0, 0 }, { 1, 2, 0 }, { 1, 2, 2 }, { 1, 1, 2 } };
+	public static final int[][] SplashMatrix2 = { { 0, 0, 0 }, { 0, 0, 0 }, { 1, 2, 0 }, { 1, 2, 2 }, { 1, 1, 2 } };
 
-	public static int[][] SplashMatrix3 = { { 0, 0, 0 }, { 0, 0, 0 }, { 1, 2, 0 }, { 1, 2, 2 }, { 0, 0, 0 } };
+	public static final int[][] SplashMatrix3 = { { 0, 0, 0 }, { 0, 0, 0 }, { 1, 2, 0 }, { 1, 2, 2 }, { 0, 0, 0 } };
 
-	public static int[][] SplashMatrix4 = { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 }, { 1, 2, 0 }, { 1, 2, 2 } };
+	public static final int[][] SplashMatrix4 = { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 }, { 1, 2, 0 }, { 1, 2, 2 } };
 
 	// --------------
 
@@ -248,24 +248,12 @@ public class AssetManager {
 
 		for (int k = 0; k < srt.length(); k++) {
 
-			if (srt.charAt(k) == 'g') {
+			if (srt.charAt(k) == 'g' || srt.charAt(k) == 'j' || srt.charAt(k) == 'n' || srt.charAt(k) == 'z') {
 
 				length += 1;
-			} else if (srt.charAt(k) == 'j') {
-
-				length += 1;
-			} else if (srt.charAt(k) == 'm') {
+			} else if (srt.charAt(k) == 'm' || srt.charAt(k) == 'w') {
 
 				length += 2;
-			} else if (srt.charAt(k) == 'n') {
-
-				length += 1;
-			} else if (srt.charAt(k) == 'w') {
-
-				length += 2;
-			} else if (srt.charAt(k) == 'z') {
-
-				length += 1;
 			} else if (srt.charAt(k) == ' ') {
 				length -= 2;
 			}
@@ -299,11 +287,11 @@ public class AssetManager {
 
 		int Xoffset = 0;
 
-		// goes through entire word and if any letter corrisponds with a letter it's
+		// goes through entire word and if any letter corresponds with a letter it's
 		// testing for
 		// it calls a function to add the new symbol to 2d array
 
-		// I considered commenting all this but I think it's pretty self explanitory
+		// I considered commenting all this but I think it's pretty self explanatory
 
 		for (int k = 0; k < srt.length(); k++) {
 
