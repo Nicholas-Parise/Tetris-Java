@@ -1,5 +1,8 @@
 # Tetris-Java
 
+This game was my grade 12 final project and as such is very very old and poorly made. I keep it here more to show how much I've improved than as a show of my current skill
+
+
 To-Do:
 -
 - Add objects
