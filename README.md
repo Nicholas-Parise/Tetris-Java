@@ -2,22 +2,14 @@
 
 This game was my grade 12 final project and as such is very very old and poorly made. I keep it here more to show how much I've improved than as a show of my current skill
 
-
 To-Do:
 -
-- Add objects
-- Add more encapsulated classes
+- convert to use OOP properly 
 - fix resize so aspect ratio stays same
 
 <br>
 
-Doing:
-- Reformat this old project to use objects and fix the bugs
-
-
-<br>
-
-Done: 
+Commit Log: 
 -
 - speed up falling every level
 - spash screen
