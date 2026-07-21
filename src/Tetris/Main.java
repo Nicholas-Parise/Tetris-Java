@@ -19,7 +19,7 @@ public class Main {
 
 		long last_time = System.nanoTime();
 		long time = 0;
-		int delta_time = 0;
+		int delta_time;
 
 
 		ScoreManager sm = new ScoreManager();

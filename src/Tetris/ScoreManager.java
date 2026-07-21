@@ -172,10 +172,7 @@ public class ScoreManager {
 
 	public boolean TestHS() {
 
-		if (score > Highscore) {
-			return true;
-		}
-		return false;
+		return score > Highscore;
 	}
 
 

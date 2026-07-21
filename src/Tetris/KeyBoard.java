@@ -24,7 +24,7 @@ public class KeyBoard extends JPanel implements KeyListener {
 		bl = b;
 	}
 
-
+	@Override
 	public void keyPressed(KeyEvent evt) {
 		int keyCode = evt.getKeyCode();
 
@@ -92,6 +92,7 @@ public class KeyBoard extends JPanel implements KeyListener {
 		}
 	}
 
+	@Override
 	public void keyTyped(KeyEvent e) {
 
 		int keyCode = e.getKeyCode();

@@ -264,7 +264,7 @@ public class AssetManager {
 		return length;
 	}
 
-	private static int[][] AddToArr(int[][] arr, int[][] symbol, int length, int offset) {
+	private static void AddToArr(int[][] arr, int[][] symbol, int length, int offset) {
 		// Takes old array and returns new arr with new letter / number
 
 		for (int i = 0; i < 5; i++) {
@@ -275,7 +275,6 @@ public class AssetManager {
 				}
 			}
 		}
-		return arr;
 	}
 
 	public static int[][] AssetCreater(String srt) {
@@ -297,156 +296,156 @@ public class AssetManager {
 
 			if (srt.charAt(k) == '0') {
 				// if it's 0 add Zero Matrix to the matrix
-				TempArr = AddToArr(TempArr, Zero, 3, Xoffset);
+				AddToArr(TempArr, Zero, 3, Xoffset);
 
 			} else if (srt.charAt(k) == '1') {
 
-				TempArr = AddToArr(TempArr, One, 3, Xoffset);
+				AddToArr(TempArr, One, 3, Xoffset);
 
 			} else if (srt.charAt(k) == '2') {
 
-				TempArr = AddToArr(TempArr, Two, 3, Xoffset);
+				AddToArr(TempArr, Two, 3, Xoffset);
 
 			} else if (srt.charAt(k) == '3') {
 
-				TempArr = AddToArr(TempArr, Three, 3, Xoffset);
+				AddToArr(TempArr, Three, 3, Xoffset);
 
 			} else if (srt.charAt(k) == '4') {
 
-				TempArr = AddToArr(TempArr, Four, 3, Xoffset);
+				AddToArr(TempArr, Four, 3, Xoffset);
 
 			} else if (srt.charAt(k) == '5') {
 
-				TempArr = AddToArr(TempArr, Five, 3, Xoffset);
+				AddToArr(TempArr, Five, 3, Xoffset);
 
 			} else if (srt.charAt(k) == '6') {
 
-				TempArr = AddToArr(TempArr, Six, 3, Xoffset);
+				AddToArr(TempArr, Six, 3, Xoffset);
 
 			} else if (srt.charAt(k) == '7') {
 
-				TempArr = AddToArr(TempArr, Seven, 3, Xoffset);
+				AddToArr(TempArr, Seven, 3, Xoffset);
 
 			} else if (srt.charAt(k) == '8') {
 
-				TempArr = AddToArr(TempArr, Eight, 3, Xoffset);
+				AddToArr(TempArr, Eight, 3, Xoffset);
 
 			} else if (srt.charAt(k) == '9') {
 
-				TempArr = AddToArr(TempArr, Nine, 3, Xoffset);
+				AddToArr(TempArr, Nine, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'a') {
 
-				TempArr = AddToArr(TempArr, ALetter, 3, Xoffset);
+				AddToArr(TempArr, ALetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'b') {
 
-				TempArr = AddToArr(TempArr, BLetter, 3, Xoffset);
+				AddToArr(TempArr, BLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'c') {
 
-				TempArr = AddToArr(TempArr, CLetter, 3, Xoffset);
+				AddToArr(TempArr, CLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'd') {
 
-				TempArr = AddToArr(TempArr, DLetter, 3, Xoffset);
+				AddToArr(TempArr, DLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'e') {
 
-				TempArr = AddToArr(TempArr, ELetter, 3, Xoffset);
+				AddToArr(TempArr, ELetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'f') {
 
-				TempArr = AddToArr(TempArr, FLetter, 3, Xoffset);
+				AddToArr(TempArr, FLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'g') {
 
-				TempArr = AddToArr(TempArr, GLetter, 4, Xoffset);
+				AddToArr(TempArr, GLetter, 4, Xoffset);
 
 				// G is a bigger number so I just add 1 to offset
 				Xoffset += 1;
 
 			} else if (srt.charAt(k) == 'h') {
 
-				TempArr = AddToArr(TempArr, HLetter, 3, Xoffset);
+				AddToArr(TempArr, HLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'i') {
 
-				TempArr = AddToArr(TempArr, ILetter, 3, Xoffset);
+				AddToArr(TempArr, ILetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'j') {
 
-				TempArr = AddToArr(TempArr, JLetter, 4, Xoffset);
+				AddToArr(TempArr, JLetter, 4, Xoffset);
 
 				Xoffset += 1;
 
 			} else if (srt.charAt(k) == 'k') {
 
-				TempArr = AddToArr(TempArr, KLetter, 3, Xoffset);
+				AddToArr(TempArr, KLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'l') {
 
-				TempArr = AddToArr(TempArr, LLetter, 3, Xoffset);
+				AddToArr(TempArr, LLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'm') {
 
-				TempArr = AddToArr(TempArr, MLetter, 5, Xoffset);
+				AddToArr(TempArr, MLetter, 5, Xoffset);
 
 				Xoffset += 2;
 
 			} else if (srt.charAt(k) == 'n') {
 
-				TempArr = AddToArr(TempArr, NLetter, 4, Xoffset);
+				AddToArr(TempArr, NLetter, 4, Xoffset);
 
 				Xoffset += 1;
 			} else if (srt.charAt(k) == 'o') {
 
-				TempArr = AddToArr(TempArr, OLetter, 3, Xoffset);
+				AddToArr(TempArr, OLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'p') {
 
-				TempArr = AddToArr(TempArr, PLetter, 3, Xoffset);
+				AddToArr(TempArr, PLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'q') {
 
-				TempArr = AddToArr(TempArr, QLetter, 3, Xoffset);
+				AddToArr(TempArr, QLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'r') {
 
-				TempArr = AddToArr(TempArr, RLetter, 3, Xoffset);
+				AddToArr(TempArr, RLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 's') {
 
-				TempArr = AddToArr(TempArr, SLetter, 3, Xoffset);
+				AddToArr(TempArr, SLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 't') {
 
-				TempArr = AddToArr(TempArr, TLetter, 3, Xoffset);
+				AddToArr(TempArr, TLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'u') {
 
-				TempArr = AddToArr(TempArr, ULetter, 3, Xoffset);
+				AddToArr(TempArr, ULetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'v') {
 
-				TempArr = AddToArr(TempArr, VLetter, 3, Xoffset);
+				AddToArr(TempArr, VLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'w') {
 
-				TempArr = AddToArr(TempArr, WLetter, 5, Xoffset);
+				AddToArr(TempArr, WLetter, 5, Xoffset);
 
 				Xoffset += 2;
 			} else if (srt.charAt(k) == 'x') {
 
-				TempArr = AddToArr(TempArr, XLetter, 3, Xoffset);
+				AddToArr(TempArr, XLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'y') {
 
-				TempArr = AddToArr(TempArr, YLetter, 3, Xoffset);
+				AddToArr(TempArr, YLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == 'z') {
 
-				TempArr = AddToArr(TempArr, ZLetter, 4, Xoffset);
+				AddToArr(TempArr, ZLetter, 4, Xoffset);
 
 				Xoffset += 1;
 			} else if (srt.charAt(k) == ' ') {
@@ -455,11 +454,11 @@ public class AssetManager {
 
 			} else if (srt.charAt(k) == '-') {
 
-				TempArr = AddToArr(TempArr, DashLetter, 3, Xoffset);
+				AddToArr(TempArr, DashLetter, 3, Xoffset);
 
 			} else if (srt.charAt(k) == ':') {
 
-				TempArr = AddToArr(TempArr, ColonLetter, 3, Xoffset);
+				AddToArr(TempArr, ColonLetter, 3, Xoffset);
 
 			}
 

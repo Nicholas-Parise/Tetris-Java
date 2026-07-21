@@ -38,7 +38,7 @@ public class Blocks {
 
 	private int[][] TempGameMatrix = new int[20][10];
 
-	private int[] BlockQueueNeg = { -1, -1, -1, -1, -1, -1, -1 };
+	private final int[] BlockQueueNeg = { -1, -1, -1, -1, -1, -1, -1 };
 
 	private int CurrentShape = 0;
 
@@ -693,19 +693,19 @@ public class Blocks {
 	// Tests if the row is full
 	private void FullRow() {
 
-		Boolean fullRown = false;
+		boolean fullRow = false;
 
 		for (int i = 0; i < 20; i++) {
-			fullRown = true;
+			fullRow = true;
 			for (int j = 0; j < 10; j++) {
 
 				if (GameMatrix[i][j] == 0) {
 
-					fullRown = false;
+					fullRow = false;
 				}
 			}
 
-			if (fullRown) {
+			if (fullRow) {
 
 				for (int j = 0; j < 10; j++) {
 					GameMatrix[i][j] = 0;

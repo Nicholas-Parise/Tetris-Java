@@ -62,7 +62,6 @@ public class Render extends JPanel {
 		keyboard = new KeyBoard(sm,gsm,bl);
 		mouse = new Mouse(gsm,bl);
 
-
 		frame.getContentPane().add(this);
 
 		frame.setTitle("Tetris");
